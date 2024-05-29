@@ -13,22 +13,24 @@ public class Socio {
     private int edad;
     private String correo;
     private String telefono;
+    private int contador_asistencia;
     private boolean estado;
 
     public Socio() {
     }
 
-    public Socio(String dni, String nombre, String apellido, int edad, String correo, String telefono, boolean estado) {
+    public Socio(String dni, String nombre, String apellido, int edad, String correo, String telefono, int contador_asistencia, boolean estado) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
         this.correo = correo;
         this.telefono = telefono;
+        this.contador_asistencia = contador_asistencia;
         this.estado = estado;
     }
 
-    public Socio(int id_socio, String dni, String nombre, String apellido, int edad, String correo, String telefono, boolean estado) {
+    public Socio(int id_socio, String dni, String nombre, String apellido, int edad, String correo, String telefono, int contador_asistencia, boolean estado) {
         this.id_socio = id_socio;
         this.dni = dni;
         this.nombre = nombre;
@@ -36,6 +38,7 @@ public class Socio {
         this.edad = edad;
         this.correo = correo;
         this.telefono = telefono;
+        this.contador_asistencia = contador_asistencia;
         this.estado = estado;
     }
 
@@ -95,6 +98,14 @@ public class Socio {
         this.telefono = telefono;
     }
 
+    public int getContador_asistencia() {
+        return contador_asistencia;
+    }
+
+    public void setContador_asistencia(int contador_asistencia) {
+        this.contador_asistencia = contador_asistencia;
+    }
+
     public boolean isEstado() {
         return estado;
     }
@@ -105,7 +116,8 @@ public class Socio {
 
     @Override
     public String toString() {
-        return "Socio{" + "id_socio=" + id_socio + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", correo=" + correo + ", telefono=" + telefono + ", estado=" + estado + '}';
+        return "Socio{" + "id_socio=" + id_socio + ", dni=" + dni + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", correo=" + correo + ", telefono=" + telefono + ", contador_asistencia=" + contador_asistencia + ", estado=" + estado + '}';
     }
-    
+
+   
 }
