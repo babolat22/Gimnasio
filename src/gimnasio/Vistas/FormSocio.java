@@ -1,8 +1,11 @@
 
 package gimnasio.Vistas;
 
+import gimnasio.AccesoADatos.SocioData;
+import gimnasio.Entidades.Socio;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.PreparedStatement;
 import javax.swing.ImageIcon;
 /**
  *
@@ -15,6 +18,8 @@ public class FormSocio extends javax.swing.JInternalFrame {
      */
     public FormSocio() {
         initComponents();
+        
+        
     }
 
     /**
@@ -26,7 +31,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/socio3.jpg"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/socio33.jpg"));
         Image image = icon.getImage();
         socio = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image,0,0,getWidth(),getHeight(),this);     } };
         jTextField3 = new javax.swing.JTextField();
@@ -34,19 +39,18 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jTextField7 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
-        jtDniSocio = new javax.swing.JTextField();
+        jtTelefonoSocio = new javax.swing.JTextField();
         jtApellidoSocio = new javax.swing.JTextField();
         jtNombreSocio = new javax.swing.JTextField();
-        jtDniSocio2 = new javax.swing.JTextField();
-        jtDniSocio3 = new javax.swing.JTextField();
-        jtDniSocio5 = new javax.swing.JTextField();
+        jtDniSocio = new javax.swing.JTextField();
+        jtEdadSocio = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jtDniSocio4 = new javax.swing.JTextField();
+        jbNuevo = new javax.swing.JButton();
+        jbGuardar = new javax.swing.JButton();
+        jbActualizar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
+        jtCorreoSocio = new javax.swing.JTextField();
+        jTextField8 = new javax.swing.JTextField();
 
         setTitle("Formulario de Gestíon de Socio");
 
@@ -91,8 +95,6 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField5.setFocusable(false);
 
-        jtDniSocio5.setEnabled(false);
-
         jTextField6.setBackground(new java.awt.Color(0, 0, 0));
         jTextField6.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jTextField6.setForeground(new java.awt.Color(255, 255, 255));
@@ -101,36 +103,52 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jTextField6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField6.setFocusable(false);
 
-        jTextField9.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField9.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField9.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField9.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField9.setText("ID Socio");
-        jTextField9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField9.setFocusable(false);
-
-        jButton2.setBackground(new java.awt.Color(153, 153, 153));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Nuevo");
-
-        jButton3.setBackground(new java.awt.Color(153, 153, 153));
-        jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
-        jButton3.setText("Guardar");
-
-        jButton4.setBackground(new java.awt.Color(153, 153, 153));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(0, 0, 0));
-        jButton4.setText("Actualizar");
-
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Salir");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbNuevo.setBackground(new java.awt.Color(153, 153, 153));
+        jbNuevo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbNuevo.setForeground(new java.awt.Color(0, 0, 0));
+        jbNuevo.setText("Nuevo");
+        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbNuevoActionPerformed(evt);
+            }
+        });
+
+        jbGuardar.setBackground(new java.awt.Color(153, 153, 153));
+        jbGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbGuardar.setForeground(new java.awt.Color(0, 0, 0));
+        jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
+
+        jbActualizar.setBackground(new java.awt.Color(153, 153, 153));
+        jbActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        jbActualizar.setText("Actualizar");
+
+        jbSalir.setBackground(new java.awt.Color(153, 153, 153));
+        jbSalir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
+        jTextField8.setBackground(new java.awt.Color(0, 0, 0));
+        jTextField8.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField8.setText("FORMULARIO DE GESTIÓN DE SOCIOS");
+        jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jTextField8.setCaretColor(new java.awt.Color(255, 51, 255));
+        jTextField8.setFocusable(false);
+        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField8ActionPerformed(evt);
             }
         });
 
@@ -139,70 +157,69 @@ public class FormSocio extends javax.swing.JInternalFrame {
         socio.setLayer(jTextField7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jTextField5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jtDniSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtTelefonoSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtApellidoSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtNombreSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jtDniSocio2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jtDniSocio3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jtDniSocio5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtDniSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtEdadSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jTextField6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jTextField9, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jtDniSocio4, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jbNuevo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jbGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jbActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtCorreoSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jTextField8, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout socioLayout = new javax.swing.GroupLayout(socio);
         socio.setLayout(socioLayout);
         socioLayout.setHorizontalGroup(
             socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(socioLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(socioLayout.createSequentialGroup()
-                        .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addContainerGap()
                         .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtNombreSocio, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
-                                .addComponent(jtApellidoSocio, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
-                            .addComponent(jtDniSocio3, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtDniSocio4, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(socioLayout.createSequentialGroup()
+                                .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextField5)
+                                    .addComponent(jTextField4)
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jtNombreSocio, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                                        .addComponent(jtApellidoSocio))
+                                    .addComponent(jtEdadSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtCorreoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(socioLayout.createSequentialGroup()
+                                .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtTelefonoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(socioLayout.createSequentialGroup()
+                                .addComponent(jbNuevo)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(socioLayout.createSequentialGroup()
-                        .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtDniSocio2)
-                                .addComponent(jtDniSocio5, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(socioLayout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(202, Short.MAX_VALUE))
+                        .addGap(51, 51, 51)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(214, Short.MAX_VALUE))
         );
         socioLayout.setVerticalGroup(
             socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(socioLayout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtDniSocio5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(8, 8, 8)
+                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtNombreSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -213,25 +230,25 @@ public class FormSocio extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtDniSocio2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtDniSocio3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtEdadSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtDniSocio4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtCorreoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                    .addComponent(jtTelefonoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton1))
+                    .addComponent(jbNuevo)
+                    .addComponent(jbGuardar)
+                    .addComponent(jbActualizar)
+                    .addComponent(jbSalir))
                 .addGap(17, 17, 17))
         );
 
@@ -239,46 +256,76 @@ public class FormSocio extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(socio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(socio, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(socio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(socio)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        Socio socio = new Socio();
+        socio.setNombre(jtNombreSocio.getText());
+        socio.setApellido(jtApellidoSocio.getText());
+        socio.setDni(jtDniSocio.getText());
+        socio.setEdad(Integer.parseInt(jtEdadSocio.getText()));
+        socio.setCorreo(jtCorreoSocio.getText());
+        socio.setTelefono(jtTelefonoSocio.getText());
+        socio.setContador_asistencia(12);
+        socio.setEstado(true);
+        SocioData socioData = new SocioData();
+        socioData.guardarSocio(socio);
+        
+        limpiar();
+    }//GEN-LAST:event_jbGuardarActionPerformed
+
+    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+        // TODO add your handling code here:
+        limpiar();
+    }//GEN-LAST:event_jbNuevoActionPerformed
+
+    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField8ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField9;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JButton jbActualizar;
+    private javax.swing.JButton jbGuardar;
+    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtApellidoSocio;
+    private javax.swing.JTextField jtCorreoSocio;
     private javax.swing.JTextField jtDniSocio;
-    private javax.swing.JTextField jtDniSocio2;
-    private javax.swing.JTextField jtDniSocio3;
-    private javax.swing.JTextField jtDniSocio4;
-    private javax.swing.JTextField jtDniSocio5;
+    private javax.swing.JTextField jtEdadSocio;
     private javax.swing.JTextField jtNombreSocio;
+    private javax.swing.JTextField jtTelefonoSocio;
     private javax.swing.JDesktopPane socio;
     // End of variables declaration//GEN-END:variables
+
+    public void limpiar(){
+
+        jtNombreSocio.setText(null);
+        jtApellidoSocio.setText(null);
+        jtCorreoSocio.setText(null);
+        jtDniSocio.setText(null);
+        jtEdadSocio.setText(null);
+        jtTelefonoSocio.setText(null);
+    }
 }

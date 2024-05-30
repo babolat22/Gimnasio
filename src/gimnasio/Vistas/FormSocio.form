@@ -22,19 +22,12 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="socio" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
+          <Component id="socio" alignment="1" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <Component id="socio" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-          </Group>
+          <Component id="socio" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -42,7 +35,7 @@
     <Container class="javax.swing.JDesktopPane" name="socio">
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image,0,0,getWidth(),getHeight(),this);     } }"/>
-        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icon = new ImageIcon(getClass().getResource(&quot;/gimnasio/Imagenes/socio3.jpg&quot;)); &#xa;Image image = icon.getImage();"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="ImageIcon icon = new ImageIcon(getClass().getResource(&quot;/gimnasio/Imagenes/socio33.jpg&quot;)); &#xa;Image image = icon.getImage();"/>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="socio.setPreferredSize(new java.awt.Dimension(930, 500));"/>
       </AuxValues>
 
@@ -50,65 +43,66 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jTextField2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jtNombreSocio" alignment="0" pref="240" max="32767" attributes="0"/>
-                                  <Component id="jtApellidoSocio" alignment="0" pref="240" max="32767" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jTextField5" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jTextField4" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jTextField2" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jtNombreSocio" alignment="0" pref="240" max="32767" attributes="0"/>
+                                          <Component id="jtApellidoSocio" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Component id="jtEdadSocio" min="-2" pref="240" max="-2" attributes="0"/>
+                                      <Component id="jtCorreoSocio" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
-                              <Component id="jtDniSocio3" min="-2" pref="240" max="-2" attributes="0"/>
-                              <Component id="jtDniSocio4" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jTextField7" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jTextField6" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jtDniSocio" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                                      <Component id="jtTelefonoSocio" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jbNuevo" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jbGuardar" min="-2" pref="81" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jbActualizar" min="-2" pref="87" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jbSalir" min="-2" pref="84" max="-2" attributes="0"/>
+                              </Group>
                           </Group>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="jTextField3" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jTextField7" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jTextField6" alignment="1" min="-2" pref="95" max="-2" attributes="0"/>
-                              <Component id="jTextField9" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jtDniSocio2" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="jtDniSocio5" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                              </Group>
-                              <Component id="jtDniSocio" alignment="0" min="-2" pref="240" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="jButton2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton3" min="-2" pref="81" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton4" min="-2" pref="87" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButton1" min="-2" pref="84" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
+                          <Component id="jTextField8" min="-2" pref="249" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="202" max="32767" attributes="0"/>
+                  <EmptySpace pref="214" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField9" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtDniSocio5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  <Component id="jTextField8" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jtNombreSocio" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -121,29 +115,29 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextField7" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtDniSocio2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtDniSocio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtDniSocio3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtEdadSocio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextField5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtDniSocio4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtCorreoSocio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jTextField6" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtDniSocio" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtTelefonoSocio" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="156" max="32767" attributes="0"/>
+                  <EmptySpace pref="185" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbNuevo" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbGuardar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbSalir" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
               </Group>
@@ -284,20 +278,15 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtDniSocio">
+        <Component class="javax.swing.JTextField" name="jtTelefonoSocio">
         </Component>
         <Component class="javax.swing.JTextField" name="jtApellidoSocio">
         </Component>
         <Component class="javax.swing.JTextField" name="jtNombreSocio">
         </Component>
-        <Component class="javax.swing.JTextField" name="jtDniSocio2">
+        <Component class="javax.swing.JTextField" name="jtDniSocio">
         </Component>
-        <Component class="javax.swing.JTextField" name="jtDniSocio3">
-        </Component>
-        <Component class="javax.swing.JTextField" name="jtDniSocio5">
-          <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
-          </Properties>
+        <Component class="javax.swing.JTextField" name="jtEdadSocio">
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField6">
           <Properties>
@@ -325,33 +314,7 @@
             <Property name="focusable" type="boolean" value="false"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextField9">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="0" green="0" red="0" type="rgb"/>
-            </Property>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Segoe UI" size="13" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="horizontalAlignment" type="int" value="2"/>
-            <Property name="text" type="java.lang.String" value="ID Socio"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
-                <BevelBorder>
-                  <Color PropertyName="highlightOuter" blue="33" green="33" red="33" type="rgb"/>
-                  <Color PropertyName="highlightInner" blue="0" green="0" red="0" type="rgb"/>
-                  <Color PropertyName="shadowOuter" blue="cc" green="cc" red="cc" type="rgb"/>
-                  <Color PropertyName="shadowInner" blue="cc" green="cc" red="cc" type="rgb"/>
-                </BevelBorder>
-              </Border>
-            </Property>
-            <Property name="focusable" type="boolean" value="false"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="jButton2">
+        <Component class="javax.swing.JButton" name="jbNuevo">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -364,8 +327,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Nuevo"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbNuevoActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton3">
+        <Component class="javax.swing.JButton" name="jbGuardar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -378,8 +344,11 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Guardar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbGuardarActionPerformed"/>
+          </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton4">
+        <Component class="javax.swing.JButton" name="jbActualizar">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -393,7 +362,7 @@
             <Property name="text" type="java.lang.String" value="Actualizar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="jButton1">
+        <Component class="javax.swing.JButton" name="jbSalir">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
@@ -407,10 +376,42 @@
             <Property name="text" type="java.lang.String" value="Salir"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbSalirActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtDniSocio4">
+        <Component class="javax.swing.JTextField" name="jtCorreoSocio">
+        </Component>
+        <Component class="javax.swing.JTextField" name="jTextField8">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="0" green="0" red="0" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Segoe UI" size="13" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="FORMULARIO DE GESTI&#xd3;N DE SOCIOS"/>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
+                <BevelBorder>
+                  <Color PropertyName="highlightOuter" blue="33" green="33" red="33" type="rgb"/>
+                  <Color PropertyName="highlightInner" blue="0" green="0" red="0" type="rgb"/>
+                  <Color PropertyName="shadowOuter" blue="cc" green="cc" red="cc" type="rgb"/>
+                  <Color PropertyName="shadowInner" blue="cc" green="cc" red="cc" type="rgb"/>
+                </BevelBorder>
+              </Border>
+            </Property>
+            <Property name="caretColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="33" red="ff" type="rgb"/>
+            </Property>
+            <Property name="focusable" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField8ActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
