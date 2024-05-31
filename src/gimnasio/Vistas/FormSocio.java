@@ -5,6 +5,7 @@ import gimnasio.AccesoADatos.SocioData;
 import gimnasio.Entidades.Socio;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import javax.swing.ImageIcon;
 /**
@@ -45,9 +46,8 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jtDniSocio = new javax.swing.JTextField();
         jtEdadSocio = new javax.swing.JTextField();
         jTextField6 = new javax.swing.JTextField();
-        jbNuevo = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
-        jbActualizar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jtCorreoSocio = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
@@ -95,6 +95,25 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField5.setFocusable(false);
 
+        jtApellidoSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtApellidoSocioKeyTyped(evt);
+            }
+        });
+
+        jtNombreSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNombreSocioKeyTyped(evt);
+            }
+        });
+
+        jtDniSocio.setToolTipText("Ingrese solo digitos del 0 al 9 sin puntos");
+        jtDniSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtDniSocioKeyTyped(evt);
+            }
+        });
+
         jTextField6.setBackground(new java.awt.Color(0, 0, 0));
         jTextField6.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jTextField6.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,13 +122,13 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jTextField6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField6.setFocusable(false);
 
-        jbNuevo.setBackground(new java.awt.Color(153, 153, 153));
-        jbNuevo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbNuevo.setForeground(new java.awt.Color(0, 0, 0));
-        jbNuevo.setText("Nuevo");
-        jbNuevo.addActionListener(new java.awt.event.ActionListener() {
+        jbLimpiar.setBackground(new java.awt.Color(153, 153, 153));
+        jbLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbLimpiar.setForeground(new java.awt.Color(0, 0, 0));
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbNuevoActionPerformed(evt);
+                jbLimpiarActionPerformed(evt);
             }
         });
 
@@ -123,11 +142,6 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         });
 
-        jbActualizar.setBackground(new java.awt.Color(153, 153, 153));
-        jbActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbActualizar.setForeground(new java.awt.Color(0, 0, 0));
-        jbActualizar.setText("Actualizar");
-
         jbSalir.setBackground(new java.awt.Color(153, 153, 153));
         jbSalir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbSalir.setForeground(new java.awt.Color(0, 0, 0));
@@ -138,11 +152,17 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         });
 
+        jtCorreoSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtCorreoSocioKeyTyped(evt);
+            }
+        });
+
         jTextField8.setBackground(new java.awt.Color(0, 0, 0));
         jTextField8.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jTextField8.setForeground(new java.awt.Color(255, 255, 255));
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField8.setText("FORMULARIO DE GESTIÓN DE SOCIOS");
+        jTextField8.setText("FORMULARIO DE INSCRIPCIÓN DE SOCIO");
         jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField8.setCaretColor(new java.awt.Color(255, 51, 255));
         jTextField8.setFocusable(false);
@@ -163,9 +183,8 @@ public class FormSocio extends javax.swing.JInternalFrame {
         socio.setLayer(jtDniSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtEdadSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jTextField6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jbNuevo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jbLimpiar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jbGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jbActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtCorreoSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jTextField8, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -202,17 +221,16 @@ public class FormSocio extends javax.swing.JInternalFrame {
                                     .addComponent(jtDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jtTelefonoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(socioLayout.createSequentialGroup()
-                                .addComponent(jbNuevo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(30, 30, 30)
                                 .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGap(18, 18, 18)
+                                .addComponent(jbLimpiar)
+                                .addGap(18, 18, 18)
                                 .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(socioLayout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(214, Short.MAX_VALUE))
+                        .addGap(44, 44, 44)
+                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(215, Short.MAX_VALUE))
         );
         socioLayout.setVerticalGroup(
             socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,9 +263,8 @@ public class FormSocio extends javax.swing.JInternalFrame {
                     .addComponent(jtTelefonoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbNuevo)
+                    .addComponent(jbLimpiar)
                     .addComponent(jbGuardar)
-                    .addComponent(jbActualizar)
                     .addComponent(jbSalir))
                 .addGap(17, 17, 17))
         );
@@ -288,14 +305,45 @@ public class FormSocio extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_jbGuardarActionPerformed
 
-    private void jbNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbNuevoActionPerformed
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         // TODO add your handling code here:
         limpiar();
-    }//GEN-LAST:event_jbNuevoActionPerformed
+    }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField8ActionPerformed
+
+    private void jtDniSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDniSocioKeyTyped
+        // TODO add your handling code here:
+        if(!Character.isDigit(evt.getKeyChar())){
+            evt.consume();
+        } 
+    }//GEN-LAST:event_jtDniSocioKeyTyped
+
+    private void jtNombreSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreSocioKeyTyped
+        // TODO add your handling code here:
+        final char keyChar = evt.getKeyChar();
+        if (!(Character.isAlphabetic(keyChar) || (Character.isWhitespace(keyChar)) || keyChar == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        } 
+    }//GEN-LAST:event_jtNombreSocioKeyTyped
+
+    private void jtApellidoSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoSocioKeyTyped
+        // TODO add your handling code here:
+        final char keyChar = evt.getKeyChar();
+        if (!(Character.isAlphabetic(keyChar) || (Character.isWhitespace(keyChar)) || keyChar == KeyEvent.VK_DELETE)) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtApellidoSocioKeyTyped
+
+    private void jtCorreoSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCorreoSocioKeyTyped
+        // TODO add your handling code here:
+        final char keyChar = evt.getKeyChar();
+        if (Character.isWhitespace(keyChar) || keyChar == KeyEvent.VK_DELETE) {
+            evt.consume();
+        }
+    }//GEN-LAST:event_jtCorreoSocioKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -306,9 +354,8 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
-    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbGuardar;
-    private javax.swing.JButton jbNuevo;
+    private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbSalir;
     private javax.swing.JTextField jtApellidoSocio;
     private javax.swing.JTextField jtCorreoSocio;

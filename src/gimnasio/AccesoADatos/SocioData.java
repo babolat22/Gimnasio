@@ -8,6 +8,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -20,7 +22,6 @@ public class SocioData {
     public SocioData() {
         con = Conexion.getConexion();
     }
-    
     
     public void guardarSocio(Socio socio){
         
@@ -40,16 +41,29 @@ public class SocioData {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()) {
                 socio.setId_socio(rs.getInt(1));
-               
-                System.out.println("El socio: "+socio.getNombre()+" "+socio.getApellido()+" fue añadido con el ID: "+socio.getId_socio());
-                JOptionPane.showMessageDialog(null, "Alumno añadido con exito."); 
                 
+                JOptionPane.showMessageDialog(null, "El socio: "+socio.getNombre()+" "+socio.getApellido()+" fue añadido con el ID: "+socio.getId_socio()); 
             }
             ps.close();
-
         } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Alumno"+ex.getMessage()); 
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socio: "+ex.getMessage()); 
         } 
+    }
+    
+    public void eliminarSocio(int id){ //Eliminar Socio cambia el estado a 0.
+        Socio socio = new Socio();
+         
+        String sql = "UPDATE socio SET estado = 0 WHERE id_socio = id";
+     try {
+         PreparedStatement ps = con.prepareStatement(sql);
+         int fila = ps.executeUpdate();
+         if(fila==1){
+            JOptionPane.showMessageDialog(null, "Se elimino el socio: "+socio.getNombre()+" "+socio.getApellido()+" con ID: "+socio.getId_socio()); 
+         }
+     } catch (SQLException ex) {
+         JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socio: "+ex.getMessage()); 
+     }
+        
     }
     
 }

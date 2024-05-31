@@ -138,7 +138,7 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
         jTextField8.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jTextField8.setForeground(new java.awt.Color(255, 255, 255));
         jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField8.setText("LISTADO DE ENTRENADORES");
+        jTextField8.setText("LISTADO DE SOCIOS");
         jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField8.setCaretColor(new java.awt.Color(255, 51, 255));
         jTextField8.setFocusable(false);
@@ -152,7 +152,7 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
         jTextField9.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jTextField9.setForeground(new java.awt.Color(255, 255, 255));
         jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField9.setText("FORMULARIO DE BÚSQUEDA DE ENTRENADORES");
+        jTextField9.setText("FORMULARIO DE BÚSQUEDA DE SOCIOS");
         jTextField9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField9.setCaretColor(new java.awt.Color(255, 51, 255));
         jTextField9.setFocusable(false);
@@ -205,14 +205,14 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(socio2Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
+                .addGap(87, 87, 87)
                 .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(socio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, socio2Layout.createSequentialGroup()
-                    .addContainerGap(161, Short.MAX_VALUE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(154, Short.MAX_VALUE)))
+                    .addContainerGap(223, Short.MAX_VALUE)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(198, Short.MAX_VALUE)))
         );
         socio2Layout.setVerticalGroup(
             socio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,7 +239,7 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
                     .addComponent(jButton3)
                     .addComponent(jButton1)
                     .addComponent(jButton4))
-                .addContainerGap(9, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
             .addGroup(socio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(socio2Layout.createSequentialGroup()
                     .addContainerGap()

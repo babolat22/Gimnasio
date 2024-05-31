@@ -10,28 +10,31 @@ import java.sql.Date;
 public class Membresia {
     private int id_membresia;
     private Socio id_socio;
-    private String tipo;
+    private int cant_pases;
     private Date fecha_inicio;
     private Date fecha_fin;
+    private double costo;
     private boolean estado;
 
     public Membresia() {
     }
 
-    public Membresia(Socio id_socio, String tipo, Date fecha_inicio, Date fecha_fin, boolean estado) {
+    public Membresia(Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, double costo, boolean estado) {
         this.id_socio = id_socio;
-        this.tipo = tipo;
+        this.cant_pases = cant_pases;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
+        this.costo = costo;
         this.estado = estado;
     }
 
-    public Membresia(int id_membresia, Socio id_socio, String tipo, Date fecha_inicio, Date fecha_fin, boolean estado) {
+    public Membresia(int id_membresia, Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, double costo, boolean estado) {
         this.id_membresia = id_membresia;
         this.id_socio = id_socio;
-        this.tipo = tipo;
+        this.cant_pases = cant_pases;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
+        this.costo = costo;
         this.estado = estado;
     }
 
@@ -51,12 +54,12 @@ public class Membresia {
         this.id_socio = id_socio;
     }
 
-    public String getTipo() {
-        return tipo;
+    public int getCant_pases() {
+        return cant_pases;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setCant_pases(int cant_pases) {
+        this.cant_pases = cant_pases;
     }
 
     public Date getFecha_inicio() {
@@ -75,6 +78,14 @@ public class Membresia {
         this.fecha_fin = fecha_fin;
     }
 
+    public double getCosto() {
+        return costo;
+    }
+
+    public void setCosto(double costo) {
+        this.costo = costo;
+    }
+
     public boolean isEstado() {
         return estado;
     }
@@ -82,5 +93,6 @@ public class Membresia {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
     
 }
