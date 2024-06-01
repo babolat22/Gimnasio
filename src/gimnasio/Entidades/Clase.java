@@ -8,7 +8,7 @@ import java.sql.Time;
  * @author Javier
  */
 public class Clase {
-    private int id_clase;
+   private int id_clase;
     private String nombre;
     private Entrenador id_entrenador;
     private Time horario;
