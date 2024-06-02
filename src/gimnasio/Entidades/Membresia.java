@@ -1,6 +1,7 @@
 
 package gimnasio.Entidades;
 
+import java.math.BigDecimal;
 import java.sql.Date;
 
 /**
@@ -13,13 +14,13 @@ public class Membresia {
     private int cant_pases;
     private Date fecha_inicio;
     private Date fecha_fin;
-    private double costo;
+    private BigDecimal costo;
     private boolean estado;
 
     public Membresia() {
     }
 
-    public Membresia(Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, double costo, boolean estado) {
+    public Membresia(Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
         this.id_socio = id_socio;
         this.cant_pases = cant_pases;
         this.fecha_inicio = fecha_inicio;
@@ -28,7 +29,7 @@ public class Membresia {
         this.estado = estado;
     }
 
-    public Membresia(int id_membresia, Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, double costo, boolean estado) {
+    public Membresia(int id_membresia, Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
         this.id_membresia = id_membresia;
         this.id_socio = id_socio;
         this.cant_pases = cant_pases;
@@ -78,11 +79,11 @@ public class Membresia {
         this.fecha_fin = fecha_fin;
     }
 
-    public double getCosto() {
+    public BigDecimal getCosto() {
         return costo;
     }
 
-    public void setCosto(double costo) {
+    public void setCosto(BigDecimal costo) {
         this.costo = costo;
     }
 

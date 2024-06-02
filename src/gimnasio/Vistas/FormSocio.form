@@ -92,7 +92,7 @@
                           <Component id="jTextField8" min="-2" pref="267" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace pref="215" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -277,14 +277,20 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtTelefonoSocio">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtTelefonoSocioFocusGained"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtTelefonoSocioKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtApellidoSocio">
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtApellidoSocioFocusGained"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtApellidoSocioKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtNombreSocio">
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtNombreSocioFocusGained"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtNombreSocioKeyTyped"/>
           </Events>
         </Component>
@@ -293,10 +299,15 @@
             <Property name="toolTipText" type="java.lang.String" value="Ingrese solo digitos del 0 al 9 sin puntos"/>
           </Properties>
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtDniSocioFocusGained"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtDniSocioKeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jtEdadSocio">
+          <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtEdadSocioFocusGained"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtEdadSocioKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="jTextField6">
           <Properties>
@@ -377,6 +388,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtCorreoSocio">
           <Events>
+            <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtCorreoSocioFocusGained"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtCorreoSocioKeyTyped"/>
           </Events>
         </Component>

@@ -3,11 +3,13 @@ package gimnasio.Vistas;
 
 import gimnasio.AccesoADatos.SocioData;
 import gimnasio.Entidades.Socio;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
 import java.sql.PreparedStatement;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
 /**
  *
  * @author Javier
@@ -95,12 +97,33 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField5.setFocusable(false);
 
+        jtTelefonoSocio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtTelefonoSocioFocusGained(evt);
+            }
+        });
+        jtTelefonoSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtTelefonoSocioKeyTyped(evt);
+            }
+        });
+
+        jtApellidoSocio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtApellidoSocioFocusGained(evt);
+            }
+        });
         jtApellidoSocio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtApellidoSocioKeyTyped(evt);
             }
         });
 
+        jtNombreSocio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtNombreSocioFocusGained(evt);
+            }
+        });
         jtNombreSocio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtNombreSocioKeyTyped(evt);
@@ -108,9 +131,25 @@ public class FormSocio extends javax.swing.JInternalFrame {
         });
 
         jtDniSocio.setToolTipText("Ingrese solo digitos del 0 al 9 sin puntos");
+        jtDniSocio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtDniSocioFocusGained(evt);
+            }
+        });
         jtDniSocio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtDniSocioKeyTyped(evt);
+            }
+        });
+
+        jtEdadSocio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtEdadSocioFocusGained(evt);
+            }
+        });
+        jtEdadSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtEdadSocioKeyTyped(evt);
             }
         });
 
@@ -152,6 +191,11 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         });
 
+        jtCorreoSocio.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtCorreoSocioFocusGained(evt);
+            }
+        });
         jtCorreoSocio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtCorreoSocioKeyTyped(evt);
@@ -230,7 +274,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
                     .addGroup(socioLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(215, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         socioLayout.setVerticalGroup(
             socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -290,19 +334,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
         // TODO add your handling code here:
-        Socio socio = new Socio();
-        socio.setNombre(jtNombreSocio.getText());
-        socio.setApellido(jtApellidoSocio.getText());
-        socio.setDni(jtDniSocio.getText());
-        socio.setEdad(Integer.parseInt(jtEdadSocio.getText()));
-        socio.setCorreo(jtCorreoSocio.getText());
-        socio.setTelefono(jtTelefonoSocio.getText());
-        socio.setContador_asistencia(12);
-        socio.setEstado(true);
-        SocioData socioData = new SocioData();
-        socioData.guardarSocio(socio);
-        
-        limpiar();
+        cargar();  
     }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
@@ -316,7 +348,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
 
     private void jtDniSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDniSocioKeyTyped
         // TODO add your handling code here:
-        if(!Character.isDigit(evt.getKeyChar())){
+        if(!(Character.isDigit(evt.getKeyChar()))|| (jtDniSocio.getText().length() == 8)){
             evt.consume();
         } 
     }//GEN-LAST:event_jtDniSocioKeyTyped
@@ -327,6 +359,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
         if (!(Character.isAlphabetic(keyChar) || (Character.isWhitespace(keyChar)) || keyChar == KeyEvent.VK_DELETE)) {
             evt.consume();
         } 
+        
     }//GEN-LAST:event_jtNombreSocioKeyTyped
 
     private void jtApellidoSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoSocioKeyTyped
@@ -344,6 +377,59 @@ public class FormSocio extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }//GEN-LAST:event_jtCorreoSocioKeyTyped
+
+    private void jtEdadSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtEdadSocioKeyTyped
+        // TODO add your handling code here:
+        final int keyChar = evt.getKeyChar();
+        if(!(Character.isDigit(keyChar)) || (jtEdadSocio.getText().length() == 2)){
+            evt.consume();
+        }
+       
+    }//GEN-LAST:event_jtEdadSocioKeyTyped
+
+    private void jtTelefonoSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTelefonoSocioKeyTyped
+        // TODO add your handling code here:
+        final int keyChar = evt.getKeyChar();
+        if(!(Character.isDigit(keyChar)) || jtTelefonoSocio.getText().length() == 12){
+        evt.consume();
+        }
+    }//GEN-LAST:event_jtTelefonoSocioKeyTyped
+
+    private void jtNombreSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNombreSocioFocusGained
+        // TODO add your handling code here:
+        jtNombreSocio.setText(null); 
+        jtNombreSocio.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtNombreSocioFocusGained
+
+    private void jtApellidoSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtApellidoSocioFocusGained
+        // TODO add your handling code here:
+        jtApellidoSocio.setText(null); 
+        jtApellidoSocio.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtApellidoSocioFocusGained
+
+    private void jtDniSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtDniSocioFocusGained
+        // TODO add your handling code here:
+        jtDniSocio.setText(null); 
+        jtDniSocio.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtDniSocioFocusGained
+
+    private void jtEdadSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtEdadSocioFocusGained
+        // TODO add your handling code here:
+        jtEdadSocio.setText(null); 
+        jtEdadSocio.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtEdadSocioFocusGained
+
+    private void jtCorreoSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCorreoSocioFocusGained
+        // TODO add your handling code here:
+        jtCorreoSocio.setText(null); 
+        jtCorreoSocio.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtCorreoSocioFocusGained
+
+    private void jtTelefonoSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtTelefonoSocioFocusGained
+        // TODO add your handling code here:
+        jtTelefonoSocio.setText(null); 
+        jtTelefonoSocio.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtTelefonoSocioFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -366,13 +452,59 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private javax.swing.JDesktopPane socio;
     // End of variables declaration//GEN-END:variables
 
+    public void cargar(){
+           try{
+                Socio socio = new Socio();
+                socio.setNombre(jtNombreSocio.getText());
+                socio.setApellido(jtApellidoSocio.getText());
+                socio.setDni(jtDniSocio.getText());
+                socio.setCorreo(jtCorreoSocio.getText());
+                socio.setContador_asistencia(12);
+                socio.setEstado(true);
+                socio.setTelefono(jtTelefonoSocio.getText());
+                socio.setEdad(Integer.parseInt(jtEdadSocio.getText()));    
+                if(camposVacios()) throw new NumberFormatException();
+                SocioData socioData = new SocioData();
+                socioData.guardarSocio(socio);
+            }catch(NumberFormatException ex){
+              campoObligatorio();
+            } 
+        
+    }
+    
     public void limpiar(){
-
         jtNombreSocio.setText(null);
         jtApellidoSocio.setText(null);
         jtCorreoSocio.setText(null);
         jtDniSocio.setText(null);
         jtEdadSocio.setText(null);
         jtTelefonoSocio.setText(null);
+    }
+    
+    public void campoObligatorio(){
+        setCamposVacios(jtNombreSocio);
+        setCamposVacios(jtApellidoSocio);
+        setCamposVacios(jtCorreoSocio);
+        setCamposVacios(jtDniSocio);
+        setCamposVacios(jtEdadSocio);
+        setCamposVacios(jtTelefonoSocio);
+    }
+    
+    public void setCamposVacios(JTextField jtSocio){
+         if(jtSocio.getText().equals("")){
+            jtSocio.setForeground(Color.red);
+            jtSocio.setText("                * Campo Obligatorio");
+        }
+    }
+    
+    public boolean camposVacios() {
+    JTextField[] campos = {jtNombreSocio, jtApellidoSocio, jtDniSocio, jtCorreoSocio, jtTelefonoSocio};
+
+    for (JTextField campo : campos) {
+        if (campo.getText().isEmpty() || campo.getText().contains("*")) {
+            return true;
+        }
+    }
+    return false;
     }
 }

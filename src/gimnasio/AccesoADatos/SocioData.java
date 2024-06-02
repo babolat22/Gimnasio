@@ -41,8 +41,8 @@ public class SocioData {
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()) {
                 socio.setId_socio(rs.getInt(1));
-                
-                JOptionPane.showMessageDialog(null, "El socio: "+socio.getNombre()+" "+socio.getApellido()+" fue añadido con el ID: "+socio.getId_socio()); 
+                JOptionPane.showMessageDialog(null, "Socio ID: "+socio.getId_socio()+"\nNombre: "+socio.getNombre()+"\nApellido:  "+socio.getApellido()+"\nEstado: Inscripto!"); 
+              
             }
             ps.close();
         } catch (SQLException ex) {
