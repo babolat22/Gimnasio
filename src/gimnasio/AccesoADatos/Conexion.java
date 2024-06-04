@@ -29,6 +29,8 @@ public class Conexion {
                 Class.forName("org.mariadb.jdbc.Driver"); //Cargando el Driver
                 connection = DriverManager.getConnection(URL+DB+"?useLegacyDatetimeCode=false&serverTimezone=UTC"
                 + "&user=" + USUARIO +"&password=" + PASSWORD);
+                
+                JOptionPane.showMessageDialog(null,"Conexion establecida con exito");
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error al conectarse a la BD"+ex.getMessage());
             }catch (ClassNotFoundException ex) {
