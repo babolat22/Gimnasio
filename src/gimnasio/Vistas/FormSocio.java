@@ -7,7 +7,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-import java.sql.PreparedStatement;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 /**
@@ -21,8 +20,6 @@ public class FormSocio extends javax.swing.JInternalFrame {
      */
     public FormSocio() {
         initComponents();
-        
-        
     }
 
     /**
@@ -37,74 +34,79 @@ public class FormSocio extends javax.swing.JInternalFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/socio33.jpg"));
         Image image = icon.getImage();
         socio = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image,0,0,getWidth(),getHeight(),this);     } };
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jtTelefonoSocio = new javax.swing.JTextField();
+        jtCartelNombre = new javax.swing.JTextField();
+        jtCartelApellido = new javax.swing.JTextField();
+        jtCartelDni = new javax.swing.JTextField();
+        jtCartelEdad = new javax.swing.JTextField();
+        jtCartelCorreo = new javax.swing.JTextField();
+        jtArea = new javax.swing.JTextField();
         jtApellidoSocio = new javax.swing.JTextField();
         jtNombreSocio = new javax.swing.JTextField();
         jtDniSocio = new javax.swing.JTextField();
         jtEdadSocio = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        jtCartelTelefono = new javax.swing.JTextField();
         jbLimpiar = new javax.swing.JButton();
         jbGuardar = new javax.swing.JButton();
         jbSalir = new javax.swing.JButton();
         jtCorreoSocio = new javax.swing.JTextField();
-        jTextField8 = new javax.swing.JTextField();
+        jtFormularioInscripcion = new javax.swing.JTextField();
+        jlError = new javax.swing.JLabel();
+        jtNumero = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setTitle("Formulario de Gestíon de Socio");
 
-        socio.setPreferredSize(new java.awt.Dimension(930, 500));
+        socio.setPreferredSize(new java.awt.Dimension(930, 520));
 
-        jTextField3.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setText("Nombre");
-        jTextField3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField3.setCaretColor(new java.awt.Color(255, 51, 255));
-        jTextField3.setFocusable(false);
+        jtCartelNombre.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelNombre.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelNombre.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelNombre.setText("Nombre");
+        jtCartelNombre.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelNombre.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtCartelNombre.setFocusable(false);
 
-        jTextField4.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField4.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField4.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField4.setText("Apellido");
-        jTextField4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField4.setCaretColor(new java.awt.Color(255, 51, 255));
-        jTextField4.setFocusable(false);
+        jtCartelApellido.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelApellido.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelApellido.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelApellido.setText("Apellido");
+        jtCartelApellido.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelApellido.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtCartelApellido.setFocusable(false);
 
-        jTextField7.setEditable(false);
-        jTextField7.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField7.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField7.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField7.setText("DNI");
-        jTextField7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField7.setFocusable(false);
+        jtCartelDni.setEditable(false);
+        jtCartelDni.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelDni.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelDni.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelDni.setText("DNI");
+        jtCartelDni.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelDni.setFocusable(false);
 
-        jTextField2.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField2.setText("Edad");
-        jTextField2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField2.setFocusable(false);
+        jtCartelEdad.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelEdad.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelEdad.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelEdad.setText("Edad");
+        jtCartelEdad.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelEdad.setFocusable(false);
 
-        jTextField5.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField5.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField5.setText("Correo");
-        jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField5.setFocusable(false);
+        jtCartelCorreo.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelCorreo.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelCorreo.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelCorreo.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jtCartelCorreo.setText("Correo");
+        jtCartelCorreo.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelCorreo.setFocusable(false);
 
-        jtTelefonoSocio.addFocusListener(new java.awt.event.FocusAdapter() {
+        jtArea.setToolTipText("Ingrese el Código de Area sin el 0");
+        jtArea.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jtTelefonoSocioFocusGained(evt);
+                jtAreaFocusGained(evt);
             }
         });
-        jtTelefonoSocio.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtArea.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtTelefonoSocioKeyTyped(evt);
+                jtAreaKeyTyped(evt);
             }
         });
 
@@ -119,6 +121,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         });
 
+        jtNombreSocio.setToolTipText("");
         jtNombreSocio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtNombreSocioFocusGained(evt);
@@ -153,13 +156,13 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         });
 
-        jTextField6.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        jTextField6.setText("Teléfono");
-        jTextField6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField6.setFocusable(false);
+        jtCartelTelefono.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelTelefono.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelTelefono.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelTelefono.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jtCartelTelefono.setText("Teléfono");
+        jtCartelTelefono.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelTelefono.setFocusable(false);
 
         jbLimpiar.setBackground(new java.awt.Color(153, 153, 153));
         jbLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -202,36 +205,58 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         });
 
-        jTextField8.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField8.setText("FORMULARIO DE INSCRIPCIÓN DE SOCIO");
-        jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField8.setCaretColor(new java.awt.Color(255, 51, 255));
-        jTextField8.setFocusable(false);
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+        jtFormularioInscripcion.setBackground(new java.awt.Color(0, 0, 0));
+        jtFormularioInscripcion.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtFormularioInscripcion.setForeground(new java.awt.Color(255, 255, 255));
+        jtFormularioInscripcion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtFormularioInscripcion.setText("FORMULARIO DE INSCRIPCIÓN DE SOCIO");
+        jtFormularioInscripcion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtFormularioInscripcion.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtFormularioInscripcion.setFocusable(false);
+
+        jlError.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jlError.setForeground(new java.awt.Color(255, 0, 51));
+        jlError.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        jtNumero.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtNumeroFocusGained(evt);
+            }
+        });
+        jtNumero.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtNumeroKeyTyped(evt);
             }
         });
 
-        socio.setLayer(jTextField3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jTextField4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jTextField7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jTextField2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jTextField5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jtTelefonoSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Còd. Area");
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Número");
+
+        socio.setLayer(jtCartelNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtCartelApellido, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtCartelDni, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtCartelEdad, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtCartelCorreo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtArea, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtApellidoSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtNombreSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtDniSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtEdadSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jTextField6, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtCartelTelefono, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jbLimpiar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jbGuardar, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtCorreoSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jTextField8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtFormularioInscripcion, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtNumero, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout socioLayout = new javax.swing.GroupLayout(socio);
         socio.setLayout(socioLayout);
@@ -244,9 +269,9 @@ public class FormSocio extends javax.swing.JInternalFrame {
                         .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(socioLayout.createSequentialGroup()
                                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextField5)
-                                    .addComponent(jTextField4)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtCartelCorreo)
+                                    .addComponent(jtCartelApellido)
+                                    .addComponent(jtCartelEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -257,13 +282,20 @@ public class FormSocio extends javax.swing.JInternalFrame {
                             .addGroup(socioLayout.createSequentialGroup()
                                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jTextField6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(jtCartelNombre, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jtCartelDni, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jtCartelTelefono, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jtDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jtTelefonoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(socioLayout.createSequentialGroup()
+                                        .addComponent(jLabel1)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtArea, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(socioLayout.createSequentialGroup()
                                 .addGap(30, 30, 30)
                                 .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -273,39 +305,47 @@ public class FormSocio extends javax.swing.JInternalFrame {
                                 .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(socioLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jtFormularioInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(socioLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         socioLayout.setVerticalGroup(
             socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(socioLayout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtFormularioInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtCartelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtNombreSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtCartelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtApellidoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtCartelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtCartelEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtEdadSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtCartelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jtCorreoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtTelefonoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
+                    .addComponent(jtCartelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbLimpiar)
                     .addComponent(jbGuardar)
@@ -342,23 +382,33 @@ public class FormSocio extends javax.swing.JInternalFrame {
         limpiar();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
-
     private void jtDniSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDniSocioKeyTyped
         // TODO add your handling code here:
-        if(!(Character.isDigit(evt.getKeyChar()))|| (jtDniSocio.getText().length() == 8)){
+        if(!(Character.isDigit(evt.getKeyChar()))){
+            jlError.setText("* Error en campo 'DNI': Debe ingresar solo números");
             evt.consume();
-        } 
+        }else{
+            jlError.setText("");
+        }
+       if(jtDniSocio.getText().length() == 8){
+           jlError.setText("* Error en campo 'DNI': Límite max: 8 dígitos");
+            evt.consume();
+       }
     }//GEN-LAST:event_jtDniSocioKeyTyped
 
     private void jtNombreSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreSocioKeyTyped
         // TODO add your handling code here:
         final char keyChar = evt.getKeyChar();
         if (!(Character.isAlphabetic(keyChar) || (Character.isWhitespace(keyChar)) || keyChar == KeyEvent.VK_DELETE)) {
+            jlError.setText("* Error en campo 'NOMBRE': Debe ingresar solo letras");
             evt.consume();
-        } 
+        }else{
+            jlError.setText("");
+        }
+        if(jtNombreSocio.getText().length() >= 30){
+            jlError.setText("* Error en campo 'NOMBRE': Límite max: 30 caracteres");
+            evt.consume();
+       }
         
     }//GEN-LAST:event_jtNombreSocioKeyTyped
 
@@ -366,34 +416,60 @@ public class FormSocio extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
         final char keyChar = evt.getKeyChar();
         if (!(Character.isAlphabetic(keyChar) || (Character.isWhitespace(keyChar)) || keyChar == KeyEvent.VK_DELETE)) {
+            jlError.setText("* Error en campo 'APELLIDO': Debe ingresar solo letras");
             evt.consume();
+        }else{
+            jlError.setText("");
         }
+        if(jtApellidoSocio.getText().length() >= 30){
+            jlError.setText("* Error en campo 'APELLIDO': Límite max: 30 caracteres");
+            evt.consume();
+       }
     }//GEN-LAST:event_jtApellidoSocioKeyTyped
 
     private void jtCorreoSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCorreoSocioKeyTyped
         // TODO add your handling code here:
         final char keyChar = evt.getKeyChar();
         if (Character.isWhitespace(keyChar) || keyChar == KeyEvent.VK_DELETE) {
-            evt.consume();
+               evt.consume();
+        }else{
+            jlError.setText("");
         }
+        if(jtCorreoSocio.getText().length() >= 50){
+            jlError.setText("* Error en campo 'CORREO': Límite max: 50 caracteres");
+            evt.consume();
+       }
     }//GEN-LAST:event_jtCorreoSocioKeyTyped
 
     private void jtEdadSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtEdadSocioKeyTyped
         // TODO add your handling code here:
         final int keyChar = evt.getKeyChar();
-        if(!(Character.isDigit(keyChar)) || (jtEdadSocio.getText().length() == 2)){
+        if(!(Character.isDigit(keyChar))){
+            jlError.setText("* Error en campo 'EDAD': Debe ingresar solo números");
             evt.consume();
+        }else{
+            jlError.setText("");
         }
-       
+       if(jtEdadSocio.getText().length() == 2){
+           jlError.setText("* Error en campo 'EDAD': Límite max: 99 años");
+            evt.consume();
+       }
     }//GEN-LAST:event_jtEdadSocioKeyTyped
 
-    private void jtTelefonoSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtTelefonoSocioKeyTyped
+    private void jtAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAreaKeyTyped
         // TODO add your handling code here:
         final int keyChar = evt.getKeyChar();
-        if(!(Character.isDigit(keyChar)) || jtTelefonoSocio.getText().length() == 12){
-        evt.consume();
+        if(!(Character.isDigit(keyChar))){
+            jlError.setText("* Error en campo 'AREA': Debe ingresar solo números");
+            evt.consume();
+        }else{
+            jlError.setText("");
         }
-    }//GEN-LAST:event_jtTelefonoSocioKeyTyped
+       if(jtArea.getText().length() == 6){
+           jlError.setText("* Error en campo 'AREA': Límite max: 6 dígitos");
+            evt.consume();
+       }
+    }//GEN-LAST:event_jtAreaKeyTyped
 
     private void jtNombreSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNombreSocioFocusGained
         // TODO add your handling code here:
@@ -425,30 +501,56 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jtCorreoSocio.setForeground(Color.BLACK);
     }//GEN-LAST:event_jtCorreoSocioFocusGained
 
-    private void jtTelefonoSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtTelefonoSocioFocusGained
+    private void jtAreaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtAreaFocusGained
         // TODO add your handling code here:
-        jtTelefonoSocio.setText(null); 
-        jtTelefonoSocio.setForeground(Color.BLACK);
-    }//GEN-LAST:event_jtTelefonoSocioFocusGained
+        jtArea.setText(null); 
+        jtArea.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtAreaFocusGained
+
+    private void jtNumeroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNumeroFocusGained
+        // TODO add your handling code here:
+        jtNumero.setText(null); 
+        jtNumero.setForeground(Color.BLACK);
+    }//GEN-LAST:event_jtNumeroFocusGained
+
+    private void jtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNumeroKeyTyped
+        // TODO add your handling code here:
+          final int keyChar = evt.getKeyChar();
+        if(!(Character.isDigit(keyChar))){
+            jlError.setText("* Error en 'NUMERO': Debe ingresar solo números");
+            evt.consume();
+        }else{
+            jlError.setText("");
+        }
+       if(jtNumero.getText().length() == 14){
+           jlError.setText("* Error en 'NUMERO': Límite max: 14 dígitos");
+            evt.consume();
+       }
+            
+    }//GEN-LAST:event_jtNumeroKeyTyped
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JLabel jlError;
     private javax.swing.JTextField jtApellidoSocio;
+    private javax.swing.JTextField jtArea;
+    private javax.swing.JTextField jtCartelApellido;
+    private javax.swing.JTextField jtCartelCorreo;
+    private javax.swing.JTextField jtCartelDni;
+    private javax.swing.JTextField jtCartelEdad;
+    private javax.swing.JTextField jtCartelNombre;
+    private javax.swing.JTextField jtCartelTelefono;
     private javax.swing.JTextField jtCorreoSocio;
     private javax.swing.JTextField jtDniSocio;
     private javax.swing.JTextField jtEdadSocio;
+    private javax.swing.JTextField jtFormularioInscripcion;
     private javax.swing.JTextField jtNombreSocio;
-    private javax.swing.JTextField jtTelefonoSocio;
+    private javax.swing.JTextField jtNumero;
     private javax.swing.JDesktopPane socio;
     // End of variables declaration//GEN-END:variables
 
@@ -461,7 +563,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
                 socio.setCorreo(jtCorreoSocio.getText());
                 socio.setContador_asistencia(12);
                 socio.setEstado(true);
-                socio.setTelefono(jtTelefonoSocio.getText());
+                socio.setTelefono(jtArea.getText());
                 socio.setEdad(Integer.parseInt(jtEdadSocio.getText()));    
                 if(camposVacios()) throw new NumberFormatException();
                 SocioData socioData = new SocioData();
@@ -478,7 +580,9 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jtCorreoSocio.setText(null);
         jtDniSocio.setText(null);
         jtEdadSocio.setText(null);
-        jtTelefonoSocio.setText(null);
+        jtArea.setText(null);
+        jtNumero.setText(null);
+        jlError.setText(null);
     }
     
     public void campoObligatorio(){
@@ -487,7 +591,9 @@ public class FormSocio extends javax.swing.JInternalFrame {
         setCamposVacios(jtCorreoSocio);
         setCamposVacios(jtDniSocio);
         setCamposVacios(jtEdadSocio);
-        setCamposVacios(jtTelefonoSocio);
+        setCamposVacios(jtArea);
+        setCamposVacios(jtNumero);
+        jlError.setText("* Debe completar todos los campos");
     }
     
     public void setCamposVacios(JTextField jtSocio){
@@ -498,7 +604,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
     }
     
     public boolean camposVacios() {
-    JTextField[] campos = {jtNombreSocio, jtApellidoSocio, jtDniSocio, jtCorreoSocio, jtTelefonoSocio};
+    JTextField[] campos = {jtNombreSocio, jtApellidoSocio, jtDniSocio, jtCorreoSocio, jtArea, jtNumero};
 
     for (JTextField campo : campos) {
         if (campo.getText().isEmpty() || campo.getText().contains("*")) {

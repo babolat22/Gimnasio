@@ -23,8 +23,8 @@ public class SocioData {
         con = Conexion.getConexion();
     }
     
-    public void guardarSocio(Socio socio){
-        
+    public boolean guardarSocio(Socio socio){
+        Boolean flag=false;
         String sql = "INSERT INTO socio (dni, nombre, apellido, edad, correo, telefono, cont_asistencia, estado) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
         try {
@@ -42,12 +42,13 @@ public class SocioData {
             if(rs.next()) {
                 socio.setId_socio(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Socio ID: "+socio.getId_socio()+"\nNombre: "+socio.getNombre()+"\nApellido:  "+socio.getApellido()+"\nEstado: Inscripto!"); 
-              
+                flag=true;
             }
             ps.close();
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socio: "+ex.getMessage()); 
         } 
+        return flag;
     }
     
     public void eliminarSocio(int id){ //Eliminar Socio cambia el estado a 0.
