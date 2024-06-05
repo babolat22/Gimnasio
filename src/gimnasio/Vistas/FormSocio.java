@@ -133,7 +133,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         });
 
-        jtDniSocio.setToolTipText("Ingrese solo digitos del 0 al 9 sin puntos");
+        jtDniSocio.setToolTipText("");
         jtDniSocio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtDniSocioFocusGained(evt);
@@ -218,6 +218,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jlError.setForeground(new java.awt.Color(255, 0, 51));
         jlError.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
+        jtNumero.setToolTipText("Celulares: Ingrese el número sin el 15");
         jtNumero.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtNumeroFocusGained(evt);
@@ -379,52 +380,23 @@ public class FormSocio extends javax.swing.JInternalFrame {
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
         // TODO add your handling code here:
-        limpiar();
+        limpiarTodo();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jtDniSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtDniSocioKeyTyped
-        // TODO add your handling code here:
-        if(!(Character.isDigit(evt.getKeyChar()))){
-            jlError.setText("* Error en campo 'DNI': Debe ingresar solo números");
-            evt.consume();
-        }else{
-            jlError.setText("");
-        }
-       if(jtDniSocio.getText().length() == 8){
-           jlError.setText("* Error en campo 'DNI': Límite max: 8 dígitos");
-            evt.consume();
-       }
+        String campo = "DNI";
+        int limite = 8;
+        controlSoloNumeros(evt, campo, limite, jtDniSocio);
     }//GEN-LAST:event_jtDniSocioKeyTyped
 
     private void jtNombreSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNombreSocioKeyTyped
-        // TODO add your handling code here:
-        final char keyChar = evt.getKeyChar();
-        if (!(Character.isAlphabetic(keyChar) || (Character.isWhitespace(keyChar)) || keyChar == KeyEvent.VK_DELETE)) {
-            jlError.setText("* Error en campo 'NOMBRE': Debe ingresar solo letras");
-            evt.consume();
-        }else{
-            jlError.setText("");
-        }
-        if(jtNombreSocio.getText().length() >= 30){
-            jlError.setText("* Error en campo 'NOMBRE': Límite max: 30 caracteres");
-            evt.consume();
-       }
-        
+        String campo = "NOMBRE";
+        controlSoloLetras(evt, campo, jtNombreSocio);  
     }//GEN-LAST:event_jtNombreSocioKeyTyped
 
     private void jtApellidoSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtApellidoSocioKeyTyped
-        // TODO add your handling code here:
-        final char keyChar = evt.getKeyChar();
-        if (!(Character.isAlphabetic(keyChar) || (Character.isWhitespace(keyChar)) || keyChar == KeyEvent.VK_DELETE)) {
-            jlError.setText("* Error en campo 'APELLIDO': Debe ingresar solo letras");
-            evt.consume();
-        }else{
-            jlError.setText("");
-        }
-        if(jtApellidoSocio.getText().length() >= 30){
-            jlError.setText("* Error en campo 'APELLIDO': Límite max: 30 caracteres");
-            evt.consume();
-       }
+        String campo = "APELLIDO";
+        controlSoloLetras(evt, campo, jtApellidoSocio);
     }//GEN-LAST:event_jtApellidoSocioKeyTyped
 
     private void jtCorreoSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCorreoSocioKeyTyped
@@ -442,90 +414,49 @@ public class FormSocio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jtCorreoSocioKeyTyped
 
     private void jtEdadSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtEdadSocioKeyTyped
-        // TODO add your handling code here:
-        final int keyChar = evt.getKeyChar();
-        if(!(Character.isDigit(keyChar))){
-            jlError.setText("* Error en campo 'EDAD': Debe ingresar solo números");
-            evt.consume();
-        }else{
-            jlError.setText("");
-        }
-       if(jtEdadSocio.getText().length() == 2){
-           jlError.setText("* Error en campo 'EDAD': Límite max: 99 años");
-            evt.consume();
-       }
+       String campo = "EDAD";
+        int limite = 2;
+        controlSoloNumeros(evt, campo, limite, jtEdadSocio);
     }//GEN-LAST:event_jtEdadSocioKeyTyped
 
     private void jtAreaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtAreaKeyTyped
-        // TODO add your handling code here:
-        final int keyChar = evt.getKeyChar();
-        if(!(Character.isDigit(keyChar))){
-            jlError.setText("* Error en campo 'AREA': Debe ingresar solo números");
-            evt.consume();
-        }else{
-            jlError.setText("");
-        }
-       if(jtArea.getText().length() == 6){
-           jlError.setText("* Error en campo 'AREA': Límite max: 6 dígitos");
-            evt.consume();
-       }
+        String campo = "AREA";
+        int limite = 6;
+        controlSoloNumeros(evt, campo, limite, jtArea);
     }//GEN-LAST:event_jtAreaKeyTyped
 
     private void jtNombreSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNombreSocioFocusGained
-        // TODO add your handling code here:
-        jtNombreSocio.setText(null); 
-        jtNombreSocio.setForeground(Color.BLACK);
+        limpiarCampo(jtNombreSocio);
     }//GEN-LAST:event_jtNombreSocioFocusGained
 
     private void jtApellidoSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtApellidoSocioFocusGained
-        // TODO add your handling code here:
-        jtApellidoSocio.setText(null); 
-        jtApellidoSocio.setForeground(Color.BLACK);
+        limpiarCampo(jtApellidoSocio);
     }//GEN-LAST:event_jtApellidoSocioFocusGained
 
     private void jtDniSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtDniSocioFocusGained
-        // TODO add your handling code here:
-        jtDniSocio.setText(null); 
-        jtDniSocio.setForeground(Color.BLACK);
+        limpiarCampo(jtDniSocio);
     }//GEN-LAST:event_jtDniSocioFocusGained
 
     private void jtEdadSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtEdadSocioFocusGained
-        // TODO add your handling code here:
-        jtEdadSocio.setText(null); 
-        jtEdadSocio.setForeground(Color.BLACK);
+        limpiarCampo(jtEdadSocio);
     }//GEN-LAST:event_jtEdadSocioFocusGained
 
     private void jtCorreoSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCorreoSocioFocusGained
-        // TODO add your handling code here:
-        jtCorreoSocio.setText(null); 
-        jtCorreoSocio.setForeground(Color.BLACK);
+        limpiarCampo(jtCorreoSocio);
     }//GEN-LAST:event_jtCorreoSocioFocusGained
 
     private void jtAreaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtAreaFocusGained
-        // TODO add your handling code here:
-        jtArea.setText(null); 
-        jtArea.setForeground(Color.BLACK);
+        limpiarCampo(jtArea);
     }//GEN-LAST:event_jtAreaFocusGained
 
     private void jtNumeroFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNumeroFocusGained
-        // TODO add your handling code here:
-        jtNumero.setText(null); 
-        jtNumero.setForeground(Color.BLACK);
+        limpiarCampo(jtNumero);
     }//GEN-LAST:event_jtNumeroFocusGained
 
     private void jtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNumeroKeyTyped
-        // TODO add your handling code here:
-          final int keyChar = evt.getKeyChar();
-        if(!(Character.isDigit(keyChar))){
-            jlError.setText("* Error en 'NUMERO': Debe ingresar solo números");
-            evt.consume();
-        }else{
-            jlError.setText("");
-        }
-       if(jtNumero.getText().length() == 14){
-           jlError.setText("* Error en 'NUMERO': Límite max: 14 dígitos");
-            evt.consume();
-       }
+       String campo = "NUMERO";
+       int limite = 14;
+        controlSoloNumeros(evt, campo, limite, jtNumero);
             
     }//GEN-LAST:event_jtNumeroKeyTyped
 
@@ -554,7 +485,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private javax.swing.JDesktopPane socio;
     // End of variables declaration//GEN-END:variables
 
-    public void cargar(){
+    private void cargar(){
            try{
                 Socio socio = new Socio();
                 socio.setNombre(jtNombreSocio.getText());
@@ -563,40 +494,36 @@ public class FormSocio extends javax.swing.JInternalFrame {
                 socio.setCorreo(jtCorreoSocio.getText());
                 socio.setContador_asistencia(12);
                 socio.setEstado(true);
-                socio.setTelefono(jtArea.getText());
+                socio.setTelefono(jtArea.getText()+jtNumero.getText());
                 socio.setEdad(Integer.parseInt(jtEdadSocio.getText()));    
                 if(camposVacios()) throw new NumberFormatException();
+                validarLongitudMin();
+                //validarRangoMin();
                 SocioData socioData = new SocioData();
-                socioData.guardarSocio(socio);
+                if(socioData.guardarSocio(socio)) limpiarTodo();//Si pudo guardar el Socio limpia todos los campos
             }catch(NumberFormatException ex){
-              campoObligatorio();
-            } 
-        
+                campoObligatorio();
+            }catch(Exception ec) {
+            }
     }
     
-    public void limpiar(){
-        jtNombreSocio.setText(null);
-        jtApellidoSocio.setText(null);
-        jtCorreoSocio.setText(null);
-        jtDniSocio.setText(null);
-        jtEdadSocio.setText(null);
-        jtArea.setText(null);
-        jtNumero.setText(null);
+    private void limpiarTodo(){
+        JTextField[] campos = {jtNombreSocio, jtApellidoSocio, jtDniSocio, jtCorreoSocio, jtEdadSocio, jtArea, jtNumero};
+        for (JTextField campo : campos) {
+            campo.setText(null);
+        }
         jlError.setText(null);
     }
     
-    public void campoObligatorio(){
-        setCamposVacios(jtNombreSocio);
-        setCamposVacios(jtApellidoSocio);
-        setCamposVacios(jtCorreoSocio);
-        setCamposVacios(jtDniSocio);
-        setCamposVacios(jtEdadSocio);
-        setCamposVacios(jtArea);
-        setCamposVacios(jtNumero);
+    private void campoObligatorio(){
+        JTextField[] campos = {jtNombreSocio, jtApellidoSocio, jtDniSocio, jtCorreoSocio, jtEdadSocio, jtArea, jtNumero};
+        for (JTextField campo : campos) {
+            setCampoObligatorio(campo);
+        }
         jlError.setText("* Debe completar todos los campos");
     }
     
-    public void setCamposVacios(JTextField jtSocio){
+    private void setCampoObligatorio(JTextField jtSocio){
          if(jtSocio.getText().equals("")){
             jtSocio.setForeground(Color.red);
             jtSocio.setText("                * Campo Obligatorio");
@@ -605,12 +532,74 @@ public class FormSocio extends javax.swing.JInternalFrame {
     
     public boolean camposVacios() {
     JTextField[] campos = {jtNombreSocio, jtApellidoSocio, jtDniSocio, jtCorreoSocio, jtArea, jtNumero};
-
     for (JTextField campo : campos) {
         if (campo.getText().isEmpty() || campo.getText().contains("*")) {
             return true;
         }
     }
     return false;
+    }
+    
+    public void limpiarCampo(JTextField socio){
+        if(socio.getText().contains("*")) socio.setText(null);
+         
+        socio.setForeground(Color.BLACK);
+    }
+    
+    private void controlSoloLetras(java.awt.event.KeyEvent evt, String campo, JTextField jtextfield){
+        final char keyChar = evt.getKeyChar();
+        if (!(Character.isAlphabetic(keyChar) || (Character.isWhitespace(keyChar)) || keyChar == KeyEvent.VK_DELETE)) {
+            jlError.setText("* Error en campo '"+campo+"': Debe ingresar solo letras");
+            evt.consume();
+        }else{
+            jlError.setText("");
+        }
+        if(jtextfield.getText().length() >= 30){
+            jlError.setText("* Error en campo '"+campo+"' Longitud max: 30 caracteres");
+            evt.consume();
+        }
+         
+    }
+    
+    private void controlSoloNumeros(java.awt.event.KeyEvent evt, String campo, int limite, JTextField jtextfield){
+        final int keyChar = evt.getKeyChar();
+        if(!(Character.isDigit(keyChar))){
+            jlError.setText("* Error en '"+campo+"': Debe ingresar solo números");
+            evt.consume();
+        }else{
+            jlError.setText("");
+        }
+        if(jtextfield.getText().length() == limite){
+           jlError.setText("* Error en '"+campo+"': Longitud max: "+limite+" dígitos");
+            evt.consume();
+        }
+    }
+       
+    private void validarLongitudMin() throws Exception{
+        validarLongitud(jtNombreSocio.getText(), "NOMBRE", 3);
+        validarLongitud(jtApellidoSocio.getText(), "APELLIDO", 3);
+        validarLongitud(jtDniSocio.getText(), "DNI", 7);
+        validarRangoMin();
+        validarLongitud(jtArea.getText(), "AREA", 2);
+        validarLongitud(jtNumero.getText(), "NUMERO", 7);
+    }
+
+    private void validarLongitud(String campo, String nombreCampo, int longitudMinima) throws Exception{
+        if(campo.length() < longitudMinima){
+            jlError.setText("* Error en campo '"+nombreCampo+"' Longitud min: "+longitudMinima+" caracteres"); 
+            throw new Exception();
+        }
+    }
+    
+    private void validarRangoMin() throws Exception{
+        validarRango(Integer.parseInt(jtDniSocio.getText()), "DNI", 1000000);
+        validarRango(Integer.parseInt(jtEdadSocio.getText()), "EDAD", 6);
+    }
+    
+    private void validarRango(int campo, String nombreCampo, int rangoMinimo) throws Exception{
+        if(campo < rangoMinimo){
+            jlError.setText("* Error en campo '"+nombreCampo+"' Rango min: "+rangoMinimo); 
+            throw new Exception();
+        }
     }
 }

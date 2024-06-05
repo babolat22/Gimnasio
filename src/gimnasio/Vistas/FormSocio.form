@@ -319,7 +319,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtDniSocio">
           <Properties>
-            <Property name="toolTipText" type="java.lang.String" value="Ingrese solo digitos del 0 al 9 sin puntos"/>
+            <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtDniSocioFocusGained"/>
@@ -456,6 +456,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jtNumero">
+          <Properties>
+            <Property name="toolTipText" type="java.lang.String" value="Celulares: Ingrese el n&#xfa;mero sin el 15"/>
+          </Properties>
           <Events>
             <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jtNumeroFocusGained"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jtNumeroKeyTyped"/>
