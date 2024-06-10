@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-05-2024 a las 02:06:57
+-- Tiempo de generación: 10-06-2024 a las 04:18:14
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -85,9 +85,11 @@ CREATE TABLE IF NOT EXISTS `entrenador` (
 CREATE TABLE IF NOT EXISTS `membresia` (
   `id_membresia` int(11) NOT NULL AUTO_INCREMENT,
   `id_socio` int(11) NOT NULL,
-  `tipo` varchar(30) NOT NULL,
+  `tipo` varchar(50) NOT NULL,
+  `cant_pases` int(11) NOT NULL,
   `fecha_inicio` date NOT NULL,
   `fecha_fin` date NOT NULL,
+  `costo` decimal(10,0) NOT NULL,
   `estado` tinyint(1) NOT NULL,
   PRIMARY KEY (`id_membresia`),
   KEY `id_socio` (`id_socio`)
