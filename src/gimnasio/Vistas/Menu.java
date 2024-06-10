@@ -29,7 +29,7 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuItem1 = new javax.swing.JMenuItem();
-        ImageIcon icon = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/imagenFondo.jpg")); 
+        ImageIcon icon = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/imagenFondo.jpg"));
         Image image = icon.getImage();
         escritorio = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image,0,0,getWidth(),getHeight(),this);     } };
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -52,7 +52,7 @@ public class Menu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GIMNASIO \"ULP\" - Proyecto Final ");
 
-        escritorio.setPreferredSize(new java.awt.Dimension(1000, 630));
+        escritorio.setPreferredSize(new java.awt.Dimension(1000, 840));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -73,9 +73,19 @@ public class Menu extends javax.swing.JFrame {
         });
 
         jmGestionMembresia.setText("Gestión Membresia");
+        jmGestionMembresia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmGestionMembresiaActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmGestionMembresia);
 
         jmConsultasMembresia.setText("Consultas");
+        jmConsultasMembresia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmConsultasMembresiaActionPerformed(evt);
+            }
+        });
         jMenu1.add(jmConsultasMembresia);
 
         jMenuBar1.add(jMenu1);
@@ -123,9 +133,19 @@ public class Menu extends javax.swing.JFrame {
         jMenu3.setText("Clase");
 
         jmGestionClase.setText("Gestión Clase");
+        jmGestionClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmGestionClaseActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmGestionClase);
 
         jmConsultasClase.setText("Consultas");
+        jmConsultasClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmConsultasClaseActionPerformed(evt);
+            }
+        });
         jMenu3.add(jmConsultasClase);
 
         jMenuBar1.add(jMenu3);
@@ -144,7 +164,7 @@ public class Menu extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(escritorio)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -174,6 +194,26 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
          mostrarPestaña(new FormSocioConsultas());
     }//GEN-LAST:event_jmConsultasSocioActionPerformed
+
+    private void jmGestionMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGestionMembresiaActionPerformed
+        // TODO add your handling code here:
+        mostrarPestaña(new FormMembresia());
+    }//GEN-LAST:event_jmGestionMembresiaActionPerformed
+
+    private void jmConsultasMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasMembresiaActionPerformed
+        // TODO add your handling code here:
+        mostrarPestaña(new FormMembresiaConsultas());
+    }//GEN-LAST:event_jmConsultasMembresiaActionPerformed
+
+    private void jmGestionClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGestionClaseActionPerformed
+        // TODO add your handling code here:
+         mostrarPestaña(new FormClase());
+    }//GEN-LAST:event_jmGestionClaseActionPerformed
+
+    private void jmConsultasClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasClaseActionPerformed
+        // TODO add your handling code here:
+         mostrarPestaña(new FormClaseConsultas());
+    }//GEN-LAST:event_jmConsultasClaseActionPerformed
 
     /**
      * @param args the command line arguments

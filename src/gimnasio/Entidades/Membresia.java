@@ -11,6 +11,7 @@ import java.sql.Date;
 public class Membresia {
     private int id_membresia;
     private Socio id_socio;
+    private String tipo;
     private int cant_pases;
     private Date fecha_inicio;
     private Date fecha_fin;
@@ -20,8 +21,9 @@ public class Membresia {
     public Membresia() {
     }
 
-    public Membresia(Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
+    public Membresia(Socio id_socio, String tipo, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
         this.id_socio = id_socio;
+        this.tipo = tipo;
         this.cant_pases = cant_pases;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
@@ -29,9 +31,10 @@ public class Membresia {
         this.estado = estado;
     }
 
-    public Membresia(int id_membresia, Socio id_socio, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
+    public Membresia(int id_membresia, Socio id_socio, String tipo, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
         this.id_membresia = id_membresia;
         this.id_socio = id_socio;
+        this.tipo = tipo;
         this.cant_pases = cant_pases;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
@@ -53,6 +56,14 @@ public class Membresia {
 
     public void setId_socio(Socio id_socio) {
         this.id_socio = id_socio;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
     public int getCant_pases() {
@@ -95,5 +106,11 @@ public class Membresia {
         this.estado = estado;
     }
 
+    @Override
+    public String toString() {
+        return "Membresia{" + "id_membresia=" + id_membresia + ", id_socio=" + id_socio + ", tipo=" + tipo + ", cant_pases=" + cant_pases + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", costo=" + costo + ", estado=" + estado + '}';
+    }
+
+    
     
 }

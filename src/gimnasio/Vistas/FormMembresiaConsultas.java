@@ -3,17 +3,23 @@ package gimnasio.Vistas;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
+import javax.swing.JTextField;
+import com.toedter.calendar.JDateChooser;
+import javax.swing.*;
+import java.util.Calendar;
+import java.util.Date;
 /**
  *
  * @author Javier
  */
-public class FormSocioConsultas extends javax.swing.JInternalFrame {
+public class FormMembresiaConsultas extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form FormSocioConsultas
+     * Creates new form FormMembresiaConsultas
      */
-    public FormSocioConsultas() {
+    public FormMembresiaConsultas() {
         initComponents();
     }
 
@@ -41,10 +47,11 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
         jTextField3 = new javax.swing.JTextField();
         jtDniSocio = new javax.swing.JTextField();
         jButton4 = new javax.swing.JButton();
-        jTextField8 = new javax.swing.JTextField();
+        jtCartelMembresia = new javax.swing.JTextField();
         jTextField9 = new javax.swing.JTextField();
 
         setClosable(true);
+        setTitle("Formulario de Gestión de Membresias");
 
         socio2.setPreferredSize(new java.awt.Dimension(750, 546));
 
@@ -115,7 +122,7 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
         jButton2.setBackground(new java.awt.Color(153, 153, 153));
         jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
-        jButton2.setText("Nuevo");
+        jButton2.setText("Renovar");
 
         jButton3.setBackground(new java.awt.Color(153, 153, 153));
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -136,17 +143,17 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
         jButton4.setForeground(new java.awt.Color(0, 0, 0));
         jButton4.setText("Buscar");
 
-        jTextField8.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField8.setText("LISTADO DE SOCIOS");
-        jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField8.setCaretColor(new java.awt.Color(255, 51, 255));
-        jTextField8.setFocusable(false);
-        jTextField8.addActionListener(new java.awt.event.ActionListener() {
+        jtCartelMembresia.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelMembresia.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelMembresia.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelMembresia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtCartelMembresia.setText("LISTADO DE MEMBRESIAS");
+        jtCartelMembresia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelMembresia.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtCartelMembresia.setFocusable(false);
+        jtCartelMembresia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField8ActionPerformed(evt);
+                jtCartelMembresiaActionPerformed(evt);
             }
         });
 
@@ -154,10 +161,15 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
         jTextField9.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jTextField9.setForeground(new java.awt.Color(255, 255, 255));
         jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField9.setText("FORMULARIO DE BÚSQUEDA DE SOCIOS");
+        jTextField9.setText("FORMULARIO DE BÚSQUEDA DE MEMBRESIAS");
         jTextField9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField9.setCaretColor(new java.awt.Color(255, 51, 255));
         jTextField9.setFocusable(false);
+        jTextField9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField9ActionPerformed(evt);
+            }
+        });
 
         socio2.setLayer(jTextField4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio2.setLayer(jtApellidoSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -170,7 +182,7 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
         socio2.setLayer(jTextField3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio2.setLayer(jtDniSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio2.setLayer(jButton4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio2.setLayer(jTextField8, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio2.setLayer(jtCartelMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio2.setLayer(jTextField9, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout socio2Layout = new javax.swing.GroupLayout(socio2);
@@ -181,7 +193,7 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
                 .addGroup(socio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(socio2Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 703, Short.MAX_VALUE))
                     .addGroup(socio2Layout.createSequentialGroup()
                         .addGap(39, 39, 39)
                         .addGroup(socio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,9 +224,9 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(socio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, socio2Layout.createSequentialGroup()
-                    .addContainerGap(223, Short.MAX_VALUE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(198, Short.MAX_VALUE)))
+                    .addContainerGap(283, Short.MAX_VALUE)
+                    .addComponent(jtCartelMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(267, Short.MAX_VALUE)))
         );
         socio2Layout.setVerticalGroup(
             socio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,12 +253,12 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
                     .addComponent(jButton3)
                     .addComponent(jbEliminar)
                     .addComponent(jButton4))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(socio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(socio2Layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(483, Short.MAX_VALUE)))
+                    .addComponent(jtCartelMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(525, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -263,18 +275,22 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
     private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jbEliminarActionPerformed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jtCartelMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCartelMembresiaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jtCartelMembresiaActionPerformed
 
-    private void jTextField8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField8ActionPerformed
+    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField8ActionPerformed
+    }//GEN-LAST:event_jTextField9ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -285,10 +301,10 @@ public class FormSocioConsultas extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JButton jbEliminar;
     private javax.swing.JTextField jtApellidoSocio;
+    private javax.swing.JTextField jtCartelMembresia;
     private javax.swing.JTextField jtDniSocio;
     private javax.swing.JTable jtListadoSocio;
     private javax.swing.JTextField jtNombreSocio;

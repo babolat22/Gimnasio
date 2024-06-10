@@ -91,5 +91,10 @@ public class Entrenador {
     public void setEstado(boolean estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre y Apellido = " + nombre +" "+ apellido + " | id_entrenador = " + id_entrenador + " | dni = " + dni + " | especialidad = " + especialidad + " | disponibilidad = " + disponibilidad + " | estado = " + estado + '}';
+    }
     
 }
