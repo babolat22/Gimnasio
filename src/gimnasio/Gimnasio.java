@@ -1,17 +1,21 @@
 
 package gimnasio;
 
+import gimnasio.AccesoADatos.ClaseData;
 import gimnasio.AccesoADatos.Conexion;
 import gimnasio.AccesoADatos.EntrenadorData;
 import gimnasio.AccesoADatos.MembresiaData;
 import gimnasio.AccesoADatos.SocioData;
+import gimnasio.Entidades.Clase;
 import gimnasio.Entidades.Entrenador;
 import gimnasio.Entidades.Membresia;
 import gimnasio.Entidades.Socio;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -71,17 +75,17 @@ public class Gimnasio {
 //    
 //    LocalDate fechaActual = LocalDate.now();
 //    Date fechaInicio = Date.valueOf(fechaActual);
-
+//
 //    // Sumar un mes a la fecha actual
 //    LocalDate fechaMensual = fechaActual.plusMonths(1);
 //    Date fechaFin = Date.valueOf(fechaMensual);
-
+//
 //    // Calcular el periodo entre las dos fechas (diferencia en días)
 //    long diasDiferencia = ChronoUnit.DAYS.between(fechaActual, fechaMensual);
-
+//
 //    // Calcular el costo como BigDecimal
 //    BigDecimal costo =  BigDecimal.valueOf((diasDiferencia-18)*700);
-
+//
 //    //registro membresia del 1 socio
 //    JOptionPane.showMessageDialog(null, "Registro de membresia 1er Socio");
 //    Socio socioX;
@@ -118,7 +122,7 @@ public class Gimnasio {
 //    Entrenador entrenador3 = new Entrenador("35478963", "Gustavo", "Perez", "Yoga","Viernes de 11hs a 12hs", true);
 //    Entrenador entrenador4 = new Entrenador("15546449", "Jorge", "Araoz", "Fitness","Jueves de 7hs a 8hs", true);
 //    Entrenador[] entrenadorN= {entrenador1, entrenador2, entrenador3, entrenador4};
-    EntrenadorData entrenadorData = new EntrenadorData(); 
+//    EntrenadorData entrenadorData = new EntrenadorData(); 
 //        for (Entrenador entrenador : entrenadorN) {
 //             entrenadorData.guardarEntrenador(entrenador);
 //        }
@@ -144,23 +148,87 @@ public class Gimnasio {
 //        for (Entrenador entrenadorz : entrenadoresPorNombre) {
 //            System.out.println("Entrenador encontrado por nombre: " + entrenadorz.toString());
 //        }
-
-    // Probar modificar un entrenador
-    JOptionPane.showMessageDialog(null, "Modificando entrenador con ID: 3");
-    Entrenador entrenadorAModificar;
-    entrenadorAModificar = entrenadorData.buscarEntrenadorPorId(3);
-    entrenadorAModificar.setNombre("Juan Modificado");
-    entrenadorData.modificarEntrenador(entrenadorAModificar);
-    System.out.println("Entrenador modificado: " + entrenadorData.buscarEntrenadorPorId(3).toString());
-
-//        // Probar eliminar un entrenador
-//        entrenadorData.eliminarEntrenador(entrenador.getId_entrenador());
-//        System.out.println("Entrenador eliminado: " + entrenadorData.buscarEntrenadorPorId(entrenador.getId_entrenador()));
+//
+//    // Probar modificar un entrenador
+//    JOptionPane.showMessageDialog(null, "Modificando entrenador con ID: 3");
+//    Entrenador entrenadorAModificar;
+//    entrenadorAModificar = entrenadorData.buscarEntrenadorPorId(3);
+//    entrenadorAModificar.setNombre("Juan Modificado");
+//    entrenadorData.modificarEntrenador(entrenadorAModificar);
+//    System.out.println("Entrenador modificado: " + entrenadorData.buscarEntrenadorPorId(3).toString());
+//
+//    // Probar eliminar un entrenador
+//    JOptionPane.showMessageDialog(null, "Eliminar entrenador con ID: 3");
+//    Entrenador entrenadorAEliminar;
+//    entrenadorAEliminar = entrenadorData.buscarEntrenadorPorId(3);
+//    entrenadorData.eliminarEntrenador(entrenadorAEliminar.getId_entrenador());
 //    
+//    //Guardar clases
+//    JOptionPane.showMessageDialog(null, "Registro de 5 Clases");
+//    Entrenador entrenadorX1, entrenadorX2, entrenadorX3, entrenadorX4, entrenadorX5;
+//    EntrenadorData entrenadorDataX = new EntrenadorData();
+//    
+//    entrenadorX1 = entrenadorDataX.buscarEntrenadorPorId(1);
+//    LocalTime localTime1 = LocalTime.of(8, 0);
+//    Time horario1 = Time.valueOf(localTime1); 
+//    Clase clase1 = new Clase("Musculación", entrenadorX1, horario1, 50,true);
+//    
+//    entrenadorX2 = entrenadorDataX.buscarEntrenadorPorId(3);//yoga
+//    LocalTime localTime2 = LocalTime.of(9, 0);
+//    Time horario2 = Time.valueOf(localTime2); 
+//    Clase clase2 = new Clase("Yoga", entrenadorX2, horario2, 10,true);
+//
+//    entrenadorX3 = entrenadorDataX.buscarEntrenadorPorId(3);
+//    LocalTime localTime3 = LocalTime.of(10, 0);
+//    Time horario3 = Time.valueOf(localTime3); 
+//    Clase clase3 = new Clase("Musculación", entrenadorX3, horario3, 50,true);
+//    
+//    entrenadorX4 = entrenadorDataX.buscarEntrenadorPorId(2);
+//    LocalTime localTime4 = LocalTime.of(10, 0);
+//    Time horario4 = Time.valueOf(localTime4); 
+//    Clase clase4 = new Clase("Pilates", entrenadorX4, horario4, 8,true);
+//  
+//    entrenadorX5 = entrenadorDataX.buscarEntrenadorPorId(1);
+//    LocalTime localTime5 = LocalTime.of(12, 0);
+//    Time horario5 = Time.valueOf(localTime5); 
+//    Clase clase5 = new Clase("Musculación", entrenadorX5, horario5, 50,true);
+//    
+    ClaseData claseData = new ClaseData();
+//    Clase[] claseN ={clase1, clase2, clase3, clase4, clase5};
+//        for (Clase clase : claseN) {
+//            claseData.guardarClase(clase);
+//        }
+//    
+    //Buscar Clase por entrenador
+//    JOptionPane.showMessageDialog(null, "Busqueda de clases Activas por entrenador Activo");
+//    int idABuscar = 3;
+//    List<Clase> listaClases;
+//    listaClases = claseData.buscarClasePorEntrenador(idABuscar);
+//        for (Clase listaClase : listaClases) {
+//            System.out.println(listaClase.toString());
+//        }
+//    //Listado de clases por nombre
+//    JOptionPane.showMessageDialog(null, "Busqueda de clases Activas por Nombre de Clase");    
+//    listaClases = claseData.buscarClasePorNombre("Musculación");
+//        for (Clase listaClase : listaClases) {
+//            System.out.println(listaClase.toString());
+//        }
+////    
+    //Buscar Clase por horario
+    JOptionPane.showMessageDialog(null, "Busqueda de clases disponibles por horario y estado activo");
+    int horaABuscar = 10;
+    LocalTime localTime6 = LocalTime.of(horaABuscar, 0);
+    Time horario6 = Time.valueOf(localTime6);
+    List<Clase> listaClases6;
+    listaClases6 = claseData.buscarClasePorHorario(horario6);
+        for (Clase clase : listaClases6) {
+            System.out.println(clase.toString());
+        }
     
-
-    }
-}//FIN MAIN
+    
+    }//FIN MAIN
+    
+}//FIN CLASE
 
     
     

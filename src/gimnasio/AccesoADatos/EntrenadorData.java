@@ -145,8 +145,9 @@ public class EntrenadorData {
         Entrenador entrenador;
         try{
             entrenador = entrenadorABuscar.buscarEntrenadorPorId(id);
-            String sql = "UPDATE entrenador SET estado = 0 WHERE id_entrenador = id";
+            String sql = "UPDATE entrenador SET estado = 0 WHERE id_entrenador = ?";
             ps = con.prepareStatement(sql);
+            ps.setInt(1, id);
             int fila = ps.executeUpdate();
             if(fila==1){
                JOptionPane.showMessageDialog(null, "Entrenador ID: "+entrenador.getId_entrenador()+"\nNombre: "+entrenador.getNombre()+" "+entrenador.getApellido()+"\nEstado: Eliminado!"); 

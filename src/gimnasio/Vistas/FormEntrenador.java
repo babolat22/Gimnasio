@@ -1,8 +1,14 @@
 
 package gimnasio.Vistas;
 
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.date;
+import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
 import javax.swing.ImageIcon;
 
 /**
@@ -40,60 +46,14 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         jTextField3 = new javax.swing.JTextField();
         jtCartelApellido = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
         jTextField7 = new javax.swing.JTextField();
-        jcLunes = new javax.swing.JCheckBox();
-        jTextField8 = new javax.swing.JTextField();
-        jTextField9 = new javax.swing.JTextField();
-        jtCartelLunes = new javax.swing.JTextField();
-        jcHoraInicioLunes = new javax.swing.JComboBox<>();
         jtNombre = new javax.swing.JTextField();
         jtDni = new javax.swing.JTextField();
-        jcMinutosInicioLunes = new javax.swing.JComboBox<>();
-        jcHoraFinLunes = new javax.swing.JComboBox<>();
-        jcMinutosFinLunes = new javax.swing.JComboBox<>();
-        jcMartes = new javax.swing.JCheckBox();
-        jTextField12 = new javax.swing.JTextField();
-        jcHoraInicioMartes = new javax.swing.JComboBox<>();
-        jcMinutosInicioMartes = new javax.swing.JComboBox<>();
-        jTextField10 = new javax.swing.JTextField();
-        jcHoraFinMartes = new javax.swing.JComboBox<>();
-        jcMinutosFinMartes = new javax.swing.JComboBox<>();
-        jcHoraInicioMiercoles = new javax.swing.JComboBox<>();
-        jcMinutosInicioMiercoles = new javax.swing.JComboBox<>();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jcMiercoles = new javax.swing.JCheckBox();
-        jcHoraFinMiercoles = new javax.swing.JComboBox<>();
-        jcMinutosFinMiercoles = new javax.swing.JComboBox<>();
-        jTextField15 = new javax.swing.JTextField();
-        jcHoraFinJueves = new javax.swing.JComboBox<>();
-        jcMinutosFinJueves = new javax.swing.JComboBox<>();
-        jcHoraInicioJueves = new javax.swing.JComboBox<>();
-        jcMinutosInicioJueves = new javax.swing.JComboBox<>();
-        jTextField16 = new javax.swing.JTextField();
-        jcJueves = new javax.swing.JCheckBox();
-        jcViernes = new javax.swing.JCheckBox();
-        jTextField17 = new javax.swing.JTextField();
-        jcMinutosFinViernes = new javax.swing.JComboBox<>();
-        jcHoraFinViernes = new javax.swing.JComboBox<>();
-        jcHoraInicioViernes = new javax.swing.JComboBox<>();
-        jcMinutosInicioViernes = new javax.swing.JComboBox<>();
-        jTextField18 = new javax.swing.JTextField();
-        jcSabado = new javax.swing.JCheckBox();
         jTextField19 = new javax.swing.JTextField();
-        jcMinutosFinSabado = new javax.swing.JComboBox<>();
-        jcHoraFinSabado = new javax.swing.JComboBox<>();
-        jcHoraInicioSabado = new javax.swing.JComboBox<>();
-        jcMinutosInicioSabado = new javax.swing.JComboBox<>();
+        jSpinField1 = new com.toedter.components.JSpinField();
         jTextField20 = new javax.swing.JTextField();
-        jcDomingo = new javax.swing.JCheckBox();
+        jTextField1 = new javax.swing.JTextField();
         jTextField21 = new javax.swing.JTextField();
-        jTextField22 = new javax.swing.JTextField();
-        jcMinutosInicioDomingo = new javax.swing.JComboBox<>();
-        jcHoraFinDomingo = new javax.swing.JComboBox<>();
-        jcHoraInicioDomingo = new javax.swing.JComboBox<>();
-        jcMinutosFinDomingo = new javax.swing.JComboBox<>();
 
         setTitle("Formulario de gestión de Entrenadores");
 
@@ -113,6 +73,11 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         jbGuardar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jbGuardar.setForeground(new java.awt.Color(0, 0, 0));
         jbGuardar.setText("Guardar");
+        jbGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarActionPerformed(evt);
+            }
+        });
 
         jbNuevo.setBackground(new java.awt.Color(153, 153, 153));
         jbNuevo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
@@ -160,15 +125,6 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField5.setFocusable(false);
 
-        jTextField6.setEditable(false);
-        jTextField6.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField6.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField6.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField6.setText("Dia");
-        jTextField6.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField6.setFocusable(false);
-
         jTextField7.setEditable(false);
         jTextField7.setBackground(new java.awt.Color(0, 0, 0));
         jTextField7.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -177,322 +133,27 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         jTextField7.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField7.setFocusable(false);
 
-        jcLunes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jcLunes.setForeground(new java.awt.Color(0, 0, 0));
-
-        jTextField8.setEditable(false);
-        jTextField8.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField8.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
-        jTextField8.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField8.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField8.setText("Horario");
-        jTextField8.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
-        jTextField8.setFocusable(false);
-
-        jTextField9.setEditable(false);
-        jTextField9.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField9.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField9.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField9.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField9.setText("a");
-        jTextField9.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField9.setFocusable(false);
-        jTextField9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField9ActionPerformed(evt);
-            }
-        });
-
-        jtCartelLunes.setEditable(false);
-        jtCartelLunes.setBackground(new java.awt.Color(0, 0, 0));
-        jtCartelLunes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jtCartelLunes.setForeground(new java.awt.Color(255, 255, 255));
-        jtCartelLunes.setText("Lunes");
-        jtCartelLunes.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jtCartelLunes.setFocusable(false);
-
-        jcHoraInicioLunes.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraInicioLunes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraInicioLunes.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraInicioLunes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraInicioLunes.setBorder(null);
-        jcHoraInicioLunes.setLightWeightPopupEnabled(false);
-
-        jcMinutosInicioLunes.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosInicioLunes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosInicioLunes.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosInicioLunes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosInicioLunes.setBorder(null);
-        jcMinutosInicioLunes.setLightWeightPopupEnabled(false);
-
-        jcHoraFinLunes.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraFinLunes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraFinLunes.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraFinLunes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraFinLunes.setBorder(null);
-        jcHoraFinLunes.setLightWeightPopupEnabled(false);
-
-        jcMinutosFinLunes.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosFinLunes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosFinLunes.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosFinLunes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosFinLunes.setBorder(null);
-        jcMinutosFinLunes.setLightWeightPopupEnabled(false);
-
-        jcMartes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jcMartes.setForeground(new java.awt.Color(0, 0, 0));
-
-        jTextField12.setEditable(false);
-        jTextField12.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField12.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField12.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField12.setText("Martes");
-        jTextField12.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField12.setFocusable(false);
-
-        jcHoraInicioMartes.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraInicioMartes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraInicioMartes.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraInicioMartes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraInicioMartes.setBorder(null);
-        jcHoraInicioMartes.setLightWeightPopupEnabled(false);
-
-        jcMinutosInicioMartes.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosInicioMartes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosInicioMartes.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosInicioMartes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosInicioMartes.setBorder(null);
-        jcMinutosInicioMartes.setLightWeightPopupEnabled(false);
-
-        jTextField10.setEditable(false);
-        jTextField10.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField10.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField10.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField10.setText("a");
-        jTextField10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField10.setFocusable(false);
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
-            }
-        });
-
-        jcHoraFinMartes.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraFinMartes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraFinMartes.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraFinMartes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraFinMartes.setBorder(null);
-        jcHoraFinMartes.setLightWeightPopupEnabled(false);
-
-        jcMinutosFinMartes.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosFinMartes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosFinMartes.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosFinMartes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosFinMartes.setBorder(null);
-        jcMinutosFinMartes.setLightWeightPopupEnabled(false);
-
-        jcHoraInicioMiercoles.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraInicioMiercoles.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraInicioMiercoles.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraInicioMiercoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraInicioMiercoles.setBorder(null);
-        jcHoraInicioMiercoles.setLightWeightPopupEnabled(false);
-
-        jcMinutosInicioMiercoles.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosInicioMiercoles.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosInicioMiercoles.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosInicioMiercoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosInicioMiercoles.setBorder(null);
-        jcMinutosInicioMiercoles.setLightWeightPopupEnabled(false);
-
-        jTextField13.setEditable(false);
-        jTextField13.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField13.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField13.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField13.setText("Miercoles");
-        jTextField13.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField13.setFocusable(false);
-
-        jTextField14.setEditable(false);
-        jTextField14.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField14.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField14.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField14.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField14.setText("a");
-        jTextField14.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField14.setFocusable(false);
-        jTextField14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField14ActionPerformed(evt);
-            }
-        });
-
-        jcMiercoles.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jcMiercoles.setForeground(new java.awt.Color(0, 0, 0));
-
-        jcHoraFinMiercoles.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraFinMiercoles.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraFinMiercoles.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraFinMiercoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraFinMiercoles.setBorder(null);
-        jcHoraFinMiercoles.setLightWeightPopupEnabled(false);
-
-        jcMinutosFinMiercoles.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosFinMiercoles.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosFinMiercoles.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosFinMiercoles.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosFinMiercoles.setBorder(null);
-        jcMinutosFinMiercoles.setLightWeightPopupEnabled(false);
-
-        jTextField15.setEditable(false);
-        jTextField15.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField15.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField15.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField15.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField15.setText("a");
-        jTextField15.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField15.setFocusable(false);
-        jTextField15.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField15ActionPerformed(evt);
-            }
-        });
-
-        jcHoraFinJueves.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraFinJueves.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraFinJueves.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraFinJueves.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraFinJueves.setBorder(null);
-        jcHoraFinJueves.setLightWeightPopupEnabled(false);
-
-        jcMinutosFinJueves.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosFinJueves.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosFinJueves.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosFinJueves.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosFinJueves.setBorder(null);
-        jcMinutosFinJueves.setLightWeightPopupEnabled(false);
-
-        jcHoraInicioJueves.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraInicioJueves.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraInicioJueves.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraInicioJueves.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraInicioJueves.setBorder(null);
-        jcHoraInicioJueves.setLightWeightPopupEnabled(false);
-
-        jcMinutosInicioJueves.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosInicioJueves.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosInicioJueves.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosInicioJueves.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosInicioJueves.setBorder(null);
-        jcMinutosInicioJueves.setLightWeightPopupEnabled(false);
-
-        jTextField16.setEditable(false);
-        jTextField16.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField16.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField16.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField16.setText("Jueves");
-        jTextField16.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField16.setFocusable(false);
-
-        jcJueves.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jcJueves.setForeground(new java.awt.Color(0, 0, 0));
-
-        jcViernes.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jcViernes.setForeground(new java.awt.Color(0, 0, 0));
-
-        jTextField17.setEditable(false);
-        jTextField17.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField17.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField17.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField17.setText("Viernes");
-        jTextField17.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField17.setFocusable(false);
-
-        jcMinutosFinViernes.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosFinViernes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosFinViernes.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosFinViernes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosFinViernes.setBorder(null);
-        jcMinutosFinViernes.setLightWeightPopupEnabled(false);
-
-        jcHoraFinViernes.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraFinViernes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraFinViernes.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraFinViernes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraFinViernes.setBorder(null);
-        jcHoraFinViernes.setLightWeightPopupEnabled(false);
-
-        jcHoraInicioViernes.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraInicioViernes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraInicioViernes.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraInicioViernes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraInicioViernes.setBorder(null);
-        jcHoraInicioViernes.setLightWeightPopupEnabled(false);
-
-        jcMinutosInicioViernes.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosInicioViernes.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosInicioViernes.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosInicioViernes.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosInicioViernes.setBorder(null);
-        jcMinutosInicioViernes.setLightWeightPopupEnabled(false);
-
-        jTextField18.setEditable(false);
-        jTextField18.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField18.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField18.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField18.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField18.setText("a");
-        jTextField18.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField18.setFocusable(false);
-        jTextField18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField18ActionPerformed(evt);
-            }
-        });
-
-        jcSabado.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jcSabado.setForeground(new java.awt.Color(0, 0, 0));
-
         jTextField19.setEditable(false);
         jTextField19.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField19.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jTextField19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextField19.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField19.setText("Sábado");
+        jTextField19.setText("Lunes a Sábado:");
         jTextField19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
         jTextField19.setFocusable(false);
+        jTextField19.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField19ActionPerformed(evt);
+            }
+        });
 
-        jcMinutosFinSabado.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosFinSabado.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosFinSabado.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosFinSabado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosFinSabado.setBorder(null);
-        jcMinutosFinSabado.setLightWeightPopupEnabled(false);
-
-        jcHoraFinSabado.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraFinSabado.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraFinSabado.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraFinSabado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraFinSabado.setBorder(null);
-        jcHoraFinSabado.setLightWeightPopupEnabled(false);
-
-        jcHoraInicioSabado.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraInicioSabado.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraInicioSabado.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraInicioSabado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraInicioSabado.setBorder(null);
-        jcHoraInicioSabado.setLightWeightPopupEnabled(false);
-
-        jcMinutosInicioSabado.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosInicioSabado.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosInicioSabado.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosInicioSabado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosInicioSabado.setBorder(null);
-        jcMinutosInicioSabado.setLightWeightPopupEnabled(false);
+        jSpinField1.setBackground(new java.awt.Color(204, 204, 204));
+        jSpinField1.setForeground(new java.awt.Color(0, 0, 0));
+        jSpinField1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jSpinField1.setHorizontalAlignment(0);
 
         jTextField20.setEditable(false);
         jTextField20.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField20.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jTextField20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextField20.setForeground(new java.awt.Color(255, 255, 255));
         jTextField20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField20.setText("a");
@@ -504,58 +165,26 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
             }
         });
 
-        jcDomingo.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jcDomingo.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(0, 0, 0));
+        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField1.setText("0");
+        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        jTextField1.setFocusable(false);
 
         jTextField21.setEditable(false);
         jTextField21.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField21.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jTextField21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jTextField21.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField21.setText("Domingo");
+        jTextField21.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jTextField21.setText("Horas");
         jTextField21.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
         jTextField21.setFocusable(false);
-
-        jTextField22.setEditable(false);
-        jTextField22.setBackground(new java.awt.Color(0, 0, 0));
-        jTextField22.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jTextField22.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField22.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField22.setText("a");
-        jTextField22.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
-        jTextField22.setFocusable(false);
-        jTextField22.addActionListener(new java.awt.event.ActionListener() {
+        jTextField21.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField22ActionPerformed(evt);
+                jTextField21ActionPerformed(evt);
             }
         });
-
-        jcMinutosInicioDomingo.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosInicioDomingo.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosInicioDomingo.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosInicioDomingo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosInicioDomingo.setBorder(null);
-        jcMinutosInicioDomingo.setLightWeightPopupEnabled(false);
-
-        jcHoraFinDomingo.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraFinDomingo.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraFinDomingo.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraFinDomingo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraFinDomingo.setBorder(null);
-        jcHoraFinDomingo.setLightWeightPopupEnabled(false);
-
-        jcHoraInicioDomingo.setBackground(new java.awt.Color(102, 102, 102));
-        jcHoraInicioDomingo.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcHoraInicioDomingo.setForeground(new java.awt.Color(255, 255, 255));
-        jcHoraInicioDomingo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", " " }));
-        jcHoraInicioDomingo.setBorder(null);
-        jcHoraInicioDomingo.setLightWeightPopupEnabled(false);
-
-        jcMinutosFinDomingo.setBackground(new java.awt.Color(102, 102, 102));
-        jcMinutosFinDomingo.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcMinutosFinDomingo.setForeground(new java.awt.Color(255, 255, 255));
-        jcMinutosFinDomingo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "00", "15", "30", "45", " " }));
-        jcMinutosFinDomingo.setBorder(null);
-        jcMinutosFinDomingo.setLightWeightPopupEnabled(false);
 
         entrenador.setLayer(jtApellido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         entrenador.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -567,180 +196,44 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
         entrenador.setLayer(jTextField3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         entrenador.setLayer(jtCartelApellido, javax.swing.JLayeredPane.DEFAULT_LAYER);
         entrenador.setLayer(jTextField5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jTextField6, javax.swing.JLayeredPane.DEFAULT_LAYER);
         entrenador.setLayer(jTextField7, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcLunes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jTextField8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jTextField9, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jtCartelLunes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcHoraInicioLunes, javax.swing.JLayeredPane.DRAG_LAYER);
         entrenador.setLayer(jtNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         entrenador.setLayer(jtDni, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcMinutosInicioLunes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcHoraFinLunes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosFinLunes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMartes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jTextField12, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcHoraInicioMartes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosInicioMartes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jTextField10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcHoraFinMartes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosFinMartes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcHoraInicioMiercoles, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosInicioMiercoles, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jTextField13, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jTextField14, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcMiercoles, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcHoraFinMiercoles, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosFinMiercoles, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jTextField15, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcHoraFinJueves, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosFinJueves, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcHoraInicioJueves, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosInicioJueves, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jTextField16, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcJueves, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcViernes, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jTextField17, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcMinutosFinViernes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcHoraFinViernes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcHoraInicioViernes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosInicioViernes, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jTextField18, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcSabado, javax.swing.JLayeredPane.DEFAULT_LAYER);
         entrenador.setLayer(jTextField19, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcMinutosFinSabado, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcHoraFinSabado, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcHoraInicioSabado, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosInicioSabado, javax.swing.JLayeredPane.DRAG_LAYER);
+        entrenador.setLayer(jSpinField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         entrenador.setLayer(jTextField20, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcDomingo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        entrenador.setLayer(jTextField1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         entrenador.setLayer(jTextField21, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jTextField22, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        entrenador.setLayer(jcMinutosInicioDomingo, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcHoraFinDomingo, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcHoraInicioDomingo, javax.swing.JLayeredPane.DRAG_LAYER);
-        entrenador.setLayer(jcMinutosFinDomingo, javax.swing.JLayeredPane.DRAG_LAYER);
 
         javax.swing.GroupLayout entrenadorLayout = new javax.swing.GroupLayout(entrenador);
         entrenador.setLayout(entrenadorLayout);
         entrenadorLayout.setHorizontalGroup(
             entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(entrenadorLayout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addContainerGap()
                 .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(entrenadorLayout.createSequentialGroup()
-                        .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField5)
-                            .addComponent(jtCartelApellido)
-                            .addComponent(jTextField2)
-                            .addComponent(jTextField6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtNombre)
-                            .addComponent(jtApellido)
-                            .addComponent(jtDni)
-                            .addComponent(jcEspecialidad, 0, 249, Short.MAX_VALUE)
-                            .addComponent(jTextField8, javax.swing.GroupLayout.Alignment.TRAILING)))
-                    .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(entrenadorLayout.createSequentialGroup()
-                            .addComponent(jcLunes)
+                            .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jTextField5)
+                                .addComponent(jtCartelApellido)
+                                .addComponent(jTextField2))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jtCartelLunes, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcHoraInicioLunes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosInicioLunes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcHoraFinLunes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosFinLunes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(entrenadorLayout.createSequentialGroup()
-                            .addComponent(jcMartes)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcHoraInicioMartes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosInicioMartes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcHoraFinMartes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosFinMartes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(entrenadorLayout.createSequentialGroup()
-                            .addComponent(jcMiercoles)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcHoraInicioMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosInicioMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcHoraFinMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosFinMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(entrenadorLayout.createSequentialGroup()
-                            .addComponent(jcJueves)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcHoraInicioJueves, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosInicioJueves, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcHoraFinJueves, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosFinJueves, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(entrenadorLayout.createSequentialGroup()
-                            .addComponent(jcViernes)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcHoraInicioViernes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosInicioViernes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcHoraFinViernes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosFinViernes, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(entrenadorLayout.createSequentialGroup()
-                            .addComponent(jcSabado)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcHoraInicioSabado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosInicioSabado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcHoraFinSabado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosFinSabado, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entrenadorLayout.createSequentialGroup()
-                            .addComponent(jcDomingo)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jcHoraInicioDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosInicioDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcHoraFinDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jcMinutosFinDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtNombre)
+                                .addComponent(jtApellido)
+                                .addComponent(jtDni)
+                                .addComponent(jcEspecialidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entrenadorLayout.createSequentialGroup()
+                                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jSpinField1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, entrenadorLayout.createSequentialGroup()
                             .addComponent(jbGuardar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -752,7 +245,7 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
                     .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                         .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(80, Short.MAX_VALUE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         entrenadorLayout.setVerticalGroup(
             entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -773,208 +266,86 @@ public class FormEntrenador extends javax.swing.JInternalFrame {
                 .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jcEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcLunes, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraInicioLunes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jtCartelLunes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosInicioLunes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraFinLunes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosFinLunes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcMartes, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraInicioMartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosInicioMartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraFinMartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosFinMartes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraInicioMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosInicioMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraFinMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosFinMiercoles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcJueves, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraInicioJueves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosInicioJueves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraFinJueves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosFinJueves, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcViernes, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraInicioViernes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosInicioViernes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraFinViernes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosFinViernes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcSabado, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraInicioSabado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosInicioSabado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraFinSabado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosFinSabado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraInicioDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosInicioDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcHoraFinDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jcMinutosFinDomingo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 22, Short.MAX_VALUE)
+                .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(entrenadorLayout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSpinField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jTextField5)
+                            .addComponent(jTextField19)))
+                    .addGroup(entrenadorLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField20)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                            .addComponent(jTextField21))))
+                .addGap(245, 245, 245)
                 .addGroup(entrenadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardar)
                     .addComponent(jbNuevo)
                     .addComponent(jbActualizar)
                     .addComponent(jbSalir))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(entrenador)
-                .addContainerGap())
+            .addComponent(entrenador)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(entrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(12, Short.MAX_VALUE))
+            .addComponent(entrenador)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField9ActionPerformed
+    private void jTextField21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField21ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField9ActionPerformed
+    }//GEN-LAST:event_jTextField21ActionPerformed
+
+    private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField20ActionPerformed
+
+    private void jTextField19ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField19ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField19ActionPerformed
+
+    private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
+        // TODO add your handling code here:
+        //        Date selectedDate = jtHoraInicio.getDate();
+        //        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        //                String formattedDate = dateFormat.format(selectedDate);
+        //                System.out.println(formattedDate);
+    }//GEN-LAST:event_jbGuardarActionPerformed
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jbSalirActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
-
-    private void jTextField14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField14ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField14ActionPerformed
-
-    private void jTextField15ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField15ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField15ActionPerformed
-
-    private void jTextField18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField18ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField18ActionPerformed
-
-    private void jTextField20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField20ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField20ActionPerformed
-
-    private void jTextField22ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField22ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField22ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane entrenador;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
+    private com.toedter.components.JSpinField jSpinField1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField19;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField20;
     private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbNuevo;
     private javax.swing.JButton jbSalir;
-    private javax.swing.JCheckBox jcDomingo;
     private javax.swing.JComboBox<String> jcEspecialidad;
-    private javax.swing.JComboBox<String> jcHoraFinDomingo;
-    private javax.swing.JComboBox<String> jcHoraFinJueves;
-    private javax.swing.JComboBox<String> jcHoraFinLunes;
-    private javax.swing.JComboBox<String> jcHoraFinMartes;
-    private javax.swing.JComboBox<String> jcHoraFinMiercoles;
-    private javax.swing.JComboBox<String> jcHoraFinSabado;
-    private javax.swing.JComboBox<String> jcHoraFinViernes;
-    private javax.swing.JComboBox<String> jcHoraInicioDomingo;
-    private javax.swing.JComboBox<String> jcHoraInicioJueves;
-    private javax.swing.JComboBox<String> jcHoraInicioLunes;
-    private javax.swing.JComboBox<String> jcHoraInicioMartes;
-    private javax.swing.JComboBox<String> jcHoraInicioMiercoles;
-    private javax.swing.JComboBox<String> jcHoraInicioSabado;
-    private javax.swing.JComboBox<String> jcHoraInicioViernes;
-    private javax.swing.JCheckBox jcJueves;
-    private javax.swing.JCheckBox jcLunes;
-    private javax.swing.JCheckBox jcMartes;
-    private javax.swing.JCheckBox jcMiercoles;
-    private javax.swing.JComboBox<String> jcMinutosFinDomingo;
-    private javax.swing.JComboBox<String> jcMinutosFinJueves;
-    private javax.swing.JComboBox<String> jcMinutosFinLunes;
-    private javax.swing.JComboBox<String> jcMinutosFinMartes;
-    private javax.swing.JComboBox<String> jcMinutosFinMiercoles;
-    private javax.swing.JComboBox<String> jcMinutosFinSabado;
-    private javax.swing.JComboBox<String> jcMinutosFinViernes;
-    private javax.swing.JComboBox<String> jcMinutosInicioDomingo;
-    private javax.swing.JComboBox<String> jcMinutosInicioJueves;
-    private javax.swing.JComboBox<String> jcMinutosInicioLunes;
-    private javax.swing.JComboBox<String> jcMinutosInicioMartes;
-    private javax.swing.JComboBox<String> jcMinutosInicioMiercoles;
-    private javax.swing.JComboBox<String> jcMinutosInicioSabado;
-    private javax.swing.JComboBox<String> jcMinutosInicioViernes;
-    private javax.swing.JCheckBox jcSabado;
-    private javax.swing.JCheckBox jcViernes;
     private javax.swing.JTextField jtApellido;
     private javax.swing.JTextField jtCartelApellido;
-    private javax.swing.JTextField jtCartelLunes;
     private javax.swing.JTextField jtDni;
     private javax.swing.JTextField jtNombre;
     // End of variables declaration//GEN-END:variables
