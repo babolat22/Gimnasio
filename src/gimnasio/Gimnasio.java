@@ -1,15 +1,8 @@
 
 package gimnasio;
 
-import gimnasio.AccesoADatos.ClaseData;
-import gimnasio.AccesoADatos.Conexion;
-import gimnasio.AccesoADatos.EntrenadorData;
-import gimnasio.AccesoADatos.MembresiaData;
-import gimnasio.AccesoADatos.SocioData;
-import gimnasio.Entidades.Clase;
-import gimnasio.Entidades.Entrenador;
-import gimnasio.Entidades.Membresia;
-import gimnasio.Entidades.Socio;
+import gimnasio.AccesoADatos.*;
+import gimnasio.Entidades.*;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
@@ -193,7 +186,7 @@ public class Gimnasio {
 //    Time horario5 = Time.valueOf(localTime5); 
 //    Clase clase5 = new Clase("Musculación", entrenadorX5, horario5, 50,true);
 //    
-    ClaseData claseData = new ClaseData();
+//    ClaseData claseData = new ClaseData();
 //    Clase[] claseN ={clase1, clase2, clase3, clase4, clase5};
 //        for (Clase clase : claseN) {
 //            claseData.guardarClase(clase);
@@ -214,18 +207,62 @@ public class Gimnasio {
 //            System.out.println(listaClase.toString());
 //        }
 ////    
-    //Buscar Clase por horario
-    JOptionPane.showMessageDialog(null, "Busqueda de clases disponibles por horario y estado activo");
-    int horaABuscar = 10;
-    LocalTime localTime6 = LocalTime.of(horaABuscar, 0);
-    Time horario6 = Time.valueOf(localTime6);
-    List<Clase> listaClases6;
-    listaClases6 = claseData.buscarClasePorHorario(horario6);
-        for (Clase clase : listaClases6) {
-            System.out.println(clase.toString());
+//    //Buscar Clase por horario
+//    JOptionPane.showMessageDialog(null, "Busqueda de clases disponibles por horario y estado activo");
+//    int horaABuscar = 10;
+//    LocalTime localTime6 = LocalTime.of(horaABuscar, 0);
+//    Time horario6 = Time.valueOf(localTime6);
+//    List<Clase> listaClases6;
+//    listaClases6 = claseData.buscarClasePorHorario(horario6);
+//        for (Clase clase : listaClases6) {
+//            System.out.println(clase.toString());
+//        }
+//    
+    //Probar registrar asistencia del Socio ID 3 en la clase de Musculacion ID CLase; 5
+    JOptionPane.showMessageDialog(null, "Registrar una asistencia");
+    Asistencia asistencia = new Asistencia();
+    int iDSocio = 3;
+    Membresia membresia;
+    MembresiaData membresiaData = new MembresiaData();
+    membresia = membresiaData.buscarMembresiaPorSocio(iDSocio);
+    Clase clase;
+    ClaseData claseData = new ClaseData();
+    clase = claseData.buscarClasePorId(5);
+    
+    if((membresia.getCant_pases())>0 && (membresia.isEstado()) && (membresia.isEstado())){//Quedan clases y esta activo
+       
+        if(clase.isEstado() && clase.getId_entrenador().isEstado() && clase.getCapacidad() > 0){//Clase y enetrenador activos y hay capacidad
+            AsistenciaData asistenciadata = new AsistenciaData();
+            Socio socio = new Socio();
+            SocioData socioData = new SocioData();
+            asistencia.setId_socio((socioData.buscarSocioPorId(iDSocio)));
+
+            asistencia.setId_clase(clase);
+   
+            LocalDate localDate = LocalDate.now();
+            Date fecha_asistencia = Date.valueOf(localDate);
+            asistencia.setFecha_asistencia(fecha_asistencia);
+  
+            LocalTime localTime = LocalTime.of(12, 0);
+            Time horario = Time.valueOf(localTime); 
+            asistencia.setHora_asistencia(horario);
+    
+            asistencia.setEstado(true);
+            asistenciadata.registrarAsistencia(asistencia);
         }
+    }else{
+        System.out.println("Error. No se pudo registrar Asistencia:");
+        System.out.println("cant pases: "+membresia.getCant_pases());
+        System.out.println("Estado membresia: "+(membresia.isEstado()));
+        System.out.println("Estado Socio: "+(membresia.getId_socio().isEstado()));
+    }
+    
+  
     
     
+
+
+
     }//FIN MAIN
     
 }//FIN CLASE

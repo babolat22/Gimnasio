@@ -59,7 +59,8 @@ public class MembresiaData {
         }                 
         return flag;
     }
-         
+    
+    //Busca una Membresia por ID Socio
     public Membresia buscarMembresiaPorSocio(int idSocio) {
         PreparedStatement ps;
         ResultSet rs;
