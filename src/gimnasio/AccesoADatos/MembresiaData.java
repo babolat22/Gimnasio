@@ -7,6 +7,7 @@ import gimnasio.Entidades.Membresia;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -60,15 +61,16 @@ public class MembresiaData {
         return flag;
     }
     
-    //Busca una Membresia por ID Socio
+    //Busca una Membresia activa por ID Socio
     public Membresia buscarMembresiaPorSocio(int idSocio) {
         PreparedStatement ps;
         ResultSet rs;
         Membresia membresia = new Membresia();
-        String sql = "SELECT * FROM Membresia WHERE id_socio = ?";
+        String sql = "SELECT * FROM Membresia WHERE id_socio = ? AND estado = ?";
         try{ 
             ps = con.prepareStatement(sql);
             ps.setInt(1, idSocio);
+            ps.setBoolean(2, true);
             rs = ps.executeQuery();
             if(rs.next()) { 
                 SocioData sociodata = new SocioData();
@@ -79,10 +81,14 @@ public class MembresiaData {
                 membresia.setFecha_fin(rs.getDate("fecha_fin"));
                 membresia.setCosto(rs.getBigDecimal("costo"));
                 membresia.setEstado(rs.getBoolean("estado"));
+            }else{
+                throw new NullPointerException();
             }
             ps.close();
         } catch (SQLException ex) {
-           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Membresia"+ex.getMessage()); 
+           JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Membresia \n"+ex.getMessage()); 
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Error: La Membresia para ese Socio venció o no existe");
         }
         return membresia;
     }
@@ -113,35 +119,19 @@ public class MembresiaData {
         return membresias;
     }
      
-    public void renovarMembresia(int idMembresia, int cantDias) {
-        PreparedStatement ps, ps1;
-        ResultSet rs;
-        Membresia membresia1 = new Membresia();
-        //Buscando la fecha de finalizacion de la membresia actual del socio
-        String sql1 = "SELECT fecha_fin FROM membresia WHERE id_membresia = ?"; 
-        try {
-            ps1 = con.prepareStatement(sql1);
-            ps1.setInt(1, idMembresia);
-            rs = ps1.executeQuery();
-            if(rs.next()){   
-                membresia1.setFecha_fin(rs.getDate("fecha_fin"));  
-            }else{
-                JOptionPane.showMessageDialog(null, "Error Imposible renovar Membresia. Consulte tabla de Membresias"); 
-            }
-            ps1.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Membresia"+ex.getMessage()); 
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "Error Membresia no existe"); 
-        }
-        //Renovando un periodo a partir de la finalizacion del mes en curso o a vencer
-        String sql = "UPDATE membresia SET fecha_inicio = ?, fecha_fin = ?, estado = ? WHERE id_membresia = ?";
+    public void renovarMembresia(int idMembresia, int plan, int pases, Date fechaRenovacion) {
+        PreparedStatement ps;
+        LocalDate localDate = fechaRenovacion.toLocalDate();
+        LocalDate newDate = localDate.plusDays(plan);
+        Date nuevaFechaFin = Date.valueOf(newDate);
+        String sql = "UPDATE membresia SET fecha_inicio = ?, fecha_fin = ?, cant_pases = ?, estado = ? WHERE id_membresia = ?";
         try{
             ps = con.prepareStatement(sql); 
-            ps.setDate(1, membresia1.getFecha_fin());
-            ps.setDate(2, Date.valueOf(membresia1.getFecha_fin().toLocalDate().plusDays(cantDias)));
-            ps.setBoolean(3, true);  
-            ps.setInt(4, idMembresia);
+            ps.setDate(1, fechaRenovacion);
+            ps.setDate(2, nuevaFechaFin);
+            ps.setInt(3, pases);
+            ps.setBoolean(4, true);  
+            ps.setInt(5, idMembresia);
             int fila =  ps.executeUpdate();
             if(fila==1){
                  JOptionPane.showMessageDialog(null, "Renovación Membresia ID: "+idMembresia+"\nEstado: Renovada exitosamente!");

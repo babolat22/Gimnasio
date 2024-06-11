@@ -89,10 +89,11 @@ public class SocioData {
         Socio socio = new Socio();
         ResultSet rs;
         PreparedStatement ps;
-        String sql = "SELECT * FROM socio WHERE id_socio = ? AND estado = 1";
+        String sql = "SELECT * FROM socio WHERE id_socio = ? AND estado = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
+            ps.setBoolean(2, true);
             rs = ps.executeQuery();
             if(rs.next()){
                 socio.setId_socio(rs.getInt(1));
@@ -103,6 +104,7 @@ public class SocioData {
                 socio.setCorreo(rs.getString("correo"));
                 socio.setTelefono(rs.getString("telefono"));
                 socio.setContador_asistencia(rs.getInt("cont_asistencia"));
+                socio.setEstado(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Resultado de búsqueda por ID: "+id+"\nNombre: "+socio.getNombre()+"\nApellido: "+socio.getApellido()+"\nEl Socio no existe o fue dado de baja...");
             }
@@ -115,14 +117,14 @@ public class SocioData {
     
     public List<Socio> buscarSocioPorNombre(String nombre){  
         List<Socio> socios;
-        String sql = "SELECT * FROM socio WHERE nombre = ? AND estado = 1";
+        String sql = "SELECT * FROM socio WHERE nombre = ? AND estado = ?";
         socios = cargarBusquedas(sql,nombre);
     return socios;
     }
         
     public List<Socio> buscarSocioPorApellido(String apellido){  
         List<Socio> socios;
-        String sql = "SELECT * FROM socio WHERE apellido = ? AND estado = 1";
+        String sql = "SELECT * FROM socio WHERE apellido = ? AND estado = ?";
         socios = cargarBusquedas(sql,apellido);
     return socios;
     }
@@ -142,6 +144,7 @@ public class SocioData {
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, campo);
+            ps.setBoolean(2, true);
             rs = ps.executeQuery();
             while(rs.next()){
                 Socio socio = new Socio();

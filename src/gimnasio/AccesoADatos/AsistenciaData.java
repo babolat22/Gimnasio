@@ -7,8 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -40,7 +38,7 @@ public class AsistenciaData {
             if(rs.next()) {
                 asistencia.setId_asistencia(rs.getInt(1));
                 JOptionPane.showMessageDialog(null, "Asistencia ID: "+asistencia.getId_asistencia()+
-                "\nSocio: "+asistencia.getId_socio().getNombre()+" "+asistencia.getId_socio().getApellido()+"\nEstado: ASsitencia registrada con exito!");   
+                "\nSocio: "+asistencia.getId_socio().getNombre()+" "+asistencia.getId_socio().getApellido()+"\nEstado: Asistencia registrada con exito!");   
             }
             ps.close();
         }catch(SQLException ex) {
@@ -49,22 +47,62 @@ public class AsistenciaData {
             }else{
                 JOptionPane.showMessageDialog(null, "Error al registrar Asistencia ID: "+asistencia.getId_asistencia()+"\n" + ex.getMessage());
             }
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Error al registrar Asistencia ID: "+e.getMessage());
         }
-        
-        
+    }
+     
+    public void buscarAsistenciaPorSocio(int idSocio){
     }
     
-    
-    
-    
-    
-    public void buscarAsistenciaPorSocio(){
-    }
-    public void buscarAsistenciaPorClase(){
-    }
-    public void eliminarAsistencia(){
+    public void buscarAsistenciaPorClase(String nombreClase){
     }
     
+    public void listarAsistencia(){
+    }
+    
+    public void modificarAsistencia(int idAsistencia){
+    }
+    
+    public void eliminarAsistencia(int idAsistencia){
+    }
+    
+public boolean membresiaActiva(int idSocio) {
+    String sql = "SELECT * FROM membresia WHERE id_socio = ? AND fecha_fin >= CURDATE() AND cant_pases > 0";
+    boolean memActiva = false;
+    PreparedStatement ps;
+    ResultSet rs;
+    try {
+        ps = con.prepareStatement(sql);
+        ps.setInt(1, idSocio);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            memActiva = true;
+        }
+    }catch(SQLException ex){
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia");
+    }
+    return memActiva;
+}
+
+public boolean verificarCapacidadClase(int ID_Clase) {
+    String sql = "SELECT COUNT(*) AS Inscritos, Capacidad FROM Asistencia JOIN Clase ON Asistencia.ID_Clase = Clase.ID_Clase WHERE Asistencia.ID_Clase = ?";
+    boolean capacidadDisponible = false;
+    try (PreparedStatement ps = con.prepareStatement(sql)) {
+        ps.setInt(1, ID_Clase);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                int inscritos = rs.getInt("Inscritos");
+                int capacidad = rs.getInt("Capacidad");
+                capacidadDisponible = inscritos < capacidad;
+            }
+        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia");
+    }
+    return capacidadDisponible;
+}
+
     
     
 }

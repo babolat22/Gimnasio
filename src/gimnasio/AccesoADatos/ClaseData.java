@@ -22,6 +22,7 @@ public class ClaseData {
     
     public ClaseData() {
         con = Conexion.getConexion();
+        
     }
     
     public void guardarClase (Clase clase){
@@ -200,18 +201,19 @@ public class ClaseData {
         Clase clase = new Clase();
         ResultSet rs;
         PreparedStatement ps;
-        String sql = "SELECT * FROM clase WHERE id_clase = ? AND estado = 1";
+        String sql = "SELECT * FROM clase WHERE id_clase = ? AND estado = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
+            ps.setBoolean(2, true);
             rs = ps.executeQuery();
             if(rs.next()){
                 EntrenadorData entrenadordata = new EntrenadorData();
-                clase.setId_clase(rs.getInt(1));
+                clase.setId_clase(id);
                 clase.setNombre(rs.getString("nombre"));
                 clase.setId_entrenador(entrenadordata.buscarEntrenadorPorId((rs.getInt("id_entrenador"))));
                 clase.setCapacidad(rs.getInt("capacidad"));
-                clase.setEstado(true);
+                clase.setEstado(rs.getBoolean("estado"));
             }else{
                 JOptionPane.showMessageDialog(null, "Resultado de búsqueda por ID: \nLa Clase no existe o fue dada de baja...");
             }

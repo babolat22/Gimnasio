@@ -34,7 +34,7 @@ public class Gimnasio {
 //    Socio socio4 = new Socio("36887463", "Francisco", "Leyes", 61, "franciscoleyes@gmail.com", "26574315548", 0, true);
 //    Socio socio5 = new Socio("32487464", "Mateo", "Rodriguez", 39, "mateorodriguez@gmail.com", "26574315246", 0, true);
 //    Socio socio6 = new Socio("4577465", "Pablo", "Dominguez", 54, "pablodominguez@gmail.com", "26574315587", 0, true);
-//    SocioData sociodata = new SocioData();  
+    SocioData sociodata = new SocioData();  
 //    Socio[] socioN = {socio1, socio2, socio3, socio4, socio5, socio6};
 //        for (Socio socio : socioN) {
 //            sociodata.guardarSocio(socio);
@@ -63,20 +63,19 @@ public class Gimnasio {
 //    for (Socio socio : socios) {
 //           System.out.println(socio.toString()); 
 //        }
-//
-//    //Registrar 2 membresias mensuales
+
+    //Registrar 2 membresias mensuales
 //    
 //    LocalDate fechaActual = LocalDate.now();
-//    Date fechaInicio = Date.valueOf(fechaActual);
+//    Date fechaHoy = Date.valueOf(fechaActual);
 //
-//    // Sumar un mes a la fecha actual
-//    LocalDate fechaMensual = fechaActual.plusMonths(1);
+//    // Sumar un mes a la fecha
+//    int CantMeses = 1;
+//    LocalDate fechaMensual = fechaActual.plusMonths(CantMeses);
 //    Date fechaFin = Date.valueOf(fechaMensual);
 //
 //    // Calcular el periodo entre las dos fechas (diferencia en días)
 //    long diasDiferencia = ChronoUnit.DAYS.between(fechaActual, fechaMensual);
-//
-//    // Calcular el costo como BigDecimal
 //    BigDecimal costo =  BigDecimal.valueOf((diasDiferencia-18)*700);
 //
 //    //registro membresia del 1 socio
@@ -84,7 +83,9 @@ public class Gimnasio {
 //    Socio socioX;
 //    SocioData sociodataX = new SocioData();
 //    socioX = sociodataX.buscarSocioPorId(1);
-//    Membresia membresia1 = new Membresia(socioX,"Mensual",12,fechaInicio,fechaFin, costo, true);
+//    Date fechaInicio1 = Date.valueOf("2024-03-28");
+//    Date fechaFin1 = Date.valueOf("2024-04-28");
+//    Membresia membresia1 = new Membresia(socioX,"Mensual",12,fechaInicio1,fechaFin1, costo, true);
 //    MembresiaData membresiadata = new MembresiaData();
 //    membresiadata.registrarMembresia(membresia1);
 //    
@@ -94,16 +95,21 @@ public class Gimnasio {
 //    Socio socioXI;
 //    SocioData sociodataXI = new SocioData();
 //    socioXI = sociodataXI.buscarSocioPorId(3);
-//    Membresia membresia2 = new Membresia(socioXI,"Mensual",20,fechaInicio,fechaFin, costo2, true);
+//    int pases=20;
+//    Membresia membresia2 = new Membresia(socioXI,"Mensual",pases,fechaHoy,fechaFin, costo2, true);
 //    MembresiaData membresiadata2 = new MembresiaData();
 //    membresiadata2.registrarMembresia(membresia2);
 //    
 //    //Renovar Membresia SocioX
-//    int cantDias=0, idMembresia = 1;
+//    int cantDias=0, idMembresia;
+//    idMembresia = membresia1.getId_membresia();
 //    if(membresia1.getTipo().equals("Mensual")){
 //        cantDias = 30;
 //    }
-//    membresiadata.renovarMembresia(idMembresia, cantDias);
+//    pases = membresia1.getCant_pases();
+//   
+//    //Renovacion a partir de la fecha de hoy
+//    membresiadata.renovarMembresia(idMembresia, cantDias, pases, fechaHoy);
 //    
 //    //Cancelar Membresia Socio7
 //    membresiadata.cancelarMembresia(idMembresia);
@@ -218,45 +224,35 @@ public class Gimnasio {
 //            System.out.println(clase.toString());
 //        }
 //    
-    //Probar registrar asistencia del Socio ID 3 en la clase de Musculacion ID CLase; 5
-    JOptionPane.showMessageDialog(null, "Registrar una asistencia");
-    Asistencia asistencia = new Asistencia();
-    int iDSocio = 3;
-    Membresia membresia;
-    MembresiaData membresiaData = new MembresiaData();
-    membresia = membresiaData.buscarMembresiaPorSocio(iDSocio);
-    Clase clase;
-    ClaseData claseData = new ClaseData();
-    clase = claseData.buscarClasePorId(5);
+    //Probar registrar asistencia del Socio ID 1 en la clase de Musculacion ID CLase; 5
+//    JOptionPane.showMessageDialog(null, "Registrar una asistencia");
+//    int iDSocio = 1;
+//    Membresia membresiaA;
+//    MembresiaData membresiaDataA = new MembresiaData();
+//    membresiaA = membresiaDataA.buscarMembresiaPorSocio(iDSocio);
+//    ClaseData claseDataA = new ClaseData();
+//    Clase claseA = claseDataA.buscarClasePorId(5);
+//    if((membresiaA.getCant_pases())>0 && (membresiaA.isEstado()) && (membresiaA.getId_socio().isEstado())){//Quedan clases y esta activo
+//        if(claseA.isEstado() && claseA.getId_entrenador().isEstado() && claseA.getCapacidad() > 0){//Clase y enetrenador activos y hay capacidad
+//            Asistencia asistencia = new Asistencia();
+//            SocioData socioData = new SocioData();
+//            asistencia.setId_socio((socioData.buscarSocioPorId(iDSocio)));
+//            asistencia.setId_clase(claseA);
+//            LocalDate localDate = LocalDate.now();
+//            Date fecha_asistencia = Date.valueOf(localDate);
+//            asistencia.setFecha_asistencia(fecha_asistencia);
+//            LocalTime localTime = LocalTime.of(15, 0);
+//            Time horario = Time.valueOf(localTime); 
+//            asistencia.setHora_asistencia(horario);
+//            asistencia.setEstado(true);
+//            AsistenciaData asistenciadata = new AsistenciaData();
+//            asistenciadata.registrarAsistencia(asistencia);
+//        }
+//    }else{
+//          System.out.println("Estado membresia: "+(membresiaA.isEstado()));
+//    }
     
-    if((membresia.getCant_pases())>0 && (membresia.isEstado()) && (membresia.isEstado())){//Quedan clases y esta activo
-       
-        if(clase.isEstado() && clase.getId_entrenador().isEstado() && clase.getCapacidad() > 0){//Clase y enetrenador activos y hay capacidad
-            AsistenciaData asistenciadata = new AsistenciaData();
-            Socio socio = new Socio();
-            SocioData socioData = new SocioData();
-            asistencia.setId_socio((socioData.buscarSocioPorId(iDSocio)));
-
-            asistencia.setId_clase(clase);
-   
-            LocalDate localDate = LocalDate.now();
-            Date fecha_asistencia = Date.valueOf(localDate);
-            asistencia.setFecha_asistencia(fecha_asistencia);
-  
-            LocalTime localTime = LocalTime.of(12, 0);
-            Time horario = Time.valueOf(localTime); 
-            asistencia.setHora_asistencia(horario);
-    
-            asistencia.setEstado(true);
-            asistenciadata.registrarAsistencia(asistencia);
-        }
-    }else{
-        System.out.println("Error. No se pudo registrar Asistencia:");
-        System.out.println("cant pases: "+membresia.getCant_pases());
-        System.out.println("Estado membresia: "+(membresia.isEstado()));
-        System.out.println("Estado Socio: "+(membresia.getId_socio().isEstado()));
-    }
-    
+    //
   
     
     
