@@ -1,12 +1,14 @@
 
 package gimnasio.AccesoADatos;
 
-import gimnasio.Entidades.Asistencia;
+import gimnasio.Entidades.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -58,8 +60,45 @@ public class AsistenciaData {
     public void buscarAsistenciaPorClase(String nombreClase){
     }
     
-    public void listarAsistencia(){
+    public List<Asistencia> listarAsistencia(){
+        List<Asistencia> asistencias;
+        String sql = "SELECT * FROM asistencia WHERE estado = ?";
+        String campo = "1";
+        asistencias = cargarBusquedas(sql, campo);
+    return asistencias;    
     }
+      
+    public List<Asistencia> cargarBusquedas(String sql, String campo){ 
+        PreparedStatement ps;
+        ResultSet rs;
+        List<Asistencia> asistencias2 = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, campo);
+            rs = ps.executeQuery();
+            
+            while(rs.next()){
+                Asistencia asistencia = new Asistencia();
+                SocioData socioData = new SocioData();
+                ClaseData claseData = new ClaseData();
+                asistencia.setId_asistencia(rs.getInt(1));
+                asistencia.setId_socio(socioData.buscarSocioPorId(rs.getInt("id_socio")));
+                asistencia.setId_clase(claseData.buscarClasePorId(rs.getInt("id_clase")));
+                asistencia.setFecha_asistencia(rs.getDate("fecha_asistencia"));
+                asistencia.setHora_asistencia(rs.getTime("hora_asistencia"));
+                asistencia.setEstado(rs.getBoolean("estado"));
+                asistencias2.add(asistencia);
+            }
+            ps.close();
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla: "+ex.getMessage()); 
+        }catch(NullPointerException e){
+            JOptionPane.showMessageDialog(null, "Error  \n"+e.getMessage()); 
+        }
+        return asistencias2;
+    }
+    
     
     public void modificarAsistencia(int idAsistencia){
     }
@@ -86,7 +125,7 @@ public boolean membresiaActiva(int idSocio) {
 }
 
 public boolean verificarCapacidadClase(int ID_Clase) {
-    String sql = "SELECT COUNT(*) AS Inscritos, Capacidad FROM Asistencia JOIN Clase ON Asistencia.ID_Clase = Clase.ID_Clase WHERE Asistencia.ID_Clase = ?";
+    String sql = "SELECT COUNT(*) AS Asistencia, capacidad FROM asistencia JOIN Clase ON Asistencia.ID_Clase = Clase.ID_Clase WHERE Asistencia.ID_Clase = ?";
     boolean capacidadDisponible = false;
     try (PreparedStatement ps = con.prepareStatement(sql)) {
         ps.setInt(1, ID_Clase);

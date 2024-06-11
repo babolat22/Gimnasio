@@ -252,9 +252,13 @@ public class Gimnasio {
 //          System.out.println("Estado membresia: "+(membresiaA.isEstado()));
 //    }
     
-    //
-  
-    
+    //probando listar asistencias
+    List<Asistencia> listaAsistenciaN;
+    AsistenciaData asistenciaDataN = new AsistenciaData();
+    listaAsistenciaN = asistenciaDataN.listarAsistencia();
+        for (Asistencia asistencia : listaAsistenciaN) {
+            System.out.println(asistencia.toString());
+        }
     
 
 

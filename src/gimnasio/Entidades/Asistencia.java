@@ -86,7 +86,7 @@ public class Asistencia {
 
     @Override
     public String toString() {
-        return "Asistencia{" + "id_asistencia=" + id_asistencia + ", id_socio=" + id_socio + ", id_clase=" + id_clase + ", fecha_asistencia=" + fecha_asistencia + ", hora_asistencia=" + hora_asistencia + ", estado=" + estado + '}';
+        return "ID Asistencia = " + id_asistencia + " | ID Socio = " + id_socio + " | ID Clase = " + id_clase + ", fecha_asistencia=" + fecha_asistencia + ", hora_asistencia=" + hora_asistencia + ", estado=" + estado + '}';
     }
 
     
