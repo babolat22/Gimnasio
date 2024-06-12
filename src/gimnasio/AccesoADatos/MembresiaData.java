@@ -23,16 +23,16 @@ public class MembresiaData {
     public MembresiaData() {
          con = Conexion.getConexion();
 }
-    public Boolean registrarMembresia (Membresia membresia){
+    public Boolean registrarMembresia(Membresia membresia){
         Boolean flag=false;
         Membresia membresia1= buscarMembresiaPorSocio(membresia.getId_socio().getId_socio());
+        
         PreparedStatement ps;
         ResultSet rs;
         String sql = "INSERT INTO membresia (id_socio, tipo, cant_pases, fecha_inicio, fecha_fin, costo, estado) VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {  
-            if(membresia1.getId_membresia()!=0){
-                JOptionPane.showMessageDialog(null,"Ya se encuentra registrado con una Membresia: "+membresia.getTipo());
-            }
+            if(membresia1.getId_membresia()!=0) throw new NumberFormatException();
+            if(!membresia1.isEstado()) throw new NullPointerException();
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setInt(1, membresia.getId_socio().getId_socio());
             ps.setString(2, membresia.getTipo());
@@ -57,7 +57,11 @@ public class MembresiaData {
             }else{
                 JOptionPane.showMessageDialog(null, "Error al registrar la Membresia: "+membresia.getId_socio().getNombre()+" "+membresia.getId_socio().getApellido()+"\n" + ex.getMessage());
             }  
-        }                 
+        }catch(NumberFormatException e){
+            JOptionPane.showMessageDialog(null,"El Socio ID: "+membresia1.getId_socio().getId_socio()+"\nSe encuentra registrado con una Membresia: "+membresia.getTipo());
+        }catch(NullPointerException exp){
+            //Saliendo porque el socio no existe
+        }                
         return flag;
     }
     
@@ -76,19 +80,16 @@ public class MembresiaData {
                 SocioData sociodata = new SocioData();
                 membresia.setId_membresia(rs.getInt("id_membresia"));
                 membresia.setId_socio(sociodata.buscarSocioPorId(idSocio));
+                membresia.setTipo(rs.getString("tipo"));
                 membresia.setCant_pases(rs.getInt("cant_pases"));
                 membresia.setFecha_inicio(rs.getDate("fecha_inicio"));
                 membresia.setFecha_fin(rs.getDate("fecha_fin"));
                 membresia.setCosto(rs.getBigDecimal("costo"));
                 membresia.setEstado(rs.getBoolean("estado"));
-            }else{
-                throw new NullPointerException();
             }
             ps.close();
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Membresia \n"+ex.getMessage()); 
-        }catch(NullPointerException e){
-            JOptionPane.showMessageDialog(null, "Error: La Membresia para ese Socio venció o no existe");
         }
         return membresia;
     }
@@ -120,8 +121,10 @@ public class MembresiaData {
             rs = ps.executeQuery();
             while (rs.next()) {
                 Membresia membresia = new Membresia();
+                SocioData socioData = new SocioData();
                 membresia.setId_membresia(rs.getInt("id_membresia"));
-                membresia.getId_socio();
+                membresia.setId_socio(socioData.buscarSocioPorId(rs.getInt("id_socio")));
+                membresia.setTipo(rs.getString("tipo"));
                 membresia.setCant_pases(rs.getInt("cant_pases"));
                 membresia.setFecha_inicio(rs.getDate("fecha_inicio"));
                 membresia.setFecha_fin(rs.getDate("fecha_fin"));

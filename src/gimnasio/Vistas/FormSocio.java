@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 /**
@@ -69,6 +70,9 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jtListadoSocio = new javax.swing.JTable();
         jbListarTodos = new javax.swing.JButton();
         jbCerrar = new javax.swing.JButton();
+        jbActualizarSocio = new javax.swing.JButton();
+        jbEliminarSocio = new javax.swing.JButton();
+        jbLimpiarTablaSocio = new javax.swing.JButton();
         jbBuscar = new javax.swing.JButton();
 
         setClosable(true);
@@ -352,30 +356,72 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         });
 
+        jbActualizarSocio.setBackground(new java.awt.Color(153, 153, 153));
+        jbActualizarSocio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbActualizarSocio.setForeground(new java.awt.Color(0, 0, 0));
+        jbActualizarSocio.setText("Actualizar");
+        jbActualizarSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarSocioActionPerformed(evt);
+            }
+        });
+
+        jbEliminarSocio.setBackground(new java.awt.Color(153, 153, 153));
+        jbEliminarSocio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbEliminarSocio.setForeground(new java.awt.Color(0, 0, 0));
+        jbEliminarSocio.setText("Eliminar");
+        jbEliminarSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarSocioActionPerformed(evt);
+            }
+        });
+
+        jbLimpiarTablaSocio.setBackground(new java.awt.Color(153, 153, 153));
+        jbLimpiarTablaSocio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbLimpiarTablaSocio.setForeground(new java.awt.Color(0, 0, 0));
+        jbLimpiarTablaSocio.setText("Limpiar");
+        jbLimpiarTablaSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarTablaSocioActionPerformed(evt);
+            }
+        });
+
         escritorioSocio2.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorioSocio2.setLayer(jbListarTodos, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorioSocio2.setLayer(jbCerrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioSocio2.setLayer(jbActualizarSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioSocio2.setLayer(jbEliminarSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioSocio2.setLayer(jbLimpiarTablaSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioSocio2Layout = new javax.swing.GroupLayout(escritorioSocio2);
         escritorioSocio2.setLayout(escritorioSocio2Layout);
         escritorioSocio2Layout.setHorizontalGroup(
             escritorioSocio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioSocio2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbListarTodos)
+                .addComponent(jbListarTodos, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbCerrar)
+                .addComponent(jbActualizarSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbEliminarSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbLimpiarTablaSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         escritorioSocio2Layout.setVerticalGroup(
             escritorioSocio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioSocio2Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(escritorioSocio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbListarTodos)
-                    .addComponent(jbCerrar)))
+                .addGroup(escritorioSocio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioSocio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbListarTodos)
+                        .addComponent(jbCerrar))
+                    .addComponent(jbActualizarSocio)
+                    .addComponent(jbEliminarSocio)
+                    .addComponent(jbLimpiarTablaSocio)))
         );
 
         jbBuscar.setBackground(new java.awt.Color(153, 153, 153));
@@ -676,20 +722,59 @@ public class FormSocio extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbCerrarActionPerformed
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
-        escritorioSocio2.setVisible(true);
-        llenarTabla();
-                
+        if(jtNombreSocio.isEnabled()){
+            llenarTabla2();
+        }else{
+            llenarTabla();
+        }
+        if(!escritorioSocio2.isVisible()&&flag||(jtNombreSocio.getText().equals("")&&jtIdSocio.getText().equals(""))){
+            escritorioSocio2.setVisible(true);
+            flag= false;
+        }        
     }//GEN-LAST:event_jbBuscarActionPerformed
 
     private void jtIdSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIdSocioActionPerformed
-        if(!escritorioSocio2.isVisible()) escritorioSocio2.setVisible(true);
         llenarTabla();
+        if(!escritorioSocio2.isVisible()&&flag){
+            escritorioSocio2.setVisible(true);
+             flag= false;
+        }
     }//GEN-LAST:event_jtIdSocioActionPerformed
 
     private void jtNombreSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreSocioActionPerformed
-        if(!escritorioSocio2.isVisible()) escritorioSocio2.setVisible(true);
         llenarTabla2();
+        if(!escritorioSocio2.isVisible()&&flag){
+            escritorioSocio2.setVisible(true);
+            flag= false;
+        }
+        
     }//GEN-LAST:event_jtNombreSocioActionPerformed
+
+    private void jbActualizarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarSocioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbActualizarSocioActionPerformed
+
+    private void jbEliminarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarSocioActionPerformed
+        int selectedRow = jtListadoSocio.getSelectedRow();
+        if (selectedRow != -1) {
+            // Eliminar la fila del modelo de tabla
+            modelo.removeRow(selectedRow);
+            int respuesta = JOptionPane.showConfirmDialog(
+                null,
+                "¿Deseas continuar con la eliminacón?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+            );
+            JOptionPane.showMessageDialog(null, "Socio eliminado.");
+        } else {
+            JOptionPane.showMessageDialog(jtListadoSocio, "Por favor, seleccione un Socio para eliminar.");
+        }
+
+    }//GEN-LAST:event_jbEliminarSocioActionPerformed
+
+    private void jbLimpiarTablaSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTablaSocioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbLimpiarTablaSocioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -698,10 +783,13 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbActualizarSocio;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JButton jbCerrar;
+    private javax.swing.JButton jbEliminarSocio;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbLimpiarTablaSocio;
     private javax.swing.JButton jbListarTodos;
     private javax.swing.JLabel jlError;
     private javax.swing.JButton jtAMembresia;
@@ -893,7 +981,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
         }
      }
      
-    private void llenarTabla(){
+    private void llenarTabla(){ // solo un resultado por ID
         if(!jtIdSocio.getText().equals("")){
             SocioData socioData = new SocioData();
             Socio socio = new Socio();
@@ -902,7 +990,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
         }
     }
     
-    private void llenarTabla2(){
+    private void llenarTabla2(){ //con lista de socios
         if(!jtNombreSocio.getText().equals("")){ 
             SocioData socioData = new SocioData();
             List<Socio> socios = new ArrayList();
@@ -912,7 +1000,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
             }
         }
     }
-    
+    boolean flag = false;
     private void llenarVector(Socio socio){
         if(socio.isEstado()){
                 Vector renglon = new Vector<>();
@@ -925,6 +1013,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
                 renglon.add(socio.getTelefono());
                 renglon.add(socio.isEstado());
                 modelo.addRow(renglon);
+                flag = true;
         }
     }
 }

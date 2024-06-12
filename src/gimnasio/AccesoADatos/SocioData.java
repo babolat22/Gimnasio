@@ -105,7 +105,8 @@ public class SocioData {
                 socio.setTelefono(rs.getString("telefono"));
                 socio.setContador_asistencia(rs.getInt("cont_asistencia"));
                 socio.setEstado(true);
-            }else{
+            }
+            else{
                 JOptionPane.showMessageDialog(null, "Resultado de búsqueda por ID: "+id+"\nEl Socio no existe o fue dado de baja...");
             }
             ps.close();
@@ -117,8 +118,13 @@ public class SocioData {
     
     public List<Socio> buscarSocioPorNombre(String nombre){  
         List<Socio> socios;
+        boolean flag = false;
         String sql = "SELECT * FROM socio WHERE nombre = ? AND estado = ?";
         socios = cargarBusquedas(sql,nombre);
+        for (Socio socio : socios) {
+            if(socio.isEstado()) flag = true; 
+        }
+        if(!flag) JOptionPane.showMessageDialog(null, "Resultado de búsqueda por Nombre: \nEl Socio no existe o fue dado de baja...");
     return socios;
     }
     

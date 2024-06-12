@@ -5,7 +5,7 @@
             <url>src/gimnasio/AccesoADatos/MembresiaData.java</url>
             <bookmark id="1">
                 <name/>
-                <line>19</line>
+                <line>20</line>
                 <key/>
             </bookmark>
         </file>
@@ -21,7 +21,8 @@
             <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Gimnasio.java</file>
             <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Entidades/Asistencia.java</file>
             <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Vistas/FormMembresia.java</file>
-            <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Vistas/FormMembresiaConsultas.java</file>
+            <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/UML/UML_Gimnasio.jpg</file>
+            <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Vistas/FormAsistencia.java</file>
             <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Vistas/FormClaseConsultas.java</file>
             <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Entidades/Membresia.java</file>
             <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/AccesoADatos/EntrenadorData.java</file>
@@ -32,7 +33,6 @@
             <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Entidades/Clase.java</file>
             <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Vistas/Menu.java</file>
             <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Entidades/Entrenador.java</file>
-            <file>file:/C:/Users/Javier/Documents/NetBeansProjects/Gimnasio/src/gimnasio/Vistas/FormSocioConsultas.java</file>
         </group>
     </open-files>
 </project-private>

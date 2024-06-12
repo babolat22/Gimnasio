@@ -1,19 +1,21 @@
 
 package gimnasio.Vistas;
 
+
+import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabets.table;
 import gimnasio.AccesoADatos.MembresiaData;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
-import javax.swing.JTextField;
+import java.awt.*;
+import javax.swing.*;
 import gimnasio.AccesoADatos.SocioData;
 import gimnasio.Entidades.Membresia;
 import gimnasio.Entidades.Socio;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import javax.swing.*;
 import java.util.Calendar;
-import java.util.Date;
+import java.sql.Date;
+import java.time.Instant;
+//import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
@@ -48,7 +50,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
         socio = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image,0,0,getWidth(),getHeight(),this);     } };
         jtFormularioGestionMembresia = new javax.swing.JTextField();
         jtCartelSocioMembresia = new javax.swing.JTextField();
-        jtSocioMembresia = new javax.swing.JTextField();
+        jtIDSocio = new javax.swing.JTextField();
         jtCartelTipoMembresia = new javax.swing.JTextField();
         jtCartelCantidadPases = new javax.swing.JTextField();
         jtCartelFechaInicio = new javax.swing.JTextField();
@@ -61,7 +63,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
         jdInicio = new com.toedter.calendar.JDateChooser();
         jlError = new javax.swing.JLabel();
         jcTipo = new javax.swing.JComboBox<>();
-        jcTipo1 = new javax.swing.JComboBox<>();
+        jcPases = new javax.swing.JComboBox();
         jLabel1 = new javax.swing.JLabel();
         jdFin = new com.toedter.calendar.JDateChooser();
         escritorioMembresia2 = new javax.swing.JDesktopPane();
@@ -69,6 +71,9 @@ public class FormMembresia extends javax.swing.JInternalFrame {
         jtListadoMembresia = new javax.swing.JTable();
         jbListarMembresia = new javax.swing.JButton();
         jbCerrar2 = new javax.swing.JButton();
+        jbActualizar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbLimpiarTabla = new javax.swing.JButton();
         jbBuscarMembresia = new javax.swing.JButton();
 
         setClosable(true);
@@ -100,15 +105,20 @@ public class FormMembresia extends javax.swing.JInternalFrame {
             }
         });
 
-        jtSocioMembresia.setToolTipText("");
-        jtSocioMembresia.addFocusListener(new java.awt.event.FocusAdapter() {
+        jtIDSocio.setToolTipText("");
+        jtIDSocio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jtSocioMembresiaFocusGained(evt);
+                jtIDSocioFocusGained(evt);
             }
         });
-        jtSocioMembresia.addKeyListener(new java.awt.event.KeyAdapter() {
+        jtIDSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtIDSocioActionPerformed(evt);
+            }
+        });
+        jtIDSocio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtSocioMembresiaKeyTyped(evt);
+                jtIDSocioKeyTyped(evt);
             }
         });
 
@@ -181,12 +191,6 @@ public class FormMembresia extends javax.swing.JInternalFrame {
         jtCartelCosto.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jtCartelCosto.setFocusable(false);
 
-        jtCosto.setEnabled(false);
-        jtCosto.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                jtCostoFocusGained(evt);
-            }
-        });
         jtCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtCostoKeyTyped(evt);
@@ -203,8 +207,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
         jcTipo.setBackground(new java.awt.Color(102, 102, 102));
         jcTipo.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
         jcTipo.setForeground(new java.awt.Color(255, 255, 255));
-        jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensual", "Bimestral", "Trimestral", "Semestral", "Anual", "Día de Prueba" }));
-        jcTipo.setSelectedIndex(-1);
+        jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensual", "Bimestral", "Trimestral", "Semestral", "Anual", " " }));
         jcTipo.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jcTipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -212,14 +215,14 @@ public class FormMembresia extends javax.swing.JInternalFrame {
             }
         });
 
-        jcTipo1.setBackground(new java.awt.Color(102, 102, 102));
-        jcTipo1.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcTipo1.setForeground(new java.awt.Color(255, 255, 255));
-        jcTipo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "8", "12", "20", "Ilmitados" }));
-        jcTipo1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jcTipo1.addActionListener(new java.awt.event.ActionListener() {
+        jcPases.setBackground(new java.awt.Color(102, 102, 102));
+        jcPases.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jcPases.setForeground(new java.awt.Color(255, 255, 255));
+        jcPases.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "8", "12", "20", "Ilmitados" }));
+        jcPases.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        jcPases.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcTipo1ActionPerformed(evt);
+                jcPasesActionPerformed(evt);
             }
         });
 
@@ -304,19 +307,57 @@ public class FormMembresia extends javax.swing.JInternalFrame {
             }
         });
 
+        jbActualizar.setBackground(new java.awt.Color(153, 153, 153));
+        jbActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setBackground(new java.awt.Color(153, 153, 153));
+        jbEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbEliminar.setForeground(new java.awt.Color(0, 0, 0));
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
+        jbLimpiarTabla.setBackground(new java.awt.Color(153, 153, 153));
+        jbLimpiarTabla.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbLimpiarTabla.setForeground(new java.awt.Color(0, 0, 0));
+        jbLimpiarTabla.setText("Limpiar");
+        jbLimpiarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarTablaActionPerformed(evt);
+            }
+        });
+
         escritorioMembresia2.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorioMembresia2.setLayer(jbListarMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorioMembresia2.setLayer(jbCerrar2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioMembresia2.setLayer(jbActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioMembresia2.setLayer(jbEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioMembresia2.setLayer(jbLimpiarTabla, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioMembresia2Layout = new javax.swing.GroupLayout(escritorioMembresia2);
         escritorioMembresia2.setLayout(escritorioMembresia2Layout);
         escritorioMembresia2Layout.setHorizontalGroup(
             escritorioMembresia2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioMembresia2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jbListarMembresia)
+                .addComponent(jbListarMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbCerrar2)
+                .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbLimpiarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
         );
@@ -325,9 +366,13 @@ public class FormMembresia extends javax.swing.JInternalFrame {
             .addGroup(escritorioMembresia2Layout.createSequentialGroup()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(escritorioMembresia2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbListarMembresia)
-                    .addComponent(jbCerrar2)))
+                .addGroup(escritorioMembresia2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioMembresia2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbListarMembresia)
+                        .addComponent(jbCerrar2)
+                        .addComponent(jbActualizar))
+                    .addComponent(jbEliminar)
+                    .addComponent(jbLimpiarTabla)))
         );
 
         jbBuscarMembresia.setBackground(new java.awt.Color(153, 153, 153));
@@ -342,7 +387,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
 
         socio.setLayer(jtFormularioGestionMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtCartelSocioMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jtSocioMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jtIDSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtCartelTipoMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtCartelCantidadPases, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jtCartelFechaInicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -355,7 +400,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
         socio.setLayer(jdInicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jcTipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        socio.setLayer(jcTipo1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        socio.setLayer(jcPases, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(jdFin, javax.swing.JLayeredPane.DEFAULT_LAYER);
         socio.setLayer(escritorioMembresia2, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -382,11 +427,11 @@ public class FormMembresia extends javax.swing.JInternalFrame {
                                 .addComponent(jtCartelFechaInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jtSocioMembresia)
+                                .addComponent(jtIDSocio)
                                 .addComponent(jcTipo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jdInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, socioLayout.createSequentialGroup()
-                                    .addComponent(jcTipo1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jcPases, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addGap(18, 18, 18)
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addComponent(jdFin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -417,7 +462,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtCartelSocioMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtSocioMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtIDSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jtCartelTipoMembresia)
@@ -425,7 +470,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtCartelCantidadPases)
-                    .addComponent(jcTipo1)
+                    .addComponent(jcPases)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -441,7 +486,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
                     .addComponent(jtCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(199, 199, 199)
+                .addGap(200, 200, 200)
                 .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbGuardarMembresia)
                     .addComponent(jbLimpiar)
@@ -450,7 +495,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
                 .addGap(23, 23, 23))
             .addGroup(socioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, socioLayout.createSequentialGroup()
-                    .addContainerGap(15, Short.MAX_VALUE)
+                    .addContainerGap(22, Short.MAX_VALUE)
                     .addComponent(escritorioMembresia2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(22, 22, 22)))
         );
@@ -464,9 +509,8 @@ public class FormMembresia extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(socio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(socio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -480,31 +524,26 @@ public class FormMembresia extends javax.swing.JInternalFrame {
     private void jdFinMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jdFinMouseClicked
         // TODO add your handling code here:
         Calendar calendario = Calendar.getInstance();
-        Date fechaHoy = calendario.getTime();
+        Date fechaHoy = (Date) calendario.getTime();
 
         // Establecer la fecha mínima seleccionable como la fecha de hoy
         jdFin.setMinSelectableDate(fechaHoy);
     }//GEN-LAST:event_jdFinMouseClicked
 
-    private void jcTipo1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipo1ActionPerformed
+    private void jcPasesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcPasesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jcTipo1ActionPerformed
+    }//GEN-LAST:event_jcPasesActionPerformed
 
     private void jcTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipoActionPerformed
         // TODO add your handling code here:
         int opcion = jcTipo.getSelectedIndex();
-        System.out.println("index: "+opcion);
         String valor = (String)jcTipo.getSelectedItem();
-        System.out.println("Valor seleccionando: "+valor);
     }//GEN-LAST:event_jcTipoActionPerformed
 
     private void jtCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCostoKeyTyped
-        // TODO add your handling code here:
+        String campo = "COSTO";
+        controlSoloNumeros(evt, campo, 10, jtCosto);
     }//GEN-LAST:event_jtCostoKeyTyped
-
-    private void jtCostoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCostoFocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCostoFocusGained
 
     private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
         // TODO add your handling code here:
@@ -517,18 +556,18 @@ public class FormMembresia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbGuardarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarMembresiaActionPerformed
-
-        // cargar();
+       if(camposVacios()){ jlError.setText("* Debe completar todos los campos");
+       }else{ cargar();}
     }//GEN-LAST:event_jbGuardarMembresiaActionPerformed
 
-    private void jtSocioMembresiaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtSocioMembresiaKeyTyped
+    private void jtIDSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtIDSocioKeyTyped
         String campo = "ID SOCIO";
-        controlSoloNumeros(evt, campo, 5, jtSocioMembresia);
-    }//GEN-LAST:event_jtSocioMembresiaKeyTyped
+        controlSoloNumeros(evt, campo, 5, jtIDSocio);
+    }//GEN-LAST:event_jtIDSocioKeyTyped
 
-    private void jtSocioMembresiaFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtSocioMembresiaFocusGained
+    private void jtIDSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtIDSocioFocusGained
         //  limpiarCampo(jtSocioMembresia);
-    }//GEN-LAST:event_jtSocioMembresiaFocusGained
+    }//GEN-LAST:event_jtIDSocioFocusGained
 
     private void jtCartelSocioMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCartelSocioMembresiaActionPerformed
         // TODO add your handling code here:
@@ -536,14 +575,14 @@ public class FormMembresia extends javax.swing.JInternalFrame {
 
     private void jbListarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarMembresiaActionPerformed
         // TODO add your handling code here:
-       // limpiarTabla();
+        limpiarTabla();
         List<Membresia> membresias = new ArrayList<>();
         MembresiaData membresiaData = new MembresiaData();
         membresias = membresiaData.listarMembresia();
         for (Membresia membresia : membresias) {
             Vector renglon = new Vector<>();
             renglon.add(membresia.getId_membresia());
-            renglon.add(membresia.getId_socio());
+            renglon.add(membresia.getId_socio().getId_socio());
             renglon.add(membresia.getTipo());
             renglon.add(membresia.getCant_pases());
             renglon.add(membresia.getFecha_inicio());
@@ -561,28 +600,72 @@ public class FormMembresia extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jbCerrar2ActionPerformed
 
     private void jbBuscarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarMembresiaActionPerformed
-        // TODO add your handling code here:
-        escritorioMembresia2.setVisible(true);
-        llenarTabla();
+         llenarTabla();
+        if(!escritorioMembresia2.isVisible()&&flag||jtIDSocio.getText().equals("")){
+            escritorioMembresia2.setVisible(true);
+            flag= false;
+        }
     }//GEN-LAST:event_jbBuscarMembresiaActionPerformed
+
+    private void jtIDSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIDSocioActionPerformed
+         llenarTabla();
+        if(!escritorioMembresia2.isVisible()&&flag){
+            escritorioMembresia2.setVisible(true);
+            flag= false;
+        }
+    }//GEN-LAST:event_jtIDSocioActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        int selectedRow = jtListadoMembresia.getSelectedRow();
+            if(selectedRow != -1) {
+                int respuesta = JOptionPane.showConfirmDialog(
+              jbEliminar, 
+                   "¿Deseas continuar con la eliminacón?", 
+                    "Confirmación", 
+                    JOptionPane.YES_NO_OPTION
+                );
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    MembresiaData membresiaData = new MembresiaData();
+                    Object value = jtListadoMembresia.getValueAt(selectedRow, 0);
+                    
+                    membresiaData.cancelarMembresia(Integer.parseInt(value.toString()));
+                    modelo.removeRow(selectedRow);
+                }else{
+                    if(respuesta == JOptionPane.NO_OPTION) {
+                       jtListadoMembresia.clearSelection();
+                    }       
+                }   
+            }else {
+                JOptionPane.showMessageDialog(jtListadoMembresia, "Por favor, seleccione una Membresia para eliminar.");
+            }
+      
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbLimpiarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTablaActionPerformed
+        // TODO add your handling code here:
+        limpiarTabla();
+    }//GEN-LAST:event_jbLimpiarTablaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane escritorioMembresia2;
-    private javax.swing.JDesktopPane escritorioSocio2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JButton jbActualizar;
     private javax.swing.JButton jbBuscarMembresia;
-    private javax.swing.JButton jbCerrar;
     private javax.swing.JButton jbCerrar2;
+    private javax.swing.JButton jbEliminar;
     private javax.swing.JButton jbGuardarMembresia;
     private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbLimpiarTabla;
     private javax.swing.JButton jbListarMembresia;
-    private javax.swing.JButton jbListarTodos;
     private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox jcPases;
     private javax.swing.JComboBox<String> jcTipo;
-    private javax.swing.JComboBox<String> jcTipo1;
     private com.toedter.calendar.JDateChooser jdFin;
     private com.toedter.calendar.JDateChooser jdInicio;
     private javax.swing.JLabel jlError;
@@ -594,34 +677,56 @@ public class FormMembresia extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtCartelTipoMembresia;
     private javax.swing.JTextField jtCosto;
     private javax.swing.JTextField jtFormularioGestionMembresia;
+    private javax.swing.JTextField jtIDSocio;
     private javax.swing.JTable jtListadoMembresia;
-    private javax.swing.JTable jtListadoSocio;
-    private javax.swing.JTextField jtSocioMembresia;
     private javax.swing.JDesktopPane socio;
     // End of variables declaration//GEN-END:variables
+    
+    private void cargar(){
+           try{
+                Membresia membresia = new Membresia();                
+                SocioData socioData = new SocioData();               
+                membresia.setId_socio((socioData.buscarSocioPorId(Integer.parseInt(jtIDSocio.getText()))));
+                membresia.setTipo((String) jcTipo.getSelectedItem());
+                membresia.setCant_pases(Integer.parseInt((String)jcPases.getSelectedItem()));
+                java.util.Date fechaIni = jdInicio.getDate();
+                java.sql.Date sqlFechaInicio = new java.sql.Date(fechaIni.getTime());
+                membresia.setFecha_inicio(sqlFechaInicio);
+                java.util.Date fechaFin = jdFin.getDate();
+                java.sql.Date sqlFechaFin = new java.sql.Date(fechaFin.getTime());
+                membresia.setFecha_fin(sqlFechaFin);
+                BigDecimal costo = new BigDecimal(jtCosto.getText());
+                membresia.setCosto(costo);
+                membresia.setEstado(true);
+                if(camposVacios()) throw new NumberFormatException();
+//                validarLongitudMin();
+                //validarRangoMin();
+                MembresiaData membresiaData = new MembresiaData();
+                membresiaData.registrarMembresia(membresia);
+                limpiarTodo();    
+                
+            }catch(NumberFormatException ex){
+                jlError.setText("* Debe completar todos los campos");
+            }catch(Exception ec) {
+                JOptionPane.showMessageDialog(null, "no se pudo cargar membresia\n"+ec.getMessage());
+            }
+    }
+    
+    private boolean camposVacios(){
+    return jtIDSocio.getText().equals("")||jdInicio.getDate()==null||jdFin.getDate()==null;    
+    }
+    
     public void limpiarTodo(){
-        JTextField[] campos = {jtSocioMembresia, jtCosto};
+        JTextField[] campos = {jtIDSocio, jtCosto};
         for (JTextField campo : campos) {
             campo.setText(null);
         }
         jdInicio.setDate(null);
         jdFin.setDate(null);
-       // jlError.setText(null);
+        
+        //jlError.setText(null);
     }
     
-    private void controlSoloLetras(java.awt.event.KeyEvent evt, String campo, JTextField jtextfield){
-        final char keyChar = evt.getKeyChar();
-        if (!(Character.isAlphabetic(keyChar) || (Character.isWhitespace(keyChar)) || keyChar == KeyEvent.VK_DELETE)) {
-            jlError.setText("* Error en campo '"+campo+"': Debe ingresar solo letras");
-            evt.consume();
-        }else{
-            jlError.setText("");
-        }
-        if(jtextfield.getText().length() >= 30){
-            jlError.setText("* Error en campo '"+campo+"' Longitud max: 30 caracteres");
-            evt.consume();
-        } 
-    }
     
     private void controlSoloNumeros(java.awt.event.KeyEvent evt, String campo, int limite, JTextField jtextfield){
         final int keyChar = evt.getKeyChar();
@@ -636,13 +741,13 @@ public class FormMembresia extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }
-    
-    private void cargarId(){
-        SocioData sociodata = new SocioData();
-        if(sociodata.ultimoId()!=0){
-            jtSocioMembresia.setText(String.valueOf(sociodata.ultimoId()+1));
-        }
-    }
+//    
+//    private void cargarId(){
+//        SocioData sociodata = new SocioData();
+//        if(sociodata.ultimoId()!=0){
+//            jtIDMembresia.setText(String.valueOf(sociodata.ultimoId()+1));
+//        }
+//    }
     
     private void armarCabecera(){
          modelo.addColumn("ID Membresia");
@@ -664,25 +769,27 @@ public class FormMembresia extends javax.swing.JInternalFrame {
      }
     
     private void llenarTabla(){
-        if(!jtSocioMembresia.getText().equals("")){
+        if(!jtIDSocio.getText().equals("")){
             MembresiaData membresiaData = new MembresiaData();
-            Membresia membresia = new Membresia();
-            membresia = membresiaData.buscarMembresiaPorSocio(Integer.parseInt(jtSocioMembresia.getText()));
+            Membresia membresia;
+            membresia = membresiaData.buscarMembresiaPorSocio(Integer.parseInt(jtIDSocio.getText()));
             llenarVector(membresia);
         }
     }
-    
+    boolean flag = false;
     private void llenarVector(Membresia membresia){
+       
         if(membresia.isEstado()){
             Vector renglon = new Vector<>();
             renglon.add(membresia.getId_membresia());
-            renglon.add(membresia.getId_socio());
+            renglon.add(membresia.getId_socio().getId_socio());
             renglon.add(membresia.getTipo());
             renglon.add(membresia.getCant_pases());
             renglon.add(membresia.getFecha_inicio());
             renglon.add(membresia.getFecha_fin());
             renglon.add(membresia.getCosto());
             modelo.addRow(renglon);
+            flag = true;
         }
     }
 }
