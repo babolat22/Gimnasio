@@ -253,13 +253,13 @@ public class Gimnasio {
 //    }
     
     //probando listar asistencias
-    List<Asistencia> listaAsistenciaN;
-    AsistenciaData asistenciaDataN = new AsistenciaData();
-    listaAsistenciaN = asistenciaDataN.listarAsistencia();
-        for (Asistencia asistencia : listaAsistenciaN) {
-            System.out.println(asistencia.toString());
-        }
-    
+//    List<Asistencia> listaAsistenciaN;
+//    AsistenciaData asistenciaDataN = new AsistenciaData();
+//    listaAsistenciaN = asistenciaDataN.listarAsistencia();
+//        for (Asistencia asistencia : listaAsistenciaN) {
+//            System.out.println(asistencia.toString());
+//        }
+//    
 
 
 

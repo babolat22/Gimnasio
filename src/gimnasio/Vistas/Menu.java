@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JInternalFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,10 +36,8 @@ public class Menu extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmGestionMembresia = new javax.swing.JMenuItem();
-        jmConsultasMembresia = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jmGestionSocio = new javax.swing.JMenuItem();
-        jmConsultasSocio = new javax.swing.JMenuItem();
         jmMenuEntrenador = new javax.swing.JMenu();
         jmGestionEntrenador = new javax.swing.JMenuItem();
         jmConsultasEntrenador = new javax.swing.JMenuItem();
@@ -46,6 +45,7 @@ public class Menu extends javax.swing.JFrame {
         jmGestionClase = new javax.swing.JMenuItem();
         jmConsultasClase = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jmAbout = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -80,14 +80,6 @@ public class Menu extends javax.swing.JFrame {
         });
         jMenu1.add(jmGestionMembresia);
 
-        jmConsultasMembresia.setText("Consultas");
-        jmConsultasMembresia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmConsultasMembresiaActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jmConsultasMembresia);
-
         jMenuBar1.add(jMenu1);
 
         jMenu4.setText("Socio");
@@ -99,14 +91,6 @@ public class Menu extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jmGestionSocio);
-
-        jmConsultasSocio.setText("Consultas");
-        jmConsultasSocio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmConsultasSocioActionPerformed(evt);
-            }
-        });
-        jMenu4.add(jmConsultasSocio);
 
         jMenuBar1.add(jMenu4);
 
@@ -150,7 +134,21 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu3);
 
-        jMenu2.setText("Salir");
+        jMenu2.setText("Ayuda");
+        jMenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu2ActionPerformed(evt);
+            }
+        });
+
+        jmAbout.setText("About");
+        jmAbout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmAboutActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jmAbout);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -190,20 +188,10 @@ public class Menu extends javax.swing.JFrame {
          mostrarPestaña(new FormSocio());
     }//GEN-LAST:event_jmGestionSocioActionPerformed
 
-    private void jmConsultasSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasSocioActionPerformed
-        // TODO add your handling code here:
-         mostrarPestaña(new FormSocioConsultas());
-    }//GEN-LAST:event_jmConsultasSocioActionPerformed
-
     private void jmGestionMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGestionMembresiaActionPerformed
         // TODO add your handling code here:
         mostrarPestaña(new FormMembresia());
     }//GEN-LAST:event_jmGestionMembresiaActionPerformed
-
-    private void jmConsultasMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmConsultasMembresiaActionPerformed
-        // TODO add your handling code here:
-        mostrarPestaña(new FormMembresiaConsultas());
-    }//GEN-LAST:event_jmConsultasMembresiaActionPerformed
 
     private void jmGestionClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmGestionClaseActionPerformed
         // TODO add your handling code here:
@@ -214,6 +202,16 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
          mostrarPestaña(new FormClaseConsultas());
     }//GEN-LAST:event_jmConsultasClaseActionPerformed
+
+    private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
+        // TODO add your handling code here:
+       
+    }//GEN-LAST:event_jMenu2ActionPerformed
+
+    private void jmAboutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmAboutActionPerformed
+        // TODO add your handling code here:
+         JOptionPane.showMessageDialog(null, "Product Version: Gimnasio Version 1.00.01 \nAutor: Javier Martin\nAll rights reserved\nCopyright\nSite Under Construction...");
+    }//GEN-LAST:event_jmAboutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -258,10 +256,9 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jmAbout;
     private javax.swing.JMenuItem jmConsultasClase;
     private javax.swing.JMenuItem jmConsultasEntrenador;
-    private javax.swing.JMenuItem jmConsultasMembresia;
-    private javax.swing.JMenuItem jmConsultasSocio;
     private javax.swing.JMenuItem jmGestionClase;
     private javax.swing.JMenuItem jmGestionEntrenador;
     private javax.swing.JMenuItem jmGestionMembresia;

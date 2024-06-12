@@ -3,26 +3,31 @@ package gimnasio.Vistas;
 
 import gimnasio.AccesoADatos.SocioData;
 import gimnasio.Entidades.Socio;
-import gimnasio.Entidades.Membresia;
-import gimnasio.AccesoADatos.MembresiaData;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Javier
  */
 public class FormSocio extends javax.swing.JInternalFrame {
-
+    private DefaultTableModel modelo=new DefaultTableModel();
     /**
      * Creates new form FormSocio
      */
     public FormSocio() {
         initComponents();
-        jtIdSocio.setText(String.valueOf(ultimoIdSocio()));
+        armarCabecera();
+        escritorioSocio2.setVisible(false);
+        
+        //jtIdSocio.setText(String.valueOf(ultimoIdSocio()));
     }
 
     /**
@@ -59,6 +64,12 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jtCartelIdSocio = new javax.swing.JTextField();
         jtIdSocio = new javax.swing.JTextField();
+        escritorioSocio2 = new javax.swing.JDesktopPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtListadoSocio = new javax.swing.JTable();
+        jbListarTodos = new javax.swing.JButton();
+        jbCerrar = new javax.swing.JButton();
+        jbBuscar = new javax.swing.JButton();
 
         setClosable(true);
         setIconifiable(true);
@@ -134,6 +145,11 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jtNombreSocio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtNombreSocioFocusGained(evt);
+            }
+        });
+        jtNombreSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtNombreSocioActionPerformed(evt);
             }
         });
         jtNombreSocio.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -218,7 +234,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jtFormularioInscripcion.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
         jtFormularioInscripcion.setForeground(new java.awt.Color(255, 255, 255));
         jtFormularioInscripcion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jtFormularioInscripcion.setText("FORMULARIO DE INSCRIPCIÓN DE SOCIO");
+        jtFormularioInscripcion.setText("FORMULARIO DE GESTIÓN DE SOCIO");
         jtFormularioInscripcion.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jtFormularioInscripcion.setCaretColor(new java.awt.Color(255, 51, 255));
         jtFormularioInscripcion.setFocusable(false);
@@ -256,15 +272,119 @@ public class FormSocio extends javax.swing.JInternalFrame {
         jtCartelIdSocio.setFocusable(false);
 
         jtIdSocio.setToolTipText("");
-        jtIdSocio.setFocusable(false);
         jtIdSocio.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jtIdSocioFocusGained(evt);
             }
         });
+        jtIdSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtIdSocioActionPerformed(evt);
+            }
+        });
         jtIdSocio.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 jtIdSocioKeyTyped(evt);
+            }
+        });
+
+        jtListadoSocio.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID_Socio", "Nombre", "Apellido", "DNI", "Edad", "Correo", "Telefono"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtListadoSocio.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jtListadoSocio.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(jtListadoSocio);
+
+        jbListarTodos.setBackground(new java.awt.Color(153, 153, 153));
+        jbListarTodos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbListarTodos.setForeground(new java.awt.Color(0, 0, 0));
+        jbListarTodos.setText("Listar Socios");
+        jbListarTodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbListarTodosActionPerformed(evt);
+            }
+        });
+
+        jbCerrar.setBackground(new java.awt.Color(153, 153, 153));
+        jbCerrar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbCerrar.setForeground(new java.awt.Color(0, 0, 0));
+        jbCerrar.setText("Cerrar");
+        jbCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCerrarActionPerformed(evt);
+            }
+        });
+
+        escritorioSocio2.setLayer(jScrollPane1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioSocio2.setLayer(jbListarTodos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioSocio2.setLayer(jbCerrar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioSocio2Layout = new javax.swing.GroupLayout(escritorioSocio2);
+        escritorioSocio2.setLayout(escritorioSocio2Layout);
+        escritorioSocio2Layout.setHorizontalGroup(
+            escritorioSocio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioSocio2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbListarTodos)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCerrar)
+                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE)
+        );
+        escritorioSocio2Layout.setVerticalGroup(
+            escritorioSocio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioSocio2Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(escritorioSocio2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbListarTodos)
+                    .addComponent(jbCerrar)))
+        );
+
+        jbBuscar.setBackground(new java.awt.Color(153, 153, 153));
+        jbBuscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbBuscar.setForeground(new java.awt.Color(0, 0, 0));
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
             }
         });
 
@@ -290,6 +410,8 @@ public class FormSocio extends javax.swing.JInternalFrame {
         DesktopPane.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopPane.setLayer(jtCartelIdSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
         DesktopPane.setLayer(jtIdSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopPane.setLayer(escritorioSocio2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        DesktopPane.setLayer(jbBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout DesktopPaneLayout = new javax.swing.GroupLayout(DesktopPane);
         DesktopPane.setLayout(DesktopPaneLayout);
@@ -330,24 +452,25 @@ public class FormSocio extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(DesktopPaneLayout.createSequentialGroup()
-                                .addGap(30, 30, 30)
-                                .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jtAMembresia)
-                                .addGap(18, 18, 18)
-                                .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jtCartelIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(DesktopPaneLayout.createSequentialGroup()
+                                .addComponent(jbGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtAMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbBuscar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(escritorioSocio2))
                     .addGroup(DesktopPaneLayout.createSequentialGroup()
                         .addGap(44, 44, 44)
-                        .addComponent(jtFormularioInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DesktopPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 333, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(DesktopPaneLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jtCartelIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jtFormularioInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         DesktopPaneLayout.setVerticalGroup(
             DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -355,43 +478,47 @@ public class FormSocio extends javax.swing.JInternalFrame {
                 .addGap(8, 8, 8)
                 .addComponent(jtFormularioInscripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCartelIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(5, 5, 5)
-                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCartelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtNombreSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCartelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtApellidoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCartelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCartelEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtEdadSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCartelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtCorreoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCartelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 140, Short.MAX_VALUE)
-                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtAMembresia)
-                    .addComponent(jbGuardar)
-                    .addComponent(jbLimpiar))
+                .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(DesktopPaneLayout.createSequentialGroup()
+                        .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtIdSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)
+                        .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtNombreSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtApellidoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelDni, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtDniSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtEdadSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtCorreoSocio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addGroup(DesktopPaneLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtAMembresia)
+                            .addComponent(jbGuardar)
+                            .addComponent(jbLimpiar)
+                            .addComponent(jbBuscar)))
+                    .addComponent(escritorioSocio2))
                 .addGap(17, 17, 17))
         );
 
@@ -410,9 +537,11 @@ public class FormSocio extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-        // TODO add your handling code here:
+     
       limpiarTodo();
-       
+      jtIdSocio.setText("");
+      if(!jtIdSocio.isEnabled()) jtIdSocio.setEnabled(true);
+      
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
     private void jbGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarActionPerformed
@@ -471,6 +600,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
 
     private void jtNombreSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtNombreSocioFocusGained
         limpiarCampo(jtNombreSocio);
+        jtIdSocio.setEnabled(false);
     }//GEN-LAST:event_jtNombreSocioFocusGained
 
     private void jtApellidoSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtApellidoSocioFocusGained
@@ -500,25 +630,79 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private void jtNumeroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtNumeroKeyTyped
        String campo = "NUMERO";
        int limite = 14;
-        controlSoloNumeros(evt, campo, limite, jtNumero);
+       controlSoloNumeros(evt, campo, limite, jtNumero);
             
     }//GEN-LAST:event_jtNumeroKeyTyped
 
     private void jtIdSocioFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtIdSocioFocusGained
         // TODO add your handling code here:
+        jlError.setText("* Utilice el campo ID SOCIO solo para busquedas");
     }//GEN-LAST:event_jtIdSocioFocusGained
 
     private void jtIdSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtIdSocioKeyTyped
-        // TODO add your handling code here:
+        String campo = "ID SOCIO";
+        int limite = 4;
+        controlSoloNumeros(evt, campo, limite, jtIdSocio);
+        
+        bloquearCampos();
+        jbGuardar.setEnabled(false);
     }//GEN-LAST:event_jtIdSocioKeyTyped
+
+    private void jbListarTodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarTodosActionPerformed
+        // TODO add your handling code here:
+        limpiarTabla();
+        List<Socio> socios = new ArrayList<>();
+        SocioData socioData = new SocioData();
+        socios = socioData.listarSocios();
+        for (Socio socio : socios) {
+            Vector renglon = new Vector<>();
+            renglon.add(socio.getId_socio());
+            renglon.add(socio.getNombre());
+            renglon.add(socio.getApellido());
+            renglon.add(socio.getDni());
+            renglon.add(socio.getEdad());
+            renglon.add(socio.getCorreo());
+            renglon.add(socio.getTelefono());
+            renglon.add(socio.isEstado());
+            modelo.addRow(renglon);
+            
+        }    
+    }//GEN-LAST:event_jbListarTodosActionPerformed
+
+    private void jbCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarActionPerformed
+        // TODO add your handling code here:
+        limpiarTabla();
+        escritorioSocio2.setVisible(false);
+    }//GEN-LAST:event_jbCerrarActionPerformed
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        escritorioSocio2.setVisible(true);
+        llenarTabla();
+                
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
+    private void jtIdSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtIdSocioActionPerformed
+        if(!escritorioSocio2.isVisible()) escritorioSocio2.setVisible(true);
+        llenarTabla();
+    }//GEN-LAST:event_jtIdSocioActionPerformed
+
+    private void jtNombreSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtNombreSocioActionPerformed
+        if(!escritorioSocio2.isVisible()) escritorioSocio2.setVisible(true);
+        llenarTabla2();
+    }//GEN-LAST:event_jtNombreSocioActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane DesktopPane;
+    private javax.swing.JDesktopPane escritorioSocio2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton jbBuscar;
+    private javax.swing.JButton jbCerrar;
     private javax.swing.JButton jbGuardar;
     private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbListarTodos;
     private javax.swing.JLabel jlError;
     private javax.swing.JButton jtAMembresia;
     private javax.swing.JTextField jtApellidoSocio;
@@ -535,6 +719,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private javax.swing.JTextField jtEdadSocio;
     private javax.swing.JTextField jtFormularioInscripcion;
     private javax.swing.JTextField jtIdSocio;
+    private javax.swing.JTable jtListadoSocio;
     private javax.swing.JTextField jtNombreSocio;
     private javax.swing.JTextField jtNumero;
     // End of variables declaration//GEN-END:variables
@@ -570,6 +755,12 @@ public class FormSocio extends javax.swing.JInternalFrame {
             campo.setText(null);
         }
         jlError.setText(null);
+        //escritorioSocio2.setVisible(false);
+        jbGuardar.setEnabled(true);
+        if(!jtNombreSocio.isEnabled())  desbloquearCampos();
+        int rowCount = jtListadoSocio.getRowCount();
+        if(rowCount!=0) limpiarTabla();
+        
     }
     
     private void campoObligatorio(){
@@ -665,5 +856,75 @@ public class FormSocio extends javax.swing.JInternalFrame {
         int id = sociodata.ultimoId();
        // System.out.println("el id es: "+id);
        return id+1;
+    }
+    
+    private void bloquearCampos(){
+        JTextField[] campos = {jtNombreSocio, jtApellidoSocio, jtDniSocio, jtCorreoSocio, jtArea, jtNumero};
+        for (JTextField campo : campos) {
+            campo.setEnabled(false);
+        }
+        jtEdadSocio.setEnabled(false);
+    }
+    private void desbloquearCampos(){
+        JTextField[] campos = {jtNombreSocio, jtApellidoSocio, jtDniSocio, jtCorreoSocio, jtArea, jtNumero};
+        for (JTextField campo : campos) {
+            campo.setEnabled(true);
+        }
+        jtEdadSocio.setEnabled(true);
+    }
+     private void armarCabecera(){
+       
+         modelo.addColumn("ID Socio");
+         modelo.addColumn("Nombre");
+         modelo.addColumn("Apellido");
+         modelo.addColumn("DNI");
+         modelo.addColumn("Edad");
+         modelo.addColumn("Correo");
+         modelo.addColumn("Telefono");
+         //modelo.addColumn("Estado");
+         jtListadoSocio.setModel(modelo);
+     }
+     
+     private void limpiarTabla(){
+        DefaultTableModel model = (DefaultTableModel) jtListadoSocio.getModel();
+        int rowCount = model.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+     }
+     
+    private void llenarTabla(){
+        if(!jtIdSocio.getText().equals("")){
+            SocioData socioData = new SocioData();
+            Socio socio = new Socio();
+            socio = socioData.buscarSocioPorId(Integer.parseInt(jtIdSocio.getText()));
+            llenarVector(socio);
+        }
+    }
+    
+    private void llenarTabla2(){
+        if(!jtNombreSocio.getText().equals("")){ 
+            SocioData socioData = new SocioData();
+            List<Socio> socios = new ArrayList();
+            socios = socioData.buscarSocioPorNombre(jtNombreSocio.getText());
+            for (Socio socio : socios) {
+                llenarVector(socio);
+            }
+        }
+    }
+    
+    private void llenarVector(Socio socio){
+        if(socio.isEstado()){
+                Vector renglon = new Vector<>();
+                renglon.add(socio.getId_socio());
+                renglon.add(socio.getNombre());
+                renglon.add(socio.getApellido());
+                renglon.add(socio.getDni());
+                renglon.add(socio.getEdad());
+                renglon.add(socio.getCorreo());
+                renglon.add(socio.getTelefono());
+                renglon.add(socio.isEstado());
+                modelo.addRow(renglon);
+        }
     }
 }

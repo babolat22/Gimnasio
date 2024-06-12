@@ -94,13 +94,29 @@ public class MembresiaData {
     }
     
      public List<Membresia> buscarMembresiaPorTipo(int tipo_membresia) {
+        List<Membresia> membresias;
+        String sql = "SELECT * FROM Membresia WHERE tipo = ? AND estado = ?";
+        String campo = String.valueOf( tipo_membresia);
+        membresias = cargarBusquedas(sql, campo);
+        return membresias;
+    }
+     
+     public List<Membresia> listarMembresia(){
+        List<Membresia> membresias;
+        String sql = "SELECT * FROM membresia WHERE estado = ?";
+        String campo = "1";
+        membresias = cargarBusquedas(sql, campo);
+    return membresias;    
+    }
+     
+    public List<Membresia> cargarBusquedas(String sql, String campo){
         PreparedStatement ps;
         ResultSet rs;
         List<Membresia> membresias = new ArrayList<>();
-        String sql = "SELECT * FROM Membresia WHERE tipo = ?";
         try{ 
             ps = con.prepareStatement(sql);
-            ps.setInt(1, tipo_membresia);
+            ps.setString(1, campo);
+            ps.setBoolean(2, true);
             rs = ps.executeQuery();
             while (rs.next()) {
                 Membresia membresia = new Membresia();
@@ -113,11 +129,12 @@ public class MembresiaData {
                 membresia.setEstado(rs.getBoolean("estado"));
                 membresias.add(membresia);
             }
+            ps.close();
         } catch (SQLException ex) {
            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de Membresia"+ex.getMessage()); 
         }
-        return membresias;
-    }
+    return membresias;
+    } 
      
     public void renovarMembresia(int idMembresia, int plan, int pases, Date fechaRenovacion) {
         PreparedStatement ps;

@@ -106,7 +106,7 @@ public class SocioData {
                 socio.setContador_asistencia(rs.getInt("cont_asistencia"));
                 socio.setEstado(true);
             }else{
-                JOptionPane.showMessageDialog(null, "Resultado de búsqueda por ID: "+id+"\nNombre: "+socio.getNombre()+"\nApellido: "+socio.getApellido()+"\nEl Socio no existe o fue dado de baja...");
+                JOptionPane.showMessageDialog(null, "Resultado de búsqueda por ID: "+id+"\nEl Socio no existe o fue dado de baja...");
             }
             ps.close();
         } catch (SQLException ex) {
@@ -119,13 +119,6 @@ public class SocioData {
         List<Socio> socios;
         String sql = "SELECT * FROM socio WHERE nombre = ? AND estado = ?";
         socios = cargarBusquedas(sql,nombre);
-    return socios;
-    }
-        
-    public List<Socio> buscarSocioPorApellido(String apellido){  
-        List<Socio> socios;
-        String sql = "SELECT * FROM socio WHERE apellido = ? AND estado = ?";
-        socios = cargarBusquedas(sql,apellido);
     return socios;
     }
     
