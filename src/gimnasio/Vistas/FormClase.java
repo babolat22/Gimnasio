@@ -7,20 +7,30 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
 import com.toedter.calendar.JDateChooser;
+import gimnasio.AccesoADatos.MembresiaData;
+import gimnasio.AccesoADatos.SocioData;
+import gimnasio.Entidades.Membresia;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import javax.swing.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Javier
  */
 public class FormClase extends javax.swing.JInternalFrame {
-
+    private DefaultTableModel modelo=new DefaultTableModel();
     /**
      * Creates new form FormClase
      */
     public FormClase() {
         initComponents();
+        armarCabecera();
+        escritorioClase.setVisible(false);
     }
 
     /**
@@ -32,21 +42,586 @@ public class FormClase extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ImageIcon icon = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/membresia3.jpg"));
+        Image image = icon.getImage();
+        clase = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image,0,0,getWidth(),getHeight(),this);     } };
+        jtFormularioGestionMembresia = new javax.swing.JTextField();
+        jtCartelClase = new javax.swing.JTextField();
+        jtCartelTipoMembresia = new javax.swing.JTextField();
+        jbGuardarMembresia = new javax.swing.JButton();
+        jbLimpiar = new javax.swing.JButton();
+        jbSalir = new javax.swing.JButton();
+        jlError = new javax.swing.JLabel();
+        jcTipo = new javax.swing.JComboBox<>();
+        escritorioClase = new javax.swing.JDesktopPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jtListadoClase = new javax.swing.JTable();
+        jbListarMembresia = new javax.swing.JButton();
+        jbCerrar2 = new javax.swing.JButton();
+        jbActualizar = new javax.swing.JButton();
+        jbEliminar = new javax.swing.JButton();
+        jbLimpiarTabla = new javax.swing.JButton();
+        jbBuscarMembresia = new javax.swing.JButton();
+        jcEspecialidad = new javax.swing.JComboBox<>();
+        jTextField19 = new javax.swing.JTextField();
+        jTextField5 = new javax.swing.JTextField();
+        jcHorario = new javax.swing.JComboBox<>();
+
+        clase.setPreferredSize(new java.awt.Dimension(930, 510));
+
+        jtFormularioGestionMembresia.setBackground(new java.awt.Color(0, 0, 0));
+        jtFormularioGestionMembresia.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtFormularioGestionMembresia.setForeground(new java.awt.Color(255, 255, 255));
+        jtFormularioGestionMembresia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        jtFormularioGestionMembresia.setText("FORMULARIO DE GESTIÓN DE CLASE");
+        jtFormularioGestionMembresia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtFormularioGestionMembresia.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtFormularioGestionMembresia.setFocusable(false);
+
+        jtCartelClase.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelClase.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelClase.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelClase.setText("Clase");
+        jtCartelClase.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelClase.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtCartelClase.setFocusable(false);
+        jtCartelClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtCartelClaseActionPerformed(evt);
+            }
+        });
+
+        jtCartelTipoMembresia.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelTipoMembresia.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelTipoMembresia.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelTipoMembresia.setText("Entrenador");
+        jtCartelTipoMembresia.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelTipoMembresia.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtCartelTipoMembresia.setFocusable(false);
+
+        jbGuardarMembresia.setBackground(new java.awt.Color(153, 153, 153));
+        jbGuardarMembresia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbGuardarMembresia.setForeground(new java.awt.Color(0, 0, 0));
+        jbGuardarMembresia.setText("Guardar");
+        jbGuardarMembresia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGuardarMembresiaActionPerformed(evt);
+            }
+        });
+
+        jbLimpiar.setBackground(new java.awt.Color(153, 153, 153));
+        jbLimpiar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbLimpiar.setForeground(new java.awt.Color(0, 0, 0));
+        jbLimpiar.setText("Limpiar");
+        jbLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarActionPerformed(evt);
+            }
+        });
+
+        jbSalir.setBackground(new java.awt.Color(153, 153, 153));
+        jbSalir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
+        jbSalir.setText("Salir");
+        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbSalirActionPerformed(evt);
+            }
+        });
+
+        jlError.setFont(new java.awt.Font("Segoe UI Black", 0, 12)); // NOI18N
+        jlError.setForeground(new java.awt.Color(255, 0, 51));
+        jlError.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        jcTipo.setBackground(new java.awt.Color(102, 102, 102));
+        jcTipo.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jcTipo.setForeground(new java.awt.Color(255, 255, 255));
+        jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensual", "Bimestral", "Trimestral", "Semestral", "Anual", " " }));
+        jcTipo.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        jcTipo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcTipoActionPerformed(evt);
+            }
+        });
+
+        jtListadoClase.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID Membresia", "ID_Socio", "Tipo", "Cant Pases", "Fecha Inicio", "Fecha Fin", "Costo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtListadoClase.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jtListadoClase.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(jtListadoClase);
+
+        jbListarMembresia.setBackground(new java.awt.Color(153, 153, 153));
+        jbListarMembresia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbListarMembresia.setForeground(new java.awt.Color(0, 0, 0));
+        jbListarMembresia.setText("Listar Membresias");
+        jbListarMembresia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbListarMembresiaActionPerformed(evt);
+            }
+        });
+
+        jbCerrar2.setBackground(new java.awt.Color(153, 153, 153));
+        jbCerrar2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbCerrar2.setForeground(new java.awt.Color(0, 0, 0));
+        jbCerrar2.setText("Cerrar");
+        jbCerrar2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCerrar2ActionPerformed(evt);
+            }
+        });
+
+        jbActualizar.setBackground(new java.awt.Color(153, 153, 153));
+        jbActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbActualizar.setForeground(new java.awt.Color(0, 0, 0));
+        jbActualizar.setText("Actualizar");
+        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbActualizarActionPerformed(evt);
+            }
+        });
+
+        jbEliminar.setBackground(new java.awt.Color(153, 153, 153));
+        jbEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbEliminar.setForeground(new java.awt.Color(0, 0, 0));
+        jbEliminar.setText("Eliminar");
+        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarActionPerformed(evt);
+            }
+        });
+
+        jbLimpiarTabla.setBackground(new java.awt.Color(153, 153, 153));
+        jbLimpiarTabla.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbLimpiarTabla.setForeground(new java.awt.Color(0, 0, 0));
+        jbLimpiarTabla.setText("Limpiar");
+        jbLimpiarTabla.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarTablaActionPerformed(evt);
+            }
+        });
+
+        escritorioClase.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase.setLayer(jbListarMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase.setLayer(jbCerrar2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase.setLayer(jbActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase.setLayer(jbEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase.setLayer(jbLimpiarTabla, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioClaseLayout = new javax.swing.GroupLayout(escritorioClase);
+        escritorioClase.setLayout(escritorioClaseLayout);
+        escritorioClaseLayout.setHorizontalGroup(
+            escritorioClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioClaseLayout.createSequentialGroup()
+                .addComponent(jbListarMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbLimpiarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
+        );
+        escritorioClaseLayout.setVerticalGroup(
+            escritorioClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioClaseLayout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(escritorioClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbListarMembresia)
+                        .addComponent(jbCerrar2)
+                        .addComponent(jbActualizar))
+                    .addComponent(jbEliminar)
+                    .addComponent(jbLimpiarTabla)))
+        );
+
+        jbBuscarMembresia.setBackground(new java.awt.Color(153, 153, 153));
+        jbBuscarMembresia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbBuscarMembresia.setForeground(new java.awt.Color(0, 0, 0));
+        jbBuscarMembresia.setText("Buscar");
+        jbBuscarMembresia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarMembresiaActionPerformed(evt);
+            }
+        });
+
+        jcEspecialidad.setBackground(new java.awt.Color(102, 102, 102));
+        jcEspecialidad.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jcEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
+        jcEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Levantamiento de Pesas", "Musculacion ", "Personal Training", "Entrenamiento en Grupos", "Cardio and Fitness", "Yoga", "Pilates", "CrossFit", "Artes Marciales", "Entrenamiento Funcional", "Entrenamiento de Resistencia", "Rehabilitación y Entrenamiento Correctivo", "Nutrición y Dietética", "Entrenamiento para Adultos Mayores", "Entrenamiento para Deportistas" }));
+
+        jTextField19.setEditable(false);
+        jTextField19.setBackground(new java.awt.Color(0, 0, 0));
+        jTextField19.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTextField19.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField19.setText("Lunes a Sábado:");
+        jTextField19.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        jTextField19.setFocusable(false);
+
+        jTextField5.setBackground(new java.awt.Color(0, 0, 0));
+        jTextField5.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jTextField5.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField5.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        jTextField5.setText("Horario");
+        jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jTextField5.setFocusable(false);
+
+        jcHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", " " }));
+
+        clase.setLayer(jtFormularioGestionMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jtCartelClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jtCartelTipoMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jbGuardarMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jbLimpiar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jcTipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(escritorioClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jbBuscarMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jcEspecialidad, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jTextField19, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jTextField5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        clase.setLayer(jcHorario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout claseLayout = new javax.swing.GroupLayout(clase);
+        clase.setLayout(claseLayout);
+        claseLayout.setHorizontalGroup(
+            claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(claseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                    .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(claseLayout.createSequentialGroup()
+                            .addComponent(jbGuardarMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jbLimpiar)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jbBuscarMembresia)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(claseLayout.createSequentialGroup()
+                            .addGap(38, 38, 38)
+                            .addComponent(jtFormularioGestionMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, claseLayout.createSequentialGroup()
+                            .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jTextField5)
+                                .addComponent(jtCartelClase)
+                                .addComponent(jtCartelTipoMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jcEspecialidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jcTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(claseLayout.createSequentialGroup()
+                                    .addComponent(jTextField19)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jcHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addGap(507, 507, 507))
+            .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(claseLayout.createSequentialGroup()
+                    .addGap(356, 356, 356)
+                    .addComponent(escritorioClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        claseLayout.setVerticalGroup(
+            claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(claseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jtFormularioGestionMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jtCartelClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jtCartelTipoMembresia)
+                    .addComponent(jcTipo))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jcHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200)
+                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbGuardarMembresia)
+                    .addComponent(jbLimpiar)
+                    .addComponent(jbSalir)
+                    .addComponent(jbBuscarMembresia))
+                .addGap(23, 23, 23))
+            .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, claseLayout.createSequentialGroup()
+                    .addContainerGap(22, Short.MAX_VALUE)
+                    .addComponent(escritorioClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(22, 22, 22)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addComponent(clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jtCartelClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCartelClaseActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jtCartelClaseActionPerformed
+
+    private void jbGuardarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarMembresiaActionPerformed
+       cargar();
+    }//GEN-LAST:event_jbGuardarMembresiaActionPerformed
+
+    private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
+
+       // limpiarTodo();
+    }//GEN-LAST:event_jbLimpiarActionPerformed
+
+    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jbSalirActionPerformed
+
+    private void jcTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipoActionPerformed
+        // TODO add your handling code here:
+        int opcion = jcTipo.getSelectedIndex();
+        String valor = (String)jcTipo.getSelectedItem();
+    }//GEN-LAST:event_jcTipoActionPerformed
+
+    private void jbListarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarMembresiaActionPerformed
+        // TODO add your handling code here:
+        limpiarTabla();
+        List<Membresia> membresias = new ArrayList<>();
+        MembresiaData membresiaData = new MembresiaData();
+        membresias = membresiaData.listarMembresia();
+        for (Membresia membresia : membresias) {
+            Vector renglon = new Vector<>();
+            renglon.add(membresia.getId_membresia());
+            renglon.add(membresia.getId_socio().getId_socio());
+            renglon.add(membresia.getTipo());
+            renglon.add(membresia.getCant_pases());
+            renglon.add(membresia.getFecha_inicio());
+            renglon.add(membresia.getFecha_fin());
+            renglon.add(membresia.getCosto());
+            modelo.addRow(renglon);
+        }
+
+    }//GEN-LAST:event_jbListarMembresiaActionPerformed
+
+    private void jbCerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrar2ActionPerformed
+        // TODO add your handling code here:
+        limpiarTabla();
+        escritorioClase.setVisible(false);
+    }//GEN-LAST:event_jbCerrar2ActionPerformed
+
+    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jbActualizarActionPerformed
+
+    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
+        int selectedRow = jtListadoClase.getSelectedRow();
+        if(selectedRow != -1) {
+            int respuesta = JOptionPane.showConfirmDialog(
+                jbEliminar,
+                "¿Deseas continuar con la eliminacón?",
+                "Confirmación",
+                JOptionPane.YES_NO_OPTION
+            );
+            if (respuesta == JOptionPane.YES_OPTION) {
+                MembresiaData membresiaData = new MembresiaData();
+                Object value = jtListadoClase.getValueAt(selectedRow, 0);
+
+                membresiaData.cancelarMembresia(Integer.parseInt(value.toString()));
+                modelo.removeRow(selectedRow);
+            }else{
+                if(respuesta == JOptionPane.NO_OPTION) {
+                    jtListadoClase.clearSelection();
+                }
+            }
+        }else {
+            JOptionPane.showMessageDialog(jtListadoClase, "Por favor, seleccione una Membresia para eliminar.");
+        }
+
+    }//GEN-LAST:event_jbEliminarActionPerformed
+
+    private void jbLimpiarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTablaActionPerformed
+        // TODO add your handling code here:
+        limpiarTabla();
+    }//GEN-LAST:event_jbLimpiarTablaActionPerformed
+
+    private void jbBuscarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarMembresiaActionPerformed
+        llenarTabla();
+//        if(!escritorioClase.isVisible()&&flag||jtIDSocio.getText().equals("")){
+//            escritorioClase.setVisible(true);
+//            flag= false;
+//        }
+    }//GEN-LAST:event_jbBuscarMembresiaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane clase;
+    private javax.swing.JDesktopPane escritorioClase;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextField jTextField19;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton jbActualizar;
+    private javax.swing.JButton jbBuscarMembresia;
+    private javax.swing.JButton jbCerrar2;
+    private javax.swing.JButton jbEliminar;
+    private javax.swing.JButton jbGuardarMembresia;
+    private javax.swing.JButton jbLimpiar;
+    private javax.swing.JButton jbLimpiarTabla;
+    private javax.swing.JButton jbListarMembresia;
+    private javax.swing.JButton jbSalir;
+    private javax.swing.JComboBox<String> jcEspecialidad;
+    private javax.swing.JComboBox<String> jcHorario;
+    private javax.swing.JComboBox<String> jcTipo;
+    private javax.swing.JLabel jlError;
+    private javax.swing.JTextField jtCartelClase;
+    private javax.swing.JTextField jtCartelTipoMembresia;
+    private javax.swing.JTextField jtFormularioGestionMembresia;
+    private javax.swing.JTable jtListadoClase;
     // End of variables declaration//GEN-END:variables
+  
+    private void cargar(){
+           try{
+//                Membresia membresia = new Membresia();                
+//                SocioData socioData = new SocioData();               
+//                membresia.setId_socio((socioData.buscarSocioPorId(Integer.parseInt(jtIDSocio.getText()))));
+//                membresia.setTipo((String) jcTipo.getSelectedItem());
+//                membresia.setCant_pases(Integer.parseInt((String)jcPases.getSelectedItem()));
+//                java.util.Date fechaIni = jdInicio.getDate();
+//                java.sql.Date sqlFechaInicio = new java.sql.Date(fechaIni.getTime());
+//                membresia.setFecha_inicio(sqlFechaInicio);
+//                java.util.Date fechaFin = jdFin.getDate();
+//                java.sql.Date sqlFechaFin = new java.sql.Date(fechaFin.getTime());
+//                membresia.setFecha_fin(sqlFechaFin);
+//                BigDecimal costo = new BigDecimal(jtCosto.getText());
+//                membresia.setCosto(costo);
+//                membresia.setEstado(true);
+               
+//                validarLongitudMin();
+                //validarRangoMin();
+//                MembresiaData membresiaData = new MembresiaData();
+//                membresiaData.registrarMembresia(membresia);
+////                limpiarTodo();    
+//                
+//            }catch(NumberFormatException ex){
+//                jlError.setText("* Debe completar todos los campos");
+            }catch(Exception ec) {
+                JOptionPane.showMessageDialog(null, "no se pudo cargar membresia\n"+ec.getMessage());
+            }
+    }
+    
+    
+    
+    private void controlSoloNumeros(java.awt.event.KeyEvent evt, String campo, int limite, JTextField jtextfield){
+        final int keyChar = evt.getKeyChar();
+        if(!(Character.isDigit(keyChar))){
+            jlError.setText("* Error en '"+campo+"': Debe ingresar solo números");
+            evt.consume();
+        }else{
+            jlError.setText("");
+        }
+        if(jtextfield.getText().length() == limite){
+           jlError.setText("* Error en '"+campo+"': Longitud max: "+limite+" dígitos");
+            evt.consume();
+        }
+    }
+
+    
+    private void armarCabecera(){
+         modelo.addColumn("ID Membresia");
+         modelo.addColumn("ID Socio");
+         modelo.addColumn("Tipo");
+         modelo.addColumn("Cant Pases");
+         modelo.addColumn("Fecha Inicio");
+         modelo.addColumn("Fecha Fin");
+         modelo.addColumn("Costo");
+         jtListadoClase.setModel(modelo);
+     }
+    
+    private void limpiarTabla(){
+        DefaultTableModel model = (DefaultTableModel) jtListadoClase.getModel();
+        int rowCount = model.getRowCount();
+        for (int i = rowCount - 1; i >= 0; i--) {
+            model.removeRow(i);
+        }
+     }
+    
+    private void llenarTabla(){
+        
+            MembresiaData membresiaData = new MembresiaData();
+            Membresia membresia;
+        //    membresia = membresiaData.buscarMembresiaPorSocio(Integer.parseInt(jtIDSocio.getText()));
+        //    llenarVector(membresia);
+        
+    }
+    boolean flag = false;
+    private void llenarVector(Membresia membresia){
+       
+        if(membresia.isEstado()){
+            Vector renglon = new Vector<>();
+            renglon.add(membresia.getId_membresia());
+            renglon.add(membresia.getId_socio().getId_socio());
+            renglon.add(membresia.getTipo());
+            renglon.add(membresia.getCant_pases());
+            renglon.add(membresia.getFecha_inicio());
+            renglon.add(membresia.getFecha_fin());
+            renglon.add(membresia.getCosto());
+            modelo.addRow(renglon);
+            flag = true;
+        }
+    }
 }
+

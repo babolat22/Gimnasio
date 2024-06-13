@@ -10,6 +10,8 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
@@ -630,6 +632,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
             jlError.setText("* Error en campo 'CORREO': Límite max: 50 caracteres");
             evt.consume();
        }
+      
     }//GEN-LAST:event_jtCorreoSocioKeyTyped
 
     private void jtEdadSocioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtEdadSocioKeyTyped
@@ -757,15 +760,24 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private void jbEliminarSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarSocioActionPerformed
         int selectedRow = jtListadoSocio.getSelectedRow();
         if (selectedRow != -1) {
-            // Eliminar la fila del modelo de tabla
-            modelo.removeRow(selectedRow);
+            
             int respuesta = JOptionPane.showConfirmDialog(
-                null,
+                jbEliminarSocio,
                 "¿Deseas continuar con la eliminacón?",
                 "Confirmación",
                 JOptionPane.YES_NO_OPTION
             );
-            JOptionPane.showMessageDialog(null, "Socio eliminado.");
+            if (respuesta == JOptionPane.YES_OPTION) {
+                    SocioData socioData = new SocioData();
+                    Object value = jtListadoSocio.getValueAt(selectedRow, 0);
+                    
+                    socioData.eliminarSocio(Integer.parseInt(value.toString()));
+                    modelo.removeRow(selectedRow);
+                }else{
+                    if(respuesta == JOptionPane.NO_OPTION) {
+                       jtListadoSocio.clearSelection();
+                    }       
+                }
         } else {
             JOptionPane.showMessageDialog(jtListadoSocio, "Por favor, seleccione un Socio para eliminar.");
         }
@@ -774,6 +786,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
 
     private void jbLimpiarTablaSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTablaSocioActionPerformed
         // TODO add your handling code here:
+        limpiarTabla();
     }//GEN-LAST:event_jbLimpiarTablaSocioActionPerformed
 
 
@@ -825,6 +838,7 @@ public class FormSocio extends javax.swing.JInternalFrame {
                 socio.setEdad(Integer.parseInt(jtEdadSocio.getText()));    
                 if(camposVacios()) throw new NumberFormatException();
                 validarLongitudMin();
+                validarCorreo();
                 //validarRangoMin();
                 SocioData socioData = new SocioData();
                 if(socioData.guardarSocio(socio)){
@@ -846,8 +860,8 @@ public class FormSocio extends javax.swing.JInternalFrame {
         //escritorioSocio2.setVisible(false);
         jbGuardar.setEnabled(true);
         if(!jtNombreSocio.isEnabled())  desbloquearCampos();
-        int rowCount = jtListadoSocio.getRowCount();
-        if(rowCount!=0) limpiarTabla();
+//        int rowCount = jtListadoSocio.getRowCount();
+//        if(rowCount!=0) limpiarTabla();
         
     }
     
@@ -935,6 +949,13 @@ public class FormSocio extends javax.swing.JInternalFrame {
     private void validarRango(int campo, String nombreCampo, int rangoMinimo) throws Exception{
         if(campo < rangoMinimo){
             jlError.setText("* Error en campo '"+nombreCampo+"' Rango min: "+rangoMinimo); 
+            throw new Exception();
+        }
+    }
+    
+    private void validarCorreo() throws Exception{
+        if(!jtCorreoSocio.getText().contains("@")){
+            jlError.setText("El campo CORREO debe contener @");
             throw new Exception();
         }
     }

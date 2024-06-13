@@ -31,7 +31,7 @@ public class FormMembresia extends javax.swing.JInternalFrame {
      */
     public FormMembresia() {
         initComponents();
-        //cargarId();
+       
         armarCabecera();
         escritorioMembresia2.setVisible(false);
     }
@@ -741,13 +741,6 @@ public class FormMembresia extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }
-//    
-//    private void cargarId(){
-//        SocioData sociodata = new SocioData();
-//        if(sociodata.ultimoId()!=0){
-//            jtIDMembresia.setText(String.valueOf(sociodata.ultimoId()+1));
-//        }
-//    }
     
     private void armarCabecera(){
          modelo.addColumn("ID Membresia");

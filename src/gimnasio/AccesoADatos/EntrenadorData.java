@@ -24,8 +24,8 @@ public class EntrenadorData {
         con = Conexion.getConexion();
     }
     
-    public void guardarEntrenador (Entrenador entrenador){
-        //boolean flag=false;  
+    public boolean guardarEntrenador (Entrenador entrenador){
+        boolean flag=false;  
         PreparedStatement ps;
         ResultSet rs;
         String sql = "INSERT INTO entrenador (dni ,nombre, apellido, especialidad, disponibilidad, estado) VALUES (?, ?, ?, ?, ?, ?)";
@@ -42,7 +42,7 @@ public class EntrenadorData {
             if(rs.next()) {
                 entrenador.setId_entrenador((rs.getInt(1)));
                 JOptionPane.showMessageDialog(null, "Entrenador ID: "+entrenador.getId_entrenador()+"\nNombre: "+entrenador.getNombre()+"\nApellido:  "+entrenador.getApellido()+"\nEstado: Registrado!");
-                //flag=true;
+                flag=true;
             }
             ps.close();
             
@@ -53,7 +53,7 @@ public class EntrenadorData {
                 JOptionPane.showMessageDialog(null, "Error al guardar el Entrenador: "+entrenador.getNombre()+" "+entrenador.getApellido()+"\n" + ex.getMessage());
             }
         }
-        
+        return flag;
     }
     
     public Entrenador buscarEntrenadorPorId(int id){//Busqueda por numero Id Entrenador
