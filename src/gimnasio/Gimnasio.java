@@ -167,7 +167,7 @@ public class Gimnasio {
 //    Entrenador entrenadorX1, entrenadorX2, entrenadorX3, entrenadorX4, entrenadorX5;
 //    EntrenadorData entrenadorDataX = new EntrenadorData();
 //    
-//    entrenadorX1 = entrenadorDataX.buscarEntrenadorPorId(1);
+//    entrenadorX1 = entrenadorDataX.buscarEntrenadorPorId(23);
 //    LocalTime localTime1 = LocalTime.of(8, 0);
 //    Time horario1 = Time.valueOf(localTime1); 
 //    Clase clase1 = new Clase("Musculación", entrenadorX1, horario1, 50,true);
@@ -193,11 +193,11 @@ public class Gimnasio {
 //    Clase clase5 = new Clase("Musculación", entrenadorX5, horario5, 50,true);
 //    
 //    ClaseData claseData = new ClaseData();
-//    Clase[] claseN ={clase1, clase2, clase3, clase4, clase5};
-//        for (Clase clase : claseN) {
+////    Clase[] claseN ={clase1, clase2, clase3, clase4, clase5};
+////        for (Clase clase : claseN) {
 //            claseData.guardarClase(clase);
 //        }
-//    
+////    
     //Buscar Clase por entrenador
 //    JOptionPane.showMessageDialog(null, "Busqueda de clases Activas por entrenador Activo");
 //    int idABuscar = 3;

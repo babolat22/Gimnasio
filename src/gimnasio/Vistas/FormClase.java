@@ -6,31 +6,32 @@ import java.awt.Image;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JTextField;
-import com.toedter.calendar.JDateChooser;
-import gimnasio.AccesoADatos.MembresiaData;
-import gimnasio.AccesoADatos.SocioData;
-import gimnasio.Entidades.Membresia;
-import java.math.BigDecimal;
-import java.util.ArrayList;
+import gimnasio.AccesoADatos.*;
+import gimnasio.Entidades.*;
 import javax.swing.*;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
+import java.time.LocalTime;
+import java.sql.Time;
+import java.util.ArrayList;
+
 /**
  *
  * @author Javier
  */
 public class FormClase extends javax.swing.JInternalFrame {
     private DefaultTableModel modelo=new DefaultTableModel();
+    private DefaultComboBoxModel<String> comboBoxModel = new DefaultComboBoxModel<>();
     /**
      * Creates new form FormClase
      */
     public FormClase() {
         initComponents();
         armarCabecera();
-        escritorioClase.setVisible(false);
+        armarSelectorNombre();
+        escritorioClase2.setVisible(false);
+        
     }
 
     /**
@@ -42,32 +43,45 @@ public class FormClase extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ImageIcon icon = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/membresia3.jpg"));
+        ImageIcon icon = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/clase.jpg"));
         Image image = icon.getImage();
-        clase = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image,0,0,getWidth(),getHeight(),this);     } };
+        escritorioClase1 = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image,0,0,getWidth(),getHeight(),this);     } };
         jtFormularioGestionMembresia = new javax.swing.JTextField();
         jtCartelClase = new javax.swing.JTextField();
         jtCartelTipoMembresia = new javax.swing.JTextField();
-        jbGuardarMembresia = new javax.swing.JButton();
+        jbGuardarClase = new javax.swing.JButton();
         jbLimpiar = new javax.swing.JButton();
-        jbSalir = new javax.swing.JButton();
+        jbHorariosClase = new javax.swing.JButton();
         jlError = new javax.swing.JLabel();
-        jcTipo = new javax.swing.JComboBox<>();
-        escritorioClase = new javax.swing.JDesktopPane();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jtListadoClase = new javax.swing.JTable();
-        jbListarMembresia = new javax.swing.JButton();
-        jbCerrar2 = new javax.swing.JButton();
-        jbActualizar = new javax.swing.JButton();
-        jbEliminar = new javax.swing.JButton();
-        jbLimpiarTabla = new javax.swing.JButton();
-        jbBuscarMembresia = new javax.swing.JButton();
-        jcEspecialidad = new javax.swing.JComboBox<>();
+        jcEntrenador = new javax.swing.JComboBox<>();
+        jbBuscarClase = new javax.swing.JButton();
+        jcNombreClase = new javax.swing.JComboBox<>();
         jTextField19 = new javax.swing.JTextField();
         jTextField5 = new javax.swing.JTextField();
         jcHorario = new javax.swing.JComboBox<>();
+        ImageIcon iconClase = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/clase2.jpg")); 
+        Image imageClase = iconClase.getImage();
+        escritorioClase2 = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(imageClase,0,0,getWidth(),getHeight(),this);     } };
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jtListadoClase = new javax.swing.JTable();
+        jbCerrarClase = new javax.swing.JButton();
+        jbModificarClase = new javax.swing.JButton();
+        jbEliminarClase = new javax.swing.JButton();
+        jbLimpiarTablaClase = new javax.swing.JButton();
+        jcListar = new javax.swing.JComboBox<>();
+        jbRenovarClase = new javax.swing.JButton();
+        jTextField20 = new javax.swing.JTextField();
+        jtCartelClase1 = new javax.swing.JTextField();
+        jtCapacidad = new javax.swing.JTextField();
+        jTextField21 = new javax.swing.JTextField();
+        jtCartelClase2 = new javax.swing.JTextField();
+        jtIdClase = new javax.swing.JTextField();
+        jtCartelTipoMembresia1 = new javax.swing.JTextField();
+        jtIdEntrenador = new javax.swing.JTextField();
 
-        clase.setPreferredSize(new java.awt.Dimension(930, 510));
+        setClosable(true);
+
+        escritorioClase1.setPreferredSize(new java.awt.Dimension(1130, 510));
 
         jtFormularioGestionMembresia.setBackground(new java.awt.Color(0, 0, 0));
         jtFormularioGestionMembresia.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -85,11 +99,6 @@ public class FormClase extends javax.swing.JInternalFrame {
         jtCartelClase.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jtCartelClase.setCaretColor(new java.awt.Color(255, 51, 255));
         jtCartelClase.setFocusable(false);
-        jtCartelClase.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtCartelClaseActionPerformed(evt);
-            }
-        });
 
         jtCartelTipoMembresia.setBackground(new java.awt.Color(0, 0, 0));
         jtCartelTipoMembresia.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
@@ -99,13 +108,13 @@ public class FormClase extends javax.swing.JInternalFrame {
         jtCartelTipoMembresia.setCaretColor(new java.awt.Color(255, 51, 255));
         jtCartelTipoMembresia.setFocusable(false);
 
-        jbGuardarMembresia.setBackground(new java.awt.Color(153, 153, 153));
-        jbGuardarMembresia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbGuardarMembresia.setForeground(new java.awt.Color(0, 0, 0));
-        jbGuardarMembresia.setText("Guardar");
-        jbGuardarMembresia.addActionListener(new java.awt.event.ActionListener() {
+        jbGuardarClase.setBackground(new java.awt.Color(153, 153, 153));
+        jbGuardarClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbGuardarClase.setForeground(new java.awt.Color(0, 0, 0));
+        jbGuardarClase.setText("Guardar");
+        jbGuardarClase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbGuardarMembresiaActionPerformed(evt);
+                jbGuardarClaseActionPerformed(evt);
             }
         });
 
@@ -119,13 +128,13 @@ public class FormClase extends javax.swing.JInternalFrame {
             }
         });
 
-        jbSalir.setBackground(new java.awt.Color(153, 153, 153));
-        jbSalir.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbSalir.setForeground(new java.awt.Color(0, 0, 0));
-        jbSalir.setText("Salir");
-        jbSalir.addActionListener(new java.awt.event.ActionListener() {
+        jbHorariosClase.setBackground(new java.awt.Color(153, 153, 153));
+        jbHorariosClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbHorariosClase.setForeground(new java.awt.Color(0, 0, 0));
+        jbHorariosClase.setText("Horarios");
+        jbHorariosClase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbSalirActionPerformed(evt);
+                jbHorariosClaseActionPerformed(evt);
             }
         });
 
@@ -133,163 +142,40 @@ public class FormClase extends javax.swing.JInternalFrame {
         jlError.setForeground(new java.awt.Color(255, 0, 51));
         jlError.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
 
-        jcTipo.setBackground(new java.awt.Color(102, 102, 102));
-        jcTipo.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcTipo.setForeground(new java.awt.Color(255, 255, 255));
-        jcTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensual", "Bimestral", "Trimestral", "Semestral", "Anual", " " }));
-        jcTipo.setBorder(javax.swing.BorderFactory.createCompoundBorder());
-        jcTipo.addActionListener(new java.awt.event.ActionListener() {
+        jcEntrenador.setBackground(new java.awt.Color(153, 153, 153));
+        jcEntrenador.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jcEntrenador.setForeground(new java.awt.Color(255, 255, 255));
+        jcEntrenador.setMaximumRowCount(100);
+        jcEntrenador.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        jcEntrenador.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcTipoActionPerformed(evt);
+                jcEntrenadorActionPerformed(evt);
             }
         });
 
-        jtListadoClase.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID Membresia", "ID_Socio", "Tipo", "Cant Pases", "Fecha Inicio", "Fecha Fin", "Costo"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jtListadoClase.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
-        jtListadoClase.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(jtListadoClase);
-
-        jbListarMembresia.setBackground(new java.awt.Color(153, 153, 153));
-        jbListarMembresia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbListarMembresia.setForeground(new java.awt.Color(0, 0, 0));
-        jbListarMembresia.setText("Listar Membresias");
-        jbListarMembresia.addActionListener(new java.awt.event.ActionListener() {
+        jbBuscarClase.setBackground(new java.awt.Color(153, 153, 153));
+        jbBuscarClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbBuscarClase.setForeground(new java.awt.Color(0, 0, 0));
+        jbBuscarClase.setText("Buscar");
+        jbBuscarClase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbListarMembresiaActionPerformed(evt);
+                jbBuscarClaseActionPerformed(evt);
             }
         });
 
-        jbCerrar2.setBackground(new java.awt.Color(153, 153, 153));
-        jbCerrar2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbCerrar2.setForeground(new java.awt.Color(0, 0, 0));
-        jbCerrar2.setText("Cerrar");
-        jbCerrar2.addActionListener(new java.awt.event.ActionListener() {
+        jcNombreClase.setBackground(new java.awt.Color(153, 153, 153));
+        jcNombreClase.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
+        jcNombreClase.setForeground(new java.awt.Color(255, 255, 255));
+        jcNombreClase.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcNombreClaseItemStateChanged(evt);
+            }
+        });
+        jcNombreClase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbCerrar2ActionPerformed(evt);
+                jcNombreClaseActionPerformed(evt);
             }
         });
-
-        jbActualizar.setBackground(new java.awt.Color(153, 153, 153));
-        jbActualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbActualizar.setForeground(new java.awt.Color(0, 0, 0));
-        jbActualizar.setText("Actualizar");
-        jbActualizar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbActualizarActionPerformed(evt);
-            }
-        });
-
-        jbEliminar.setBackground(new java.awt.Color(153, 153, 153));
-        jbEliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbEliminar.setForeground(new java.awt.Color(0, 0, 0));
-        jbEliminar.setText("Eliminar");
-        jbEliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbEliminarActionPerformed(evt);
-            }
-        });
-
-        jbLimpiarTabla.setBackground(new java.awt.Color(153, 153, 153));
-        jbLimpiarTabla.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbLimpiarTabla.setForeground(new java.awt.Color(0, 0, 0));
-        jbLimpiarTabla.setText("Limpiar");
-        jbLimpiarTabla.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbLimpiarTablaActionPerformed(evt);
-            }
-        });
-
-        escritorioClase.setLayer(jScrollPane3, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorioClase.setLayer(jbListarMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorioClase.setLayer(jbCerrar2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorioClase.setLayer(jbActualizar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorioClase.setLayer(jbEliminar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorioClase.setLayer(jbLimpiarTabla, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        javax.swing.GroupLayout escritorioClaseLayout = new javax.swing.GroupLayout(escritorioClase);
-        escritorioClase.setLayout(escritorioClaseLayout);
-        escritorioClaseLayout.setHorizontalGroup(
-            escritorioClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(escritorioClaseLayout.createSequentialGroup()
-                .addComponent(jbListarMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbLimpiarTabla, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbCerrar2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 569, Short.MAX_VALUE)
-        );
-        escritorioClaseLayout.setVerticalGroup(
-            escritorioClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(escritorioClaseLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 406, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(escritorioClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(escritorioClaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jbListarMembresia)
-                        .addComponent(jbCerrar2)
-                        .addComponent(jbActualizar))
-                    .addComponent(jbEliminar)
-                    .addComponent(jbLimpiarTabla)))
-        );
-
-        jbBuscarMembresia.setBackground(new java.awt.Color(153, 153, 153));
-        jbBuscarMembresia.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jbBuscarMembresia.setForeground(new java.awt.Color(0, 0, 0));
-        jbBuscarMembresia.setText("Buscar");
-        jbBuscarMembresia.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarMembresiaActionPerformed(evt);
-            }
-        });
-
-        jcEspecialidad.setBackground(new java.awt.Color(102, 102, 102));
-        jcEspecialidad.setFont(new java.awt.Font("Segoe UI", 1, 11)); // NOI18N
-        jcEspecialidad.setForeground(new java.awt.Color(255, 255, 255));
-        jcEspecialidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Levantamiento de Pesas", "Musculacion ", "Personal Training", "Entrenamiento en Grupos", "Cardio and Fitness", "Yoga", "Pilates", "CrossFit", "Artes Marciales", "Entrenamiento Funcional", "Entrenamiento de Resistencia", "Rehabilitación y Entrenamiento Correctivo", "Nutrición y Dietética", "Entrenamiento para Adultos Mayores", "Entrenamiento para Deportistas" }));
 
         jTextField19.setEditable(false);
         jTextField19.setBackground(new java.awt.Color(0, 0, 0));
@@ -307,263 +193,551 @@ public class FormClase extends javax.swing.JInternalFrame {
         jTextField5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
         jTextField5.setFocusable(false);
 
-        jcHorario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", " " }));
+        jcHorario.setBackground(new java.awt.Color(153, 153, 153));
 
-        clase.setLayer(jtFormularioGestionMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jtCartelClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jtCartelTipoMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jbGuardarMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jbLimpiar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jbSalir, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jcTipo, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(escritorioClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jbBuscarMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jcEspecialidad, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jTextField19, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jTextField5, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        clase.setLayer(jcHorario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase2.setPreferredSize(new java.awt.Dimension(780, 440));
+        escritorioClase2.setBackground(new java.awt.Color(0, 0, 0));
+        escritorioClase2.setOpaque(false);
 
-        javax.swing.GroupLayout claseLayout = new javax.swing.GroupLayout(clase);
-        clase.setLayout(claseLayout);
-        claseLayout.setHorizontalGroup(
-            claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(claseLayout.createSequentialGroup()
+        jtListadoClase.setAutoCreateRowSorter(true);
+        jtListadoClase.setForeground(new java.awt.Color(0, 0, 0));
+        jtListadoClase.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "ID_Clase", "Nombre", "ID Entrenador", "Horario", "Capacidad", "Estado"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtListadoClase.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_ALL_COLUMNS);
+        jtListadoClase.setDoubleBuffered(true);
+        jtListadoClase.setFocusTraversalPolicyProvider(true);
+        jtListadoClase.setOpaque(false);
+        jtListadoClase.setSelectionBackground(new java.awt.Color(0, 51, 204));
+        jtListadoClase.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jtListadoClase.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(jtListadoClase);
+
+        jbCerrarClase.setBackground(new java.awt.Color(153, 153, 153));
+        jbCerrarClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbCerrarClase.setForeground(new java.awt.Color(0, 0, 0));
+        jbCerrarClase.setText("Cerrar");
+        jbCerrarClase.setMaximumSize(new java.awt.Dimension(83, 22));
+        jbCerrarClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbCerrarClaseActionPerformed(evt);
+            }
+        });
+
+        jbModificarClase.setBackground(new java.awt.Color(153, 153, 153));
+        jbModificarClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbModificarClase.setForeground(new java.awt.Color(0, 0, 0));
+        jbModificarClase.setText("Modificar");
+        jbModificarClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbModificarClaseActionPerformed(evt);
+            }
+        });
+
+        jbEliminarClase.setBackground(new java.awt.Color(153, 153, 153));
+        jbEliminarClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbEliminarClase.setForeground(new java.awt.Color(0, 0, 0));
+        jbEliminarClase.setText("Eliminar");
+        jbEliminarClase.setMaximumSize(new java.awt.Dimension(85, 22));
+        jbEliminarClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbEliminarClaseActionPerformed(evt);
+            }
+        });
+
+        jbLimpiarTablaClase.setBackground(new java.awt.Color(153, 153, 153));
+        jbLimpiarTablaClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbLimpiarTablaClase.setForeground(new java.awt.Color(0, 0, 0));
+        jbLimpiarTablaClase.setText("Limpiar Tabla");
+        jbLimpiarTablaClase.setMaximumSize(new java.awt.Dimension(85, 22));
+        jbLimpiarTablaClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLimpiarTablaClaseActionPerformed(evt);
+            }
+        });
+
+        jcListar.setBackground(new java.awt.Color(102, 102, 102));
+        jcListar.setForeground(new java.awt.Color(0, 0, 0));
+        jcListar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Listar Todas ", "Clase Activa", "Clase Inactiva", "Por Nombre", "Por Entrenador", "Por Horario" }));
+        jcListar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcListarActionPerformed(evt);
+            }
+        });
+
+        jbRenovarClase.setBackground(new java.awt.Color(153, 153, 153));
+        jbRenovarClase.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbRenovarClase.setForeground(new java.awt.Color(0, 0, 0));
+        jbRenovarClase.setText("Renovar");
+        jbRenovarClase.setMaximumSize(new java.awt.Dimension(83, 22));
+        jbRenovarClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbRenovarClaseActionPerformed(evt);
+            }
+        });
+
+        escritorioClase2.setLayer(jScrollPane5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase2.setLayer(jbCerrarClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase2.setLayer(jbModificarClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase2.setLayer(jbEliminarClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase2.setLayer(jbLimpiarTablaClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase2.setLayer(jcListar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase2.setLayer(jbRenovarClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioClase2Layout = new javax.swing.GroupLayout(escritorioClase2);
+        escritorioClase2.setLayout(escritorioClase2Layout);
+        escritorioClase2Layout.setHorizontalGroup(
+            escritorioClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioClase2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
-                    .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(claseLayout.createSequentialGroup()
-                            .addComponent(jbGuardarMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jbLimpiar)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jbBuscarMembresia)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(jbSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(claseLayout.createSequentialGroup()
-                            .addGap(38, 38, 38)
-                            .addComponent(jtFormularioGestionMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, claseLayout.createSequentialGroup()
-                            .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jTextField5)
-                                .addComponent(jtCartelClase)
-                                .addComponent(jtCartelTipoMembresia, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jcEspecialidad, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jcTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(claseLayout.createSequentialGroup()
-                                    .addComponent(jTextField19)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jcHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(507, 507, 507))
-            .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(claseLayout.createSequentialGroup()
-                    .addGap(356, 356, 356)
-                    .addComponent(escritorioClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jcListar, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbRenovarClase, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbModificarClase, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbEliminarClase, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbLimpiarTablaClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbCerrarClase, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 49, Short.MAX_VALUE))
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING)
         );
-        claseLayout.setVerticalGroup(
-            claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(claseLayout.createSequentialGroup()
+        escritorioClase2Layout.setVerticalGroup(
+            escritorioClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioClase2Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 203, Short.MAX_VALUE)
+                .addGroup(escritorioClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(escritorioClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbCerrarClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbLimpiarTablaClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(escritorioClase2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jbRenovarClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jcListar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jbModificarClase)
+                        .addComponent(jbEliminarClase, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+        );
+
+        jTextField20.setEditable(false);
+        jTextField20.setBackground(new java.awt.Color(0, 0, 0));
+        jTextField20.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTextField20.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField20.setText("Horas");
+        jTextField20.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        jTextField20.setFocusable(false);
+
+        jtCartelClase1.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelClase1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelClase1.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelClase1.setText("Capacidad");
+        jtCartelClase1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelClase1.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtCartelClase1.setFocusable(false);
+
+        jtCapacidad.setBackground(javax.swing.UIManager.getDefaults().getColor("Actions.Grey"));
+        jtCapacidad.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jtCapacidadFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jtCapacidadFocusLost(evt);
+            }
+        });
+        jtCapacidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtCapacidadKeyTyped(evt);
+            }
+        });
+
+        jTextField21.setEditable(false);
+        jTextField21.setBackground(new java.awt.Color(0, 0, 0));
+        jTextField21.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jTextField21.setForeground(new java.awt.Color(255, 255, 255));
+        jTextField21.setText("* Capacidad máxima por Clase");
+        jTextField21.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), java.awt.Color.black, new java.awt.Color(204, 204, 204), new java.awt.Color(102, 102, 102)));
+        jTextField21.setFocusable(false);
+
+        jtCartelClase2.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelClase2.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelClase2.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelClase2.setText("ID Clase");
+        jtCartelClase2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelClase2.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtCartelClase2.setFocusable(false);
+
+        jtIdClase.setEnabled(false);
+        jtIdClase.setFocusable(false);
+
+        jtCartelTipoMembresia1.setBackground(new java.awt.Color(0, 0, 0));
+        jtCartelTipoMembresia1.setFont(new java.awt.Font("Segoe UI", 1, 13)); // NOI18N
+        jtCartelTipoMembresia1.setForeground(new java.awt.Color(255, 255, 255));
+        jtCartelTipoMembresia1.setText("ID Entrenador");
+        jtCartelTipoMembresia1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(51, 51, 51), new java.awt.Color(0, 0, 0), new java.awt.Color(204, 204, 204), new java.awt.Color(204, 204, 204)));
+        jtCartelTipoMembresia1.setCaretColor(new java.awt.Color(255, 51, 255));
+        jtCartelTipoMembresia1.setFocusable(false);
+
+        jtIdEntrenador.setEnabled(false);
+        jtIdEntrenador.setFocusable(false);
+
+        escritorioClase1.setLayer(jtFormularioGestionMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jtCartelClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jtCartelTipoMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jbGuardarClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jbLimpiar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jbHorariosClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jlError, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jcEntrenador, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jbBuscarClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jcNombreClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jTextField19, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jTextField5, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jcHorario, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(escritorioClase2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jTextField20, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jtCartelClase1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jtCapacidad, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jTextField21, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jtCartelClase2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jtIdClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jtCartelTipoMembresia1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorioClase1.setLayer(jtIdEntrenador, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout escritorioClase1Layout = new javax.swing.GroupLayout(escritorioClase1);
+        escritorioClase1.setLayout(escritorioClase1Layout);
+        escritorioClase1Layout.setHorizontalGroup(
+            escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioClase1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioClase1Layout.createSequentialGroup()
+                        .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(escritorioClase1Layout.createSequentialGroup()
+                                .addComponent(jbGuardarClase, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbHorariosClase, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbLimpiar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jbBuscarClase, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(escritorioClase1Layout.createSequentialGroup()
+                                .addGap(38, 38, 38)
+                                .addComponent(jtFormularioGestionMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(escritorioClase1Layout.createSequentialGroup()
+                                .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jtCartelClase2, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtCartelClase, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtIdClase, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(escritorioClase1Layout.createSequentialGroup()
+                                .addGap(101, 101, 101)
+                                .addComponent(jcNombreClase, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(escritorioClase1Layout.createSequentialGroup()
+                                .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jtCartelTipoMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtCartelTipoMembresia1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(escritorioClase1Layout.createSequentialGroup()
+                                        .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jcHorario, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jcEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jtIdEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(escritorioClase1Layout.createSequentialGroup()
+                                .addComponent(jtCartelClase1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jlError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(escritorioClase2)
+                .addContainerGap())
+        );
+        escritorioClase1Layout.setVerticalGroup(
+            escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(escritorioClase1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jtFormularioGestionMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtCartelClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcEspecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtCartelTipoMembresia)
-                    .addComponent(jcTipo))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(200, 200, 200)
-                .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbGuardarMembresia)
-                    .addComponent(jbLimpiar)
-                    .addComponent(jbSalir)
-                    .addComponent(jbBuscarMembresia))
-                .addGap(23, 23, 23))
-            .addGroup(claseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, claseLayout.createSequentialGroup()
-                    .addContainerGap(22, Short.MAX_VALUE)
-                    .addComponent(escritorioClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(22, 22, 22)))
+                .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(escritorioClase1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(escritorioClase2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(16, Short.MAX_VALUE))
+                    .addGroup(escritorioClase1Layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelClase2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtIdClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcNombreClase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jtCartelClase1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtCapacidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jtCartelTipoMembresia1)
+                            .addComponent(jtIdEntrenador))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jcEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtCartelTipoMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jcHorario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jlError, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(escritorioClase1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jbGuardarClase)
+                            .addComponent(jbLimpiar)
+                            .addComponent(jbBuscarClase)
+                            .addComponent(jbHorariosClase))
+                        .addGap(23, 23, 23))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(escritorioClase1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(clase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(escritorioClase1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtCartelClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtCartelClaseActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtCartelClaseActionPerformed
-
-    private void jbGuardarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarMembresiaActionPerformed
-       cargar();
-    }//GEN-LAST:event_jbGuardarMembresiaActionPerformed
+    private void jbGuardarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGuardarClaseActionPerformed
+        cargar();
+    }//GEN-LAST:event_jbGuardarClaseActionPerformed
 
     private void jbLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarActionPerformed
-
-       // limpiarTodo();
+        limpiarTodo();
     }//GEN-LAST:event_jbLimpiarActionPerformed
 
-    private void jbSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSalirActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jbSalirActionPerformed
+    private void jbHorariosClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbHorariosClaseActionPerformed
+        JOptionPane.showMessageDialog(null, "Horarios de Clases: De 6 a 23hs");
+    }//GEN-LAST:event_jbHorariosClaseActionPerformed
 
-    private void jcTipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcTipoActionPerformed
-        // TODO add your handling code here:
-        int opcion = jcTipo.getSelectedIndex();
-        String valor = (String)jcTipo.getSelectedItem();
-    }//GEN-LAST:event_jcTipoActionPerformed
+    private void jcEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcEntrenadorActionPerformed
+        
+    }//GEN-LAST:event_jcEntrenadorActionPerformed
 
-    private void jbListarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbListarMembresiaActionPerformed
-        // TODO add your handling code here:
+    private void jbBuscarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarClaseActionPerformed
         limpiarTabla();
-        List<Membresia> membresias = new ArrayList<>();
-        MembresiaData membresiaData = new MembresiaData();
-        membresias = membresiaData.listarMembresia();
-        for (Membresia membresia : membresias) {
-            Vector renglon = new Vector<>();
-            renglon.add(membresia.getId_membresia());
-            renglon.add(membresia.getId_socio().getId_socio());
-            renglon.add(membresia.getTipo());
-            renglon.add(membresia.getCant_pases());
-            renglon.add(membresia.getFecha_inicio());
-            renglon.add(membresia.getFecha_fin());
-            renglon.add(membresia.getCosto());
-            modelo.addRow(renglon);
+        llenarVectorListado();
+        if(!escritorioClase2.isVisible()){
+            escritorioClase2.setVisible(true);
+            
         }
+    }//GEN-LAST:event_jbBuscarClaseActionPerformed
 
-    }//GEN-LAST:event_jbListarMembresiaActionPerformed
+    private void jbCerrarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrarClaseActionPerformed
 
-    private void jbCerrar2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCerrar2ActionPerformed
-        // TODO add your handling code here:
         limpiarTabla();
-        escritorioClase.setVisible(false);
-    }//GEN-LAST:event_jbCerrar2ActionPerformed
+        escritorioClase2.setVisible(false);
+    }//GEN-LAST:event_jbCerrarClaseActionPerformed
 
-    private void jbActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbActualizarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jbActualizarActionPerformed
+    private void jbModificarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbModificarClaseActionPerformed
+        limpiarTodo();
+        jtIdClase.setEnabled(true);
+        jtIdEntrenador.setEnabled(true);
+        modificar();
+    }//GEN-LAST:event_jbModificarClaseActionPerformed
 
-    private void jbEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarActionPerformed
-        int selectedRow = jtListadoClase.getSelectedRow();
-        if(selectedRow != -1) {
-            int respuesta = JOptionPane.showConfirmDialog(
-                jbEliminar,
-                "¿Deseas continuar con la eliminacón?",
-                "Confirmación",
-                JOptionPane.YES_NO_OPTION
-            );
-            if (respuesta == JOptionPane.YES_OPTION) {
-                MembresiaData membresiaData = new MembresiaData();
-                Object value = jtListadoClase.getValueAt(selectedRow, 0);
+    private void jbEliminarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbEliminarClaseActionPerformed
+        eliminar();
+    }//GEN-LAST:event_jbEliminarClaseActionPerformed
 
-                membresiaData.cancelarMembresia(Integer.parseInt(value.toString()));
-                modelo.removeRow(selectedRow);
-            }else{
-                if(respuesta == JOptionPane.NO_OPTION) {
-                    jtListadoClase.clearSelection();
-                }
-            }
-        }else {
-            JOptionPane.showMessageDialog(jtListadoClase, "Por favor, seleccione una Membresia para eliminar.");
-        }
-
-    }//GEN-LAST:event_jbEliminarActionPerformed
-
-    private void jbLimpiarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTablaActionPerformed
-        // TODO add your handling code here:
+    private void jbLimpiarTablaClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLimpiarTablaClaseActionPerformed
         limpiarTabla();
-    }//GEN-LAST:event_jbLimpiarTablaActionPerformed
+    }//GEN-LAST:event_jbLimpiarTablaClaseActionPerformed
 
-    private void jbBuscarMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarMembresiaActionPerformed
-        llenarTabla();
-//        if(!escritorioClase.isVisible()&&flag||jtIDSocio.getText().equals("")){
-//            escritorioClase.setVisible(true);
-//            flag= false;
-//        }
-    }//GEN-LAST:event_jbBuscarMembresiaActionPerformed
+    private void jcListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcListarActionPerformed
+        limpiarTabla();
+        llenarVectorListado();
+    }//GEN-LAST:event_jcListarActionPerformed
+
+    private void jbRenovarClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRenovarClaseActionPerformed
+        renovar();
+    }//GEN-LAST:event_jbRenovarClaseActionPerformed
+
+    private void jtCapacidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtCapacidadKeyTyped
+        controlSoloNumeros(evt,"CAPACIDAD", 1000, jtCapacidad);
+    }//GEN-LAST:event_jtCapacidadKeyTyped
+
+    private void jtCapacidadFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCapacidadFocusLost
+        jlError.setText("");
+    }//GEN-LAST:event_jtCapacidadFocusLost
+
+    private void jcNombreClaseItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcNombreClaseItemStateChanged
+        armarSelectorEntrenadores();
+    }//GEN-LAST:event_jcNombreClaseItemStateChanged
+
+    private void jcNombreClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcNombreClaseActionPerformed
+        jcHorario.removeAllItems();
+        armarSelectorHorarios();
+    }//GEN-LAST:event_jcNombreClaseActionPerformed
+
+    private void jtCapacidadFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jtCapacidadFocusGained
+       jlError.setText("");
+    }//GEN-LAST:event_jtCapacidadFocusGained
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JDesktopPane clase;
-    private javax.swing.JDesktopPane escritorioClase;
-    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JDesktopPane escritorioClase1;
+    private javax.swing.JDesktopPane escritorioClase2;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTextField jTextField19;
+    private javax.swing.JTextField jTextField20;
+    private javax.swing.JTextField jTextField21;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JButton jbActualizar;
-    private javax.swing.JButton jbBuscarMembresia;
-    private javax.swing.JButton jbCerrar2;
-    private javax.swing.JButton jbEliminar;
-    private javax.swing.JButton jbGuardarMembresia;
+    private javax.swing.JButton jbBuscarClase;
+    private javax.swing.JButton jbCerrarClase;
+    private javax.swing.JButton jbEliminarClase;
+    private javax.swing.JButton jbGuardarClase;
+    private javax.swing.JButton jbHorariosClase;
     private javax.swing.JButton jbLimpiar;
-    private javax.swing.JButton jbLimpiarTabla;
-    private javax.swing.JButton jbListarMembresia;
-    private javax.swing.JButton jbSalir;
-    private javax.swing.JComboBox<String> jcEspecialidad;
+    private javax.swing.JButton jbLimpiarTablaClase;
+    private javax.swing.JButton jbModificarClase;
+    private javax.swing.JButton jbRenovarClase;
+    private javax.swing.JComboBox<String> jcEntrenador;
     private javax.swing.JComboBox<String> jcHorario;
-    private javax.swing.JComboBox<String> jcTipo;
+    private javax.swing.JComboBox<String> jcListar;
+    private javax.swing.JComboBox<String> jcNombreClase;
     private javax.swing.JLabel jlError;
+    private javax.swing.JTextField jtCapacidad;
     private javax.swing.JTextField jtCartelClase;
+    private javax.swing.JTextField jtCartelClase1;
+    private javax.swing.JTextField jtCartelClase2;
     private javax.swing.JTextField jtCartelTipoMembresia;
+    private javax.swing.JTextField jtCartelTipoMembresia1;
     private javax.swing.JTextField jtFormularioGestionMembresia;
+    private javax.swing.JTextField jtIdClase;
+    private javax.swing.JTextField jtIdEntrenador;
     private javax.swing.JTable jtListadoClase;
     // End of variables declaration//GEN-END:variables
   
     private void cargar(){
            try{
-//                Membresia membresia = new Membresia();                
-//                SocioData socioData = new SocioData();               
-//                membresia.setId_socio((socioData.buscarSocioPorId(Integer.parseInt(jtIDSocio.getText()))));
-//                membresia.setTipo((String) jcTipo.getSelectedItem());
-//                membresia.setCant_pases(Integer.parseInt((String)jcPases.getSelectedItem()));
-//                java.util.Date fechaIni = jdInicio.getDate();
-//                java.sql.Date sqlFechaInicio = new java.sql.Date(fechaIni.getTime());
-//                membresia.setFecha_inicio(sqlFechaInicio);
-//                java.util.Date fechaFin = jdFin.getDate();
-//                java.sql.Date sqlFechaFin = new java.sql.Date(fechaFin.getTime());
-//                membresia.setFecha_fin(sqlFechaFin);
-//                BigDecimal costo = new BigDecimal(jtCosto.getText());
-//                membresia.setCosto(costo);
-//                membresia.setEstado(true);
-               
-//                validarLongitudMin();
-                //validarRangoMin();
-//                MembresiaData membresiaData = new MembresiaData();
-//                membresiaData.registrarMembresia(membresia);
-////                limpiarTodo();    
-//                
-//            }catch(NumberFormatException ex){
-//                jlError.setText("* Debe completar todos los campos");
-            }catch(Exception ec) {
-                JOptionPane.showMessageDialog(null, "no se pudo cargar membresia\n"+ec.getMessage());
+                ClaseData claseData = new ClaseData();
+                Clase clase = new Clase();
+                clase.setNombre((String) jcNombreClase.getSelectedItem());
+                clase.setCapacidad(Integer.parseInt(jtCapacidad.getText()));
+                if(jtCapacidad.getText().equals("")) throw new NumberFormatException();
+                cargarHorario(clase);
+                clase.setId_entrenador(cargarEntrenador(null));
+                clase.setEstado(true);
+                if(modificarClase){
+                    clase.setId_clase(Integer.parseInt(jtIdClase.getText()));
+                    claseData.modificarClase(clase);
+                    limpiarTodo();
+                    limpiarTabla();
+                    llenarVector(clase);
+                    modificarClase = false;
+                }else{
+                    if(claseData.guardarClase(clase)){
+                        limpiarTodo();
+                        limpiarTabla();
+                        llenarVector(clase);
+                    } 
+                }
+            }catch(NumberFormatException en) {
+                jlError.setText("* Debe completar el campo CAPACIDAD"); 
+            }catch(Exception ex){
+               JOptionPane.showMessageDialog(null, "Error en cargar Clase \n"+ex.getMessage());
             }
     }
     
+    private Entrenador cargarEntrenador(String nombreyApellidoEntrenador) throws Exception{
+        EntrenadorData entrenadorData = new EntrenadorData();
+        List<Entrenador> listaEntrenador;
+         String nyaEntrenador;
+        if(nombreyApellidoEntrenador == null){
+            nyaEntrenador = (String) jcEntrenador.getSelectedItem();
+        }else{
+            nyaEntrenador =  nombreyApellidoEntrenador;
+        }
+        String nombre=null, nombre1, nombre2, apellido=null;
+        String[] partes = nyaEntrenador.split(" ");
+            if (partes.length == 2) {
+                nombre = partes[0];
+                apellido = partes[1];
+            }else{
+                if(partes.length == 3) {
+                    nombre1 = partes[0];
+                    nombre2 = partes[1];
+                    apellido = partes[2];
+                    nombre= nombre1+nombre2;
+                }else{
+                    throw new Exception();
+                }
+            }
+        listaEntrenador = entrenadorData.buscarEntrenadorPorNombreYApellido(nombre, apellido);
+        
+        if(listaEntrenador == null) {
+            throw new Exception();
+        }
+    return listaEntrenador.get(0);
+    }
     
+    private void cargarHorario(Clase clase){
+        String[] parteHora = String.valueOf(comboBoxModel.getSelectedItem()).split(":");
+        int hora = Integer.parseInt(parteHora[0]);
+        LocalTime localTime = LocalTime.of(hora, 0);
+        Time sqlTime = Time.valueOf(localTime);
+        clase.setHorario(sqlTime);
+    }
     
     private void controlSoloNumeros(java.awt.event.KeyEvent evt, String campo, int limite, JTextField jtextfield){
         final int keyChar = evt.getKeyChar();
@@ -578,19 +752,83 @@ public class FormClase extends javax.swing.JInternalFrame {
             evt.consume();
         }
     }
-
     
     private void armarCabecera(){
-         modelo.addColumn("ID Membresia");
-         modelo.addColumn("ID Socio");
-         modelo.addColumn("Tipo");
-         modelo.addColumn("Cant Pases");
-         modelo.addColumn("Fecha Inicio");
-         modelo.addColumn("Fecha Fin");
-         modelo.addColumn("Costo");
+         modelo.addColumn("ID Clase");
+         modelo.addColumn("Nombre Clase");
+         modelo.addColumn("ID Entrenador");
+         modelo.addColumn("Nombre");
+         modelo.addColumn("Apellido");
+         modelo.addColumn("Horario");
+         modelo.addColumn("Capacidad");
+         modelo.addColumn("Estado");
          jtListadoClase.setModel(modelo);
-     }
+    }
     
+    private void armarSelectorEntrenadores(){
+        EntrenadorData entrenadorData = new EntrenadorData();
+        List<Entrenador> entrenadores;
+        String nyaEntrenador;
+        entrenadores = entrenadorData.listarEntrenadores2(1);//Valor 1 para buscar entrenadores activos y  0 para inactivos
+        jcEntrenador.removeAllItems();
+        for (Entrenador entrenadorACargar : entrenadores) {
+            if(jcNombreClase.getSelectedItem().equals(entrenadorACargar.getEspecialidad())){
+                nyaEntrenador = entrenadorACargar.getNombre()+" "+entrenadorACargar.getApellido();
+                jcEntrenador.addItem(nyaEntrenador);
+            }
+        }
+    }
+    
+    private void armarSelectorNombre(){
+        FormEntrenador entrenador = new FormEntrenador();
+        List<String> especialidades;
+        especialidades = entrenador.armarEspecialidades();
+        for (String especialidadX : especialidades) {
+             jcNombreClase.addItem(especialidadX);
+        }  
+    }
+     
+    private void armarSelectorHorarios(){
+        ClaseData claseData = new ClaseData();
+        List<Time> horarios;
+        int i, j=0;
+        llenarSelectorHorario();
+        java.sql.Time hora;
+        if(jcEntrenador.getSelectedItem()!=null){
+            horarios = claseData.buscarHorarioPorClase((String) jcNombreClase.getSelectedItem());//Horarios ocupados
+            for (i = 6; i <= 22 ; i++) {
+                 for (Time horario : horarios) {
+                    LocalTime localTime = LocalTime.of(i, 0);
+                    hora = Time.valueOf(localTime); 
+                    if(horario.compareTo(hora)==0){   
+                        String horarioX = String.format("%02d:00", i);
+                        comboBoxModel.removeElement(horarioX);
+                    } 
+                }        
+            }
+            jcHorario.setModel(comboBoxModel);
+        }
+    }
+    
+    private void llenarSelectorHorario(){
+        for (int horaClase = 6; horaClase <= 22; horaClase++) {
+            String horario = String.format("%02d:00", horaClase);
+            comboBoxModel.addElement(horario);
+            jcHorario.setModel(comboBoxModel);
+        }
+    }
+    
+    private void limpiarTodo(){
+       
+        jcNombreClase.setSelectedIndex(0);
+        jtCapacidad.setText(null);
+        jcEntrenador.setSelectedIndex(0);
+        jcHorario.setSelectedIndex(0);
+        if(!jlError.getText().equals("")) jlError.setText("");
+        jtIdEntrenador.setText(null);
+        jtIdClase.setText(null);
+    }
+     
     private void limpiarTabla(){
         DefaultTableModel model = (DefaultTableModel) jtListadoClase.getModel();
         int rowCount = model.getRowCount();
@@ -599,29 +837,192 @@ public class FormClase extends javax.swing.JInternalFrame {
         }
      }
     
-    private void llenarTabla(){
-        
-            MembresiaData membresiaData = new MembresiaData();
-            Membresia membresia;
-        //    membresia = membresiaData.buscarMembresiaPorSocio(Integer.parseInt(jtIDSocio.getText()));
-        //    llenarVector(membresia);
-        
-    }
     boolean flag = false;
-    private void llenarVector(Membresia membresia){
-       
-        if(membresia.isEstado()){
-            Vector renglon = new Vector<>();
-            renglon.add(membresia.getId_membresia());
-            renglon.add(membresia.getId_socio().getId_socio());
-            renglon.add(membresia.getTipo());
-            renglon.add(membresia.getCant_pases());
-            renglon.add(membresia.getFecha_inicio());
-            renglon.add(membresia.getFecha_fin());
-            renglon.add(membresia.getCosto());
-            modelo.addRow(renglon);
-            flag = true;
+    private void llenarVector(Clase c){ 
+        String estado = "Inactiva";
+        Vector renglon = new Vector<>();
+        renglon.add(c.getId_clase());
+        renglon.add(c.getNombre());
+        renglon.add(c.getId_entrenador().getId_entrenador());
+        renglon.add(c.getId_entrenador().getNombre());
+        renglon.add(c.getId_entrenador().getApellido());
+        renglon.add(c.getHorario());
+        renglon.add(c.getCapacidad());
+        if(c.isEstado()) estado="Activa";
+        renglon.add(estado);
+        modelo.addRow(renglon);
+        flag = true; 
+    }
+    
+    private void llenarVectorListado(){
+        List<Clase> clases = new ArrayList();
+        ClaseData claseData = new ClaseData();
+        
+        switch(jcListar.getSelectedIndex()){
+            case 0:
+                clases = claseData.listarClase();
+                break;
+            case 1:
+                clases = claseData.listarClase2(jcListar.getSelectedIndex());
+                break;
+            case 2:
+                clases = claseData.listarClase2(jcListar.getSelectedIndex());
+                break;
+            
+            case 3://Por nombre
+                List<String> nombres = new ArrayList<>();
+                for (int i = 0; i < jcNombreClase.getItemCount(); i++) {
+                    nombres.add(i, ((String) jcNombreClase.getItemAt(i)));
+                }
+                String[] porNombre = nombres.toArray(new String[0]);
+                String seleccion = (String) JOptionPane.showInputDialog(null,"Nombre","Busqueda de Clase por Nombre",JOptionPane.QUESTION_MESSAGE,null,porNombre, porNombre[0]);
+                clases = claseData.buscarClasePorNombre(seleccion);
+                break;
+                
+            case 4://Por entrenador
+                List<String> entrenadores = new ArrayList<>();
+                List<Entrenador> listaEntrenador, nuevaLista;
+                Entrenador entrenador = new Entrenador();
+                EntrenadorData entrenadorData = new EntrenadorData();
+//                FormEntrenador formEntrenador = new FormEntrenador();
+//                for (int i = 0; i < jcEntrenador.getItemCount(); i++) {
+//                    entrenadores.add(i, ((String) jcEntrenador.getItemAt(i)));
+//                }
+                nuevaLista = entrenadorData.listarEntrenadores();
+                for (Entrenador entrenador1 : nuevaLista) {
+                    entrenadores.add(entrenador1.getNombre()+" "+entrenador1.getApellido());
+                }
+                
+                String[] porEntrenador = entrenadores.toArray(new String[0]);
+                String seleccionEntrenador = (String) JOptionPane.showInputDialog(null,"Entrenador","Busqueda de Clase por Entrenador",JOptionPane.QUESTION_MESSAGE,null,porEntrenador, porEntrenador[0]);
+            
+                try {
+                    entrenador = cargarEntrenador(seleccionEntrenador);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(null,"Error en metodo carga Entrenador", "Imposible cargar", JOptionPane.ERROR_MESSAGE);
+                }
+            
+                listaEntrenador = entrenadorData.buscarEntrenadorPorNombreYApellido(entrenador.getNombre(), entrenador.getApellido());
+                //String[] vectorEntrenador = listaEntrenador.toArray(new String[0]);
+                clases = claseData.buscarClasePorEntrenador(listaEntrenador.get(0).getId_entrenador());
+                break;
+
+
+            case 5://Por horario
+                //List<String> horas = new ArrayList<>();
+//                for (int i = 0; i < jcHorario.getItemCount(); i++) {
+//                    horas.add(i, ((String) jcHorario.getItemAt(i)));
+//                }
+                //String[] porHora = horas.toArray(new String[0]);18
+                String[] porHora ={"6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22"};
+                String seleccionHora = (String) JOptionPane.showInputDialog(null,"Horario","Busqueda de Clase por Horario",JOptionPane.QUESTION_MESSAGE,null,porHora, porHora[0]);
+                LocalTime localTime = LocalTime.of(Integer.parseInt(seleccionHora), 0);
+                Time sqlTime = Time.valueOf(localTime);
+                clases = claseData.buscarClasePorHorario(sqlTime);
+                break;
         }
+        for (Clase clase : clases) {
+            llenarVector(clase);
+        } 
+    }
+    private void eliminar(){
+        int selectedRow = jtListadoClase.getSelectedRow();
+            if(selectedRow != -1) {
+                int respuesta = JOptionPane.showConfirmDialog(jbEliminarClase,"¿Desea continuar con la eliminación?","Confirmación", JOptionPane.YES_NO_OPTION);
+                if (respuesta == JOptionPane.YES_OPTION) {
+                    ClaseData claseData = new ClaseData();
+                    Object value = jtListadoClase.getValueAt(selectedRow, 0);
+                    if(String.valueOf(jtListadoClase.getValueAt(selectedRow, 5)).equals("Activa")){
+                        claseData.eliminarClase(Integer.parseInt(value.toString()));
+                        modelo.removeRow(selectedRow);
+                    }else{
+                        JOptionPane.showMessageDialog(null,"La Clase ya fue eliminada o dada de baja", "Imposible Eliminar Clase", JOptionPane.ERROR_MESSAGE);
+                    }
+                }else{
+                    if(respuesta == JOptionPane.NO_OPTION) {
+                       jtListadoClase.clearSelection();
+                    }       
+                }   
+            }else {
+                JOptionPane.showMessageDialog(null, "Para eliminar seleccione una Clase");
+            }
+        limpiarTabla();
+        llenarVectorListado();
+    }
+     
+    boolean modificarClase = false;
+    
+    private void modificar(){
+        int selectedRow = jtListadoClase.getSelectedRow();
+        if (selectedRow != -1) {
+            if((jtListadoClase.getValueAt(selectedRow, 5)).equals("Activa")){
+                modificarClase = true;
+                datosAModificar(selectedRow);       
+            }else{
+                JOptionPane.showMessageDialog(null, "Estado Clase: Inactiva. Para modificar cambie el estado a 'Activa'");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione una Clase por favor");
+        }
+    }
+    
+    private void datosAModificar(int selectedRow){
+        ClaseData claseData = new ClaseData();
+        Clase clase;
+        clase = claseData.buscarClasePorId((int) (jtListadoClase.getValueAt(selectedRow, 0)));
+        limpiarTodo();
+        jtIdClase.setText(String.valueOf(clase.getId_clase()));
+        //Nombre de la Clase
+        for (int i = 0; i < jcNombreClase.getItemCount(); i++) { 
+             if(clase.getNombre().equals((String) jcNombreClase.getItemAt(i))){ 
+               jcNombreClase.setSelectedIndex(i);
+             }
+        }
+        //Capacidad
+        jtCapacidad.setText((String.valueOf(clase.getCapacidad())));
+        //Entrenador de la Clase
+        String nyaEntrenador = (clase.getId_entrenador().getNombre()+" "+clase.getId_entrenador().getApellido());
+          for (int i = 0; i < jcEntrenador.getItemCount(); i++) { //Entrenador de la Clase
+            if(nyaEntrenador.equals(jcEntrenador.getItemAt(i))){
+                jcEntrenador.setSelectedIndex(i);
+                jtIdEntrenador.setText(String.valueOf(clase.getId_entrenador().getId_entrenador()));
+            }
+        }
+        //Horario  
+        try{
+            for (int i = 0; i < jcHorario.getItemCount(); i++) { 
+                LocalTime localTime = LocalTime.of(Integer.parseInt(jcHorario.getItemAt(i)), 0);
+                Time sqlTime = Time.valueOf(localTime);
+                if(clase.getHorario().compareTo(sqlTime)==0){ 
+                   jcHorario.setSelectedIndex(i);
+                   throw new NumberFormatException();
+                 }
+            }  
+        }catch (NumberFormatException ex){}
+    }
+    
+    private void renovar(){
+        ClaseData claseData = new ClaseData();
+        Clase clase;
+        int selectedRow = jtListadoClase.getSelectedRow();
+        if(selectedRow != -1){
+            clase = claseData.buscarClasePorId((int) (jtListadoClase.getValueAt(selectedRow, 0)));
+            if(!clase.isEstado()&&clase.getId_entrenador().isEstado()){
+               claseData.renovarEntrenador(clase);
+                limpiarTabla();
+                clase.setEstado(true); // Solo sirve para mostrar el cambio de estado sin llamar a otro metodo 
+                llenarVectorListado();
+                limpiarTodo();
+            }else{
+                if(clase.isEstado()){
+                    JOptionPane.showMessageDialog(null,"La Clase ya se encuentra Activa", "Imposible Renovar Clase "+clase.getNombre(), JOptionPane.ERROR_MESSAGE);
+                }else{
+                    JOptionPane.showMessageDialog(null,"El entrenador asociado a esa Clase se encuentra Inactivo", "Imposible Renovar Clase "+clase.getNombre(), JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione una Clase por favor");
+        }    
     }
 }
 

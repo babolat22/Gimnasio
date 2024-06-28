@@ -26,7 +26,7 @@ public class AsistenciaData {
     public void registrarAsistencia(Asistencia asistencia){ 
         ResultSet rs;
         PreparedStatement ps;
-        String sql = "INSERT INTO asistencia(id_socio, id_clase, fecha_asistencia, hora_asistencia, estado) VALUES(?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO asistencia(id_socio, id_clase, fecha_asistencia, hora_asistencia) VALUES(?, ?, ?, ?)";
         
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
@@ -34,7 +34,6 @@ public class AsistenciaData {
             ps.setInt(2, asistencia.getId_clase().getId_clase());
             ps.setDate(3, asistencia.getFecha_asistencia());
             ps.setTime(4, asistencia.getHora_asistencia());
-            ps.setBoolean(5, asistencia.isEstado());
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
             if(rs.next()) {
@@ -54,15 +53,16 @@ public class AsistenciaData {
         }
     }
      
-    public void buscarAsistenciaPorSocio(int idSocio){
-    }
     
-    public void buscarAsistenciaPorClase(String nombreClase){
-    }
+//    public void buscarAsistenciaPorSocio(int idSocio){
+//    }
+//    
+//    public void buscarAsistenciaPorClase(String nombreClase){
+//    }
     
     public List<Asistencia> listarAsistencia(){
         List<Asistencia> asistencias;
-        String sql = "SELECT * FROM asistencia WHERE estado = ?";
+        String sql = "SELECT * FROM asistencia WHERE ?";
         String campo = "1";
         asistencias = cargarBusquedas(sql, campo);
     return asistencias;    
@@ -86,7 +86,6 @@ public class AsistenciaData {
                 asistencia.setId_clase(claseData.buscarClasePorId(rs.getInt("id_clase")));
                 asistencia.setFecha_asistencia(rs.getDate("fecha_asistencia"));
                 asistencia.setHora_asistencia(rs.getTime("hora_asistencia"));
-                asistencia.setEstado(rs.getBoolean("estado"));
                 asistencias2.add(asistencia);
             }
             ps.close();
@@ -100,7 +99,24 @@ public class AsistenciaData {
     }
     
     
-    public void modificarAsistencia(int idAsistencia){
+    public void descontarAsistencia(int idClase){
+        PreparedStatement ps;
+        ResultSet rs;
+        String sql = "UPDATE asistencia a JOIN clase c ON a.id_clase = c.id_clase SET c.capacidad = c.capacidad - 1 WHERE c.id_clase = ?";
+        try {
+            ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+            ps.setInt(1, idClase);
+            
+            ps.executeUpdate();
+            rs = ps.getGeneratedKeys();
+            if(rs.next()) {
+                JOptionPane.showMessageDialog(null, "Capacidad de Clase descontada exitosamente"); 
+    
+            }
+            ps.close();
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Actualización de datos fallida! Asistencia No fue modficada-");    
+        }
     }
     
     public void eliminarAsistencia(int idAsistencia){
@@ -125,20 +141,20 @@ public boolean membresiaActiva(int idSocio) {
 }
 
 public boolean verificarCapacidadClase(int ID_Clase) {
-    String sql = "SELECT COUNT(*) AS Asistencia, capacidad FROM asistencia JOIN Clase ON Asistencia.ID_Clase = Clase.ID_Clase WHERE Asistencia.ID_Clase = ?";
+    String sql = "SELECT capacidad FROM asistencia JOIN clase ON asistencia.id_clase = clase.id_clase WHERE Asistencia.ID_Clase = ?";
     boolean capacidadDisponible = false;
     try (PreparedStatement ps = con.prepareStatement(sql)) {
         ps.setInt(1, ID_Clase);
         try (ResultSet rs = ps.executeQuery()) {
             if (rs.next()) {
-                int inscritos = rs.getInt("Inscritos");
-                int capacidad = rs.getInt("Capacidad");
-                capacidadDisponible = inscritos < capacidad;
+                int capacidad = rs.getInt("capacidad");
+                capacidadDisponible = capacidad > 0;
             }
         }
     } catch (SQLException e) {
-        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Membresia");
+        JOptionPane.showMessageDialog(null, "Error al acceder a la tabla ");
     }
+    System.out.println("capacidad es "+capacidadDisponible);
     return capacidadDisponible;
 }
 

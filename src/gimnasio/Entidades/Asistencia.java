@@ -14,26 +14,26 @@ public class Asistencia {
     private Clase id_clase;
     private Date fecha_asistencia;
     private Time hora_asistencia;
-    private boolean estado;
+    
 
     public Asistencia() {
     }
 
-    public Asistencia(Socio id_socio, Clase id_clase, Date fecha_asistencia, Time hora_asistencia, boolean estado) {
+    public Asistencia(Socio id_socio, Clase id_clase, Date fecha_asistencia, Time hora_asistencia) {
         this.id_socio = id_socio;
         this.id_clase = id_clase;
         this.fecha_asistencia = fecha_asistencia;
         this.hora_asistencia = hora_asistencia;
-        this.estado = estado;
+        
     }
 
-    public Asistencia(int id_asistencia, Socio id_socio, Clase id_clase, Date fecha_asistencia, Time hora_asistencia, boolean estado) {
+    public Asistencia(int id_asistencia, Socio id_socio, Clase id_clase, Date fecha_asistencia, Time hora_asistencia) {
         this.id_asistencia = id_asistencia;
         this.id_socio = id_socio;
         this.id_clase = id_clase;
         this.fecha_asistencia = fecha_asistencia;
         this.hora_asistencia = hora_asistencia;
-        this.estado = estado;
+        
     }
 
     public int getId_asistencia() {
@@ -76,17 +76,9 @@ public class Asistencia {
         this.hora_asistencia = hora_asistencia;
     }
 
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
-    }
-
     @Override
     public String toString() {
-        return "ID Asistencia = " + id_asistencia + " | ID Socio = " + id_socio + " | ID Clase = " + id_clase + ", fecha_asistencia=" + fecha_asistencia + ", hora_asistencia=" + hora_asistencia + ", estado=" + estado + '}';
+        return "ID Asistencia = " + id_asistencia + " | ID Socio = " + id_socio + " | ID Clase = " + id_clase + ", fecha_asistencia=" + fecha_asistencia + ", hora_asistencia=" + hora_asistencia +  '}';
     }
 
     

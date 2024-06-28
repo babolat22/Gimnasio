@@ -25,8 +25,8 @@ public class SocioData {
     public boolean guardarSocio(Socio socio){
         Boolean flag=false;
         PreparedStatement ps;
-        String sql = "INSERT INTO socio (dni, nombre, apellido, edad, correo, telefono, cont_asistencia, estado) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO socio (dni, nombre, apellido, edad, correo, telefono, estado) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?)";
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, socio.getDni());
@@ -35,8 +35,8 @@ public class SocioData {
             ps.setInt(4, socio.getEdad());
             ps.setString(5, socio.getCorreo());
             ps.setString(6, socio.getTelefono());
-            ps.setInt(7, socio.getContador_asistencia());
-            ps.setBoolean(8, socio.isEstado());
+            ps.setBoolean(7, socio.isEstado());
+            
             ps.executeUpdate();
             ResultSet rs = ps.getGeneratedKeys();
             if(rs.next()) {
@@ -47,7 +47,7 @@ public class SocioData {
             ps.close();
         }catch(SQLException ex) {
             if(ex.getErrorCode() == 1062) { // Código de error para clave duplicada
-                JOptionPane.showMessageDialog(null, "Error: El dni ya existe en la base de datos. Consulte la lista de Socios.");
+                JOptionPane.showMessageDialog(null,"El dni ya existe en la base de datos", "Imposible guardar Socio", JOptionPane.ERROR_MESSAGE);
             }else{
                 JOptionPane.showMessageDialog(null, "Error al guardar el socio: "+socio.getNombre()+" "+socio.getApellido()+"\n" + ex.getMessage());
             }
@@ -55,83 +55,62 @@ public class SocioData {
         return flag;
     }
     
-    public Socio buscarSocio(String nombre, String apellido){ //Por nombre y apellido
-        int id = 0;
-        Socio socio = new Socio();
-        ResultSet rs;
-        PreparedStatement ps;
-        String sql = "SELECT * FROM socio WHERE nombre = ? AND apellido = ? AND estado = 1";
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, nombre);
-            ps.setString(2, apellido);
-            rs = ps.executeQuery();
-            if(rs.next()){
-                socio.setId_socio(rs.getInt(1));
-                socio.setDni(rs.getString("dni"));
-                socio.setNombre(rs.getString("nombre"));
-                socio.setApellido(rs.getString("apellido"));
-                socio.setEdad(rs.getInt("edad"));
-                socio.setCorreo(rs.getString("correo"));
-                socio.setTelefono(rs.getString("telefono"));
-                socio.setContador_asistencia(rs.getInt("cont_asistencia"));
-            }else{
-                JOptionPane.showMessageDialog(null, "Resultado de búsqueda de Socio: \nNombre: "+nombre+"\nApellido: "+apellido+"\nEl Socio no existe o fue dado de baja...");
-            }
-            ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socio: "+ex.getMessage()); 
-        }
-        return socio;
-    }
-    
+      
     public Socio buscarSocioPorId(int id){//Busqueda por numero de Socio
         Socio socio = new Socio();
         ResultSet rs;
         PreparedStatement ps;
-        String sql = "SELECT * FROM socio WHERE id_socio = ? AND estado = ?";
+        String sql = "SELECT * FROM socio WHERE id_socio = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
-            ps.setBoolean(2, true);
             rs = ps.executeQuery();
             if(rs.next()){
-                socio.setId_socio(rs.getInt(1));
+                socio.setId_socio(id);
                 socio.setDni(rs.getString("dni"));
                 socio.setNombre(rs.getString("nombre"));
                 socio.setApellido(rs.getString("apellido"));
                 socio.setEdad(rs.getInt("edad"));
                 socio.setCorreo(rs.getString("correo"));
                 socio.setTelefono(rs.getString("telefono"));
-                socio.setContador_asistencia(rs.getInt("cont_asistencia"));
-                socio.setEstado(true);
+                socio.setEstado(rs.getBoolean("estado"));
             }
             else{
-                JOptionPane.showMessageDialog(null, "Resultado de búsqueda por ID: "+id+"\nEl Socio no existe o fue dado de baja...");
+                JOptionPane.showMessageDialog(null, "Resultado de búsqueda por ID: "+id+"\nEl Socio no existe");
             }
             ps.close();
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Socio: "+ex.getMessage()); 
+        }catch(SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en tabla Socio: "+ex.getMessage());
         }
     return socio;
     }
     
+        
     public List<Socio> buscarSocioPorNombre(String nombre){  
         List<Socio> socios;
         boolean flag = false;
-        String sql = "SELECT * FROM socio WHERE nombre = ? AND estado = ?";
+        String sql = "SELECT * FROM socio WHERE nombre = ?";
         socios = cargarBusquedas(sql,nombre);
         for (Socio socio : socios) {
-            if(socio.isEstado()) flag = true; 
+            if(socio.getId_socio() != 0) flag = true; 
         }
-        if(!flag) JOptionPane.showMessageDialog(null, "Resultado de búsqueda por Nombre: \nEl Socio no existe o fue dado de baja...");
+        if(!flag) JOptionPane.showMessageDialog(null, "El Socio: "+nombre+" no existe");
     return socios;
     }
     
-    public List<Socio> listarSocios(){
+    public List<Socio> listarSocio(){//Lista todos los Socios
         List<Socio> socios;
-        String sql = "SELECT * FROM socio WHERE estado = ?";
+        String sql = "SELECT * FROM socio WHERE ?";
         String campo = "1";
+        socios = cargarBusquedas(sql, campo);
+    return socios;    
+    }
+    
+    public List<Socio> listarSocios2(int valor){ //Lista todos los Socios Activos o Inactivos
+        List<Socio> socios;
+        String sql = "SELECT * FROM socio WHERE estado = ? ORDER BY nombre ASC";
+        String campo;
+        if(valor==1){campo = "1";}else{campo="0";}
         socios = cargarBusquedas(sql, campo);
     return socios;    
     }
@@ -154,8 +133,7 @@ public class SocioData {
                 socio.setEdad(rs.getInt("edad"));
                 socio.setCorreo(rs.getString("correo"));
                 socio.setTelefono(rs.getString("telefono"));
-                socio.setContador_asistencia(rs.getInt("cont_asistencia"));
-                socio.setEstado(true);
+                socio.setEstado(rs.getBoolean("estado"));
                 socios.add(socio);
             }
             ps.close();
@@ -167,8 +145,7 @@ public class SocioData {
     
      public void modificarSocio(Socio socio){
         PreparedStatement ps;
-        String sql = "UPDATE socio SET (dni, nombre, apellido, edad, correo, telefono, cont_asistencia) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?) WHERE id_socio = ?";
+        String sql = "UPDATE socio SET dni = ?, nombre = ?, apellido = ?, edad = ?, correo = ?, telefono = ? WHERE id_socio = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, socio.getDni());
@@ -177,8 +154,7 @@ public class SocioData {
             ps.setInt(4, socio.getEdad());
             ps.setString(5, socio.getCorreo());
             ps.setString(6, socio.getTelefono());
-            ps.setInt(7, socio.getContador_asistencia());
-            ps.setInt(8, socio.getId_socio());
+            ps.setInt(7, socio.getId_socio());
             int fila=ps.executeUpdate();
             if(fila==1){
                 JOptionPane.showMessageDialog(null, "Socio ID: "+socio.getId_socio()+"\nNombre: "+socio.getNombre()+"\nApellido:  "+socio.getApellido()+"\nDatos Actualizados: Ok!"); 
@@ -196,21 +172,24 @@ public class SocioData {
         SocioData socioABuscar = new SocioData();
         Socio socio;
         PreparedStatement ps; 
-        try {
-            socio = socioABuscar.buscarSocioPorId(id);
-            String sql = "UPDATE socio SET estado = 0 WHERE id_socio = ?";
+        try { 
+            MembresiaData membresiaData = new MembresiaData();
+            boolean membresiaABuscar = false;
+            if((membresiaData.buscarMembresiaPorSocio(id)).isEstado()) membresiaABuscar = true;
+            socio = socioABuscar.buscarSocioPorId(id); 
+            String sql = "UPDATE socio SET estado = ? WHERE id_socio = ?";
             ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setBoolean(1, false);
+            ps.setInt(2, id);
             int fila = ps.executeUpdate();
             if(fila==1){
-               JOptionPane.showMessageDialog(null, "Socio ID: "+socio.getId_socio()+"\nNombre: "+socio.getNombre()+" "+socio.getApellido()+"\nEstado: Eliminado exitosamente!"); 
-            }else{
-                JOptionPane.showMessageDialog(null, "Socio ID: "+socio.getId_socio()+"\nNombre: "+socio.getNombre()+" "+socio.getApellido()+"\nEstado: Eliminacion Fallida!");
+               JOptionPane.showMessageDialog(null, "Socio ID: "+socio.getId_socio()+"\nNombre: "+socio.getNombre()+" "+socio.getApellido()+"\nEstado: Eliminado"); 
+               if(membresiaABuscar) membresiaData.cancelarMembresia(id, false);
             }
             ps.close();
         }catch(SQLException ex) {
             JOptionPane.showMessageDialog(null, "Error al intentar eliminar el Socio ID: "+id+"\n"+ex.getMessage()); 
-        }    
+        }
     }
     
     public int ultimoId(){
@@ -218,15 +197,31 @@ public class SocioData {
         PreparedStatement ps;
         ResultSet rs;
         String sql ="SELECT id_socio FROM socio ORDER BY id_socio DESC LIMIT 1";
-     try {
-         ps = con.prepareStatement(sql);
-         rs = ps.executeQuery();
-         if(rs.next()){
-           id = rs.getInt(1);
-         }
-     } catch (SQLException ex) {
-         JOptionPane.showMessageDialog(null, "Error en tabla Socio: "+ex.getMessage()); 
-     }
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if(rs.next()){
+              id = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en tabla Socio: "+ex.getMessage()); 
+        }
     return id;
+    }
+    
+    public void renovarSocio(Socio socio){
+        PreparedStatement ps;
+        String sql = "UPDATE socio SET estado = ? WHERE id_socio = ?";
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setBoolean(1, true);
+            ps.setInt(2, socio.getId_socio());
+            int fila =  ps.executeUpdate();
+            if(fila==1){
+                JOptionPane.showMessageDialog(null, "Renovación Socio ID:"+socio.getId_socio()+" exitosa!\nEstado de Socio: Activo"); 
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en tabla Socio: "+ex.getMessage()); 
+        }
     }
 }

@@ -33,6 +33,14 @@ public class Menu extends javax.swing.JFrame {
         ImageIcon icon = new ImageIcon(getClass().getResource("/gimnasio/Imagenes/imagenFondo.jpg"));
         Image image = icon.getImage();
         escritorio = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image,0,0,getWidth(),getHeight(),this);     } };
+        ImageIcon icon02 = new ImageIcon(getClass().getResource("/gimnasio/Iconos/banda.jpg"));
+        Image image02 = icon02.getImage();
+        menuLateral = new javax.swing.JDesktopPane(){     public void paintComponent(Graphics g){         g.drawImage(image02,0,0,getWidth(),getHeight(),this);     } };
+        jbMenuMembresia = new javax.swing.JButton();
+        jbMenuSocio = new javax.swing.JButton();
+        jbMenuClase = new javax.swing.JButton();
+        jbMenuEntrenador = new javax.swing.JButton();
+        jbMenuAsistencia = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jmGestionMembresia = new javax.swing.JMenuItem();
@@ -50,19 +58,97 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("GIMNASIO \"ULP\" - Proyecto Final ");
+        setTitle("GIMNASIO \"FITNESS GYM\" - Proyecto Final Laboratorio de Programación 1");
 
-        escritorio.setPreferredSize(new java.awt.Dimension(1000, 840));
+        escritorio.setPreferredSize(new java.awt.Dimension(1140, 840));
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
         escritorioLayout.setHorizontalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 347, Short.MAX_VALUE)
+            .addGap(0, 929, Short.MAX_VALUE)
         );
         escritorioLayout.setVerticalGroup(
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 374, Short.MAX_VALUE)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+
+        menuLateral.setPreferredSize(new java.awt.Dimension(145, 840));
+
+        jbMenuMembresia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gimnasio/Iconos/botonMembresia01.png"))); // NOI18N
+        jbMenuMembresia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMenuMembresiaActionPerformed(evt);
+            }
+        });
+
+        jbMenuSocio.setBackground(new java.awt.Color(0, 0, 0));
+        jbMenuSocio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jbMenuSocio.setForeground(new java.awt.Color(255, 255, 255));
+        jbMenuSocio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gimnasio/Iconos/botonSocio2.png"))); // NOI18N
+        jbMenuSocio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMenuSocioActionPerformed(evt);
+            }
+        });
+
+        jbMenuClase.setBackground(new java.awt.Color(255, 255, 255));
+        jbMenuClase.setForeground(new java.awt.Color(255, 255, 255));
+        jbMenuClase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gimnasio/Iconos/botonClase.png"))); // NOI18N
+        jbMenuClase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMenuClaseActionPerformed(evt);
+            }
+        });
+
+        jbMenuEntrenador.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gimnasio/Iconos/botonEntrenador.png"))); // NOI18N
+        jbMenuEntrenador.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMenuEntrenadorActionPerformed(evt);
+            }
+        });
+
+        jbMenuAsistencia.setIcon(new javax.swing.ImageIcon(getClass().getResource("/gimnasio/Iconos/botonAsistencia.png"))); // NOI18N
+        jbMenuAsistencia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbMenuAsistenciaActionPerformed(evt);
+            }
+        });
+
+        menuLateral.setLayer(jbMenuMembresia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menuLateral.setLayer(jbMenuSocio, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menuLateral.setLayer(jbMenuClase, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menuLateral.setLayer(jbMenuEntrenador, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        menuLateral.setLayer(jbMenuAsistencia, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout menuLateralLayout = new javax.swing.GroupLayout(menuLateral);
+        menuLateral.setLayout(menuLateralLayout);
+        menuLateralLayout.setHorizontalGroup(
+            menuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuLateralLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(menuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbMenuAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbMenuEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbMenuClase, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbMenuSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbMenuMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        menuLateralLayout.setVerticalGroup(
+            menuLateralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(menuLateralLayout.createSequentialGroup()
+                .addGap(13, 13, 13)
+                .addComponent(jbMenuMembresia, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbMenuSocio, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbMenuClase, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbMenuEntrenador, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbMenuAsistencia, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jMenu1.setText("Membresia");
@@ -153,13 +239,16 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(escritorio)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(menuLateral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(escritorio)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(escritorio)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(escritorio)
+            .addComponent(menuLateral)
         );
 
         pack();
@@ -204,6 +293,26 @@ public class Menu extends javax.swing.JFrame {
          mostrarPestaña(new FormAsistencia());
     }//GEN-LAST:event_jmAsistenciaActionPerformed
 
+    private void jbMenuMembresiaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuMembresiaActionPerformed
+        mostrarPestaña(new FormMembresia());
+    }//GEN-LAST:event_jbMenuMembresiaActionPerformed
+
+    private void jbMenuSocioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuSocioActionPerformed
+        mostrarPestaña(new FormSocio());
+    }//GEN-LAST:event_jbMenuSocioActionPerformed
+
+    private void jbMenuClaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuClaseActionPerformed
+         mostrarPestaña(new FormClase());
+    }//GEN-LAST:event_jbMenuClaseActionPerformed
+
+    private void jbMenuEntrenadorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuEntrenadorActionPerformed
+        mostrarPestaña(new FormEntrenador());
+    }//GEN-LAST:event_jbMenuEntrenadorActionPerformed
+
+    private void jbMenuAsistenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuAsistenciaActionPerformed
+         mostrarPestaña(new FormAsistencia());
+    }//GEN-LAST:event_jbMenuAsistenciaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +356,11 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JButton jbMenuAsistencia;
+    private javax.swing.JButton jbMenuClase;
+    private javax.swing.JButton jbMenuEntrenador;
+    private javax.swing.JButton jbMenuMembresia;
+    private javax.swing.JButton jbMenuSocio;
     private javax.swing.JMenuItem jmAbout;
     private javax.swing.JMenuItem jmAsistencia;
     private javax.swing.JMenuItem jmGestionClase;
@@ -255,6 +369,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmGestionSocio;
     private javax.swing.JMenu jmMenuAsistencia;
     private javax.swing.JMenu jmMenuEntrenador;
+    private javax.swing.JDesktopPane menuLateral;
     // End of variables declaration//GEN-END:variables
     private void mostrarPestaña(JInternalFrame x) {
         escritorio.removeAll();

@@ -28,15 +28,14 @@ public class EntrenadorData {
         boolean flag=false;  
         PreparedStatement ps;
         ResultSet rs;
-        String sql = "INSERT INTO entrenador (dni ,nombre, apellido, especialidad, disponibilidad, estado) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO entrenador (dni ,nombre, apellido, especialidad, estado) VALUES (?, ?, ?, ?, ?)";
         try {
             ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             ps.setString(1, entrenador.getDni());
             ps.setString(2, entrenador.getNombre());
             ps.setString(3, entrenador.getApellido());
             ps.setString(4, entrenador.getEspecialidad());
-            ps.setString(5, entrenador.getDisponibilidad());
-            ps.setBoolean(6, entrenador.isEstado()); 
+            ps.setBoolean(5, entrenador.isEstado()); 
             ps.executeUpdate();
             rs = ps.getGeneratedKeys();
             if(rs.next()) {
@@ -60,7 +59,7 @@ public class EntrenadorData {
         Entrenador entrenador= new Entrenador();
         ResultSet rs;
         PreparedStatement ps;
-        String sql = "SELECT * FROM entrenador WHERE id_entrenador = ? AND estado = 1";
+        String sql = "SELECT * FROM entrenador WHERE id_entrenador = ?";
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, id);
@@ -71,8 +70,7 @@ public class EntrenadorData {
                 entrenador.setNombre(rs.getString("nombre"));
                 entrenador.setApellido(rs.getString("apellido"));
                 entrenador.setEspecialidad(rs.getString("especialidad"));
-                entrenador.setDisponibilidad(rs.getString("disponibilidad"));
-                entrenador.setEstado(true);
+                entrenador.setEstado(rs.getBoolean("estado"));
             }else{
                 JOptionPane.showMessageDialog(null, "Resultado de búsqueda por ID: \nEl Entrenador no existe o fue dado de baja...");
             }
@@ -86,33 +84,68 @@ public class EntrenadorData {
     
     public List<Entrenador> buscarEntrenadorPorNombre(String nombre){  
         List<Entrenador> entrenadores;
-        String sql = "SELECT * FROM entrenador WHERE nombre = ? AND estado = 1";
+        String sql = "SELECT * FROM entrenador WHERE nombre = ?";
         entrenadores = cargarBusquedas(sql,nombre);
     return entrenadores;
     }
         
     public List<Entrenador> buscarEntrenadorPorApellido(String apellido){  
         List<Entrenador> entrenadores;
-        String sql = "SELECT * FROM entrenador WHERE apellido = ? AND estado = 1";
+        String sql = "SELECT * FROM entrenador WHERE apellido = ?";
         entrenadores = cargarBusquedas(sql,apellido);
+    return entrenadores;
+    }
+    
+    public List<Entrenador> buscarEntrenadorPorNombreYApellido(String nombre, String apellido){  
+        String sql = "SELECT * FROM entrenador WHERE nombre = ? AND apellido = ?";
+        PreparedStatement ps;
+        ResultSet rs;
+        List<Entrenador> entrenadores = new ArrayList<>();
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ps.setString(2, apellido);
+            rs = ps.executeQuery();
+            while(rs.next()){
+                Entrenador entrenador = new Entrenador();
+                entrenador.setId_entrenador(rs.getInt(1));
+                entrenador.setDni(rs.getString("dni"));
+                entrenador.setNombre(rs.getString("nombre"));
+                entrenador.setApellido(rs.getString("apellido"));
+                entrenador.setEspecialidad(rs.getString("especialidad"));
+                entrenador.setEstado(rs.getBoolean("estado"));
+                entrenadores.add(entrenador);
+            }
+            ps.close();  
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla Entrenador: "+ex.getMessage()); 
+        }
     return entrenadores;
     }
     
     public List<Entrenador> buscarEntrenadorPorEspecialidad(String especialidad){
         List<Entrenador> entrenadores;
-        String sql = "SELECT * FROM entrenador WHERE especialidad = ? AND estado = 1";
+        String sql = "SELECT * FROM entrenador WHERE especialidad = ? ";
         entrenadores = cargarBusquedas(sql,especialidad);
     return entrenadores;
     }
     
-    public List<Entrenador> listarEntrenadores(){
+    public List<Entrenador> listarEntrenadores(){//lista todos los entrenadores
         List<Entrenador> entrenadores;
-        String sql = "SELECT * FROM entrenador WHERE estado = ?";
+        String sql = "SELECT * FROM entrenador WHERE ?";
         String campo = "1";
         entrenadores = cargarBusquedas(sql, campo);
     return entrenadores;    
     }
-      
+     
+    public List<Entrenador> listarEntrenadores2(int valor){//Lista todos los entrenadores Activos
+        List<Entrenador> entrenadores;
+        String campo;
+        String sql = "SELECT * FROM entrenador WHERE 1 AND estado = ?";
+        if(valor == 1){campo = "1";}else{campo = "0";}
+        entrenadores = cargarBusquedas(sql, campo);
+    return entrenadores;    
+    }
     public List<Entrenador> cargarBusquedas(String sql, String campo){ //Metodo reutilizable para las busquedas por nombre, por apellido y Listado completo
         PreparedStatement ps;
         ResultSet rs;
@@ -128,8 +161,7 @@ public class EntrenadorData {
                 entrenador.setNombre(rs.getString("nombre"));
                 entrenador.setApellido(rs.getString("apellido"));
                 entrenador.setEspecialidad(rs.getString("especialidad"));
-                entrenador.setDisponibilidad(rs.getString("disponibilidad"));
-                entrenador.setEstado(true);
+                entrenador.setEstado(rs.getBoolean("estado"));
                 entrenadores.add(entrenador);
             }
             ps.close();
@@ -139,6 +171,29 @@ public class EntrenadorData {
         }
         return entrenadores;
     }
+        
+    public void modificarEntrenador (Entrenador entrenador){
+        String sql = "UPDATE entrenador SET dni = ?, nombre = ?, apellido = ?, especialidad = ? WHERE id_entrenador = ?";
+        PreparedStatement ps;
+        try{           
+            ps = con.prepareStatement(sql);
+            ps.setString(1, entrenador.getDni());
+            ps.setString(2, entrenador.getNombre());
+            ps.setString(3, entrenador.getApellido());
+            ps.setString(4, entrenador.getEspecialidad());
+            ps.setInt(5, entrenador.getId_entrenador());
+            int fila = ps.executeUpdate();
+            if(fila == 1){
+                JOptionPane.showMessageDialog(null, "Entrenador ID: "+entrenador.getId_entrenador()+"\nEstado; Modificado exitosamente");
+            }else{
+                JOptionPane.showMessageDialog(null, "El Entrenador no existe");
+            }
+            ps.close();
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de entrenador\n"+ ex.getMessage());
+        }
+    }
+    
     public void eliminarEntrenador(int id){
         PreparedStatement ps;
         EntrenadorData entrenadorABuscar = new EntrenadorData();
@@ -158,28 +213,25 @@ public class EntrenadorData {
         }
     }
 
-        
-    public void modificarEntrenador (Entrenador entrenador){
-        String sql = "UPDATE entrenador SET dni = ?, nombre = ?, apellido = ?, especialidad = ?,  disponibilidad = ? WHERE id_entrenador = ?";
+    public void renovarEntrenador(Entrenador entrenador){
         PreparedStatement ps;
-        System.out.println(entrenador.getId_entrenador());
-        try{           
+        String sql = "UPDATE entrenador SET estado = ? WHERE id_entrenador = ?";
+        try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, entrenador.getDni());
-            ps.setString(2, entrenador.getNombre());
-            ps.setString(3, entrenador.getApellido());
-            ps.setString(4, entrenador.getEspecialidad());
-            ps.setString(5, entrenador.getDisponibilidad());
-            ps.setInt(6, entrenador.getId_entrenador());
-            int fila = ps.executeUpdate();
-            if(fila == 1){
-                JOptionPane.showMessageDialog(null, "Entrenador ID: "+entrenador.getId_entrenador()+"Estado; Modificado exitosamente");
-            }else{
-                JOptionPane.showMessageDialog(null, "El Entrenador no existe");
+            ps.setBoolean(1, true);
+            ps.setInt(2, entrenador.getId_entrenador());
+            int fila =  ps.executeUpdate();
+            if(fila==1){
+                JOptionPane.showMessageDialog(null, "Renovación de Entrenador ID:"+entrenador.getId_entrenador()+" exitosa!\nEstado de Entrenador: Activo"); 
             }
-            ps.close();
-        }catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, "Error al acceder a la tabla de entrenador\n"+ ex.getMessage());
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Error en tabla Entrenador: "+ex.getMessage()); 
         }
+    }
+    
+    public List<String> listarEspecialidades(){
+       List<String> especialidades = new ArrayList<>();
+       
+    return especialidades;
     }
 }

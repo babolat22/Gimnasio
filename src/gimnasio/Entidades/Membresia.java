@@ -13,6 +13,7 @@ public class Membresia {
     private Socio id_socio;
     private String tipo;
     private int cant_pases;
+    private int pases_disponibles;
     private Date fecha_inicio;
     private Date fecha_fin;
     private BigDecimal costo;
@@ -21,21 +22,23 @@ public class Membresia {
     public Membresia() {
     }
 
-    public Membresia(Socio id_socio, String tipo, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
+    public Membresia(Socio id_socio, String tipo, int cant_pases, int pases_disponibles, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
         this.id_socio = id_socio;
         this.tipo = tipo;
         this.cant_pases = cant_pases;
+        this.pases_disponibles = pases_disponibles;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
         this.costo = costo;
         this.estado = estado;
     }
 
-    public Membresia(int id_membresia, Socio id_socio, String tipo, int cant_pases, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
+    public Membresia(int id_membresia, Socio id_socio, String tipo, int cant_pases, int pases_disponibles, Date fecha_inicio, Date fecha_fin, BigDecimal costo, boolean estado) {
         this.id_membresia = id_membresia;
         this.id_socio = id_socio;
         this.tipo = tipo;
         this.cant_pases = cant_pases;
+        this.pases_disponibles = pases_disponibles;
         this.fecha_inicio = fecha_inicio;
         this.fecha_fin = fecha_fin;
         this.costo = costo;
@@ -74,6 +77,14 @@ public class Membresia {
         this.cant_pases = cant_pases;
     }
 
+    public int getPases_disponibles() {
+        return pases_disponibles;
+    }
+
+    public void setPases_disponibles(int pases_disponibles) {
+        this.pases_disponibles = pases_disponibles;
+    }
+
     public Date getFecha_inicio() {
         return fecha_inicio;
     }
@@ -108,7 +119,7 @@ public class Membresia {
 
     @Override
     public String toString() {
-        return "Membresia{" + "id_membresia=" + id_membresia + ", id_socio=" + id_socio + ", tipo=" + tipo + ", cant_pases=" + cant_pases + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", costo=" + costo + ", estado=" + estado + '}';
+        return "Membresia{" + "id_membresia=" + id_membresia + ", id_socio=" + id_socio.getId_socio() + ", tipo=" + tipo + ", cant_pases=" + cant_pases + ", pases_disponibles=" + pases_disponibles + ", fecha_inicio=" + fecha_inicio + ", fecha_fin=" + fecha_fin + ", costo=" + costo + ", estado=" + estado + '}';
     }
 
     
